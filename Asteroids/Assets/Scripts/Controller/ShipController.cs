@@ -11,6 +11,7 @@ namespace Asteroids
         private Vector3 _moveDirection;
         private InputManager _inputManager;
         private ShipModel _shipModel;
+        private ShipView _shipView;
 
         #endregion
 
@@ -44,6 +45,9 @@ namespace Asteroids
         public void LetUpdate()
         {
             LetMoveShip();
+
+            _shipView.CurrentSpeedShip(_shipModel.SpeedShip);
+            _shipView.CurrentStrengthShip(_shipModel.StrengthShip);
         }
 
         #endregion

@@ -2,7 +2,7 @@ namespace Asteroids
 {
    public interface IDamageable
     {
-        public void GetDamage();
+        public int GetDamage(int damage);
     }
 }
 
