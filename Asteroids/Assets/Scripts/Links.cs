@@ -17,6 +17,8 @@ namespace Asteroids
 
         private Transform _bulletStartPosition;
 
+        private FireController _fireController;
+
         #endregion
 
 
@@ -32,10 +34,13 @@ namespace Asteroids
 
             _bulletStartPosition = GameObject.FindGameObjectWithTag(Tags.BULLET_START_POSITION_TAG).transform;
 
-            _shipController = new ShipController(_inputManager);
+            _shipController = new ShipController(_inputManager, _shipRigidbody);
             _gameStarter.AddToUpdateList(_shipController);
+
+            _fireController = new FireController(_gameStarter, _bulletStartPosition, _inputManager, _resourceManager);
         }
 
         #endregion
+
     }
 }

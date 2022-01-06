@@ -14,19 +14,16 @@ namespace Asteroids
         #endregion
 
 
-<<<<<<< main
-=======
         #region Properties
 
         public bool isFire
         {
-            get { return Input.GetButton(InputKeysAndAxis.KEY_PRIMARY_FIRE); }
+            get { return Input.GetButtonDown(InputKeysAndAxis.KEY_PRIMARY_FIRE); }
         }
 
         #endregion
 
 
->>>>>>> Global work
         #region Methods
 
         /// <summary>
@@ -41,12 +38,8 @@ namespace Asteroids
 
             return _direction.normalized;
         }
-<<<<<<< main
 
         #endregion
-=======
->>>>>>> Global work
 
-        #endregion
     }
 }

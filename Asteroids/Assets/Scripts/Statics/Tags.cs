@@ -6,7 +6,13 @@ namespace Asteroids
     /// </summary>
     public static class Tags
     {
+
+        #region Fields
+
         public const string PLAYER_TAG = "Player";
         public const string BULLET_START_POSITION_TAG = "BulletStartPosition";
+
+        #endregion
+
     }
 }

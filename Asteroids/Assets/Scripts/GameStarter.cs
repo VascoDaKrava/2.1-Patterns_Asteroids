@@ -19,9 +19,9 @@ namespace Asteroids
 
         private void Awake()
         {
-            _links = new Links(this);
-
             _updatables = new List<IUpdatable>();
+
+            _links = new Links(this);
         }
 
         private void Update()

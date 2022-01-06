@@ -6,6 +6,11 @@ namespace Asteroids
     /// </summary>
     public static class ResourcesPath
     {
+        #region Fields
+
         public const string MISSILE_AIM9 = "MissileAIM9";
+
+        #endregion
+
     }
 }
