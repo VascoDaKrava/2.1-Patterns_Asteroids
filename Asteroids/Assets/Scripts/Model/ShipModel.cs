@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Asteroids
 {
-    public sealed class ShipModel : MonoBehaviour
+    public sealed class ShipModel
     {
         #region Fields
 
@@ -20,6 +20,9 @@ namespace Asteroids
 
         #region Properties
 
+        /// <summary>
+        /// Current strength of ship
+        /// </summary>
         public int StrengthShip
         {
             get => _strengthShip;
@@ -30,16 +33,23 @@ namespace Asteroids
             }
         }
 
+        /// <summary>
+        /// Current speed of ship
+        /// </summary>
         public float SpeedShip { get; set; }
 
         #endregion
 
 
-        #region UnityMethods
+        #region ClassLifeCycles
 
-        private void Start()
+        /// <summary>
+        /// Get link a rigidbody of ship
+        /// </summary>
+        /// <param name="rigidbody"></param>
+        public ShipModel(Rigidbody rigidbody)
         {
-            _shipRigidbody = GetComponent<Rigidbody>();
+            _shipRigidbody = rigidbody;
         }
 
         #endregion
@@ -47,6 +57,10 @@ namespace Asteroids
 
         #region Methods
 
+        /// <summary>
+        /// Move model by direction
+        /// </summary>
+        /// <param name="direction"></param>
         public void LetMoveShip(Vector3 direction)
         {
             _shipRigidbody.velocity = direction * _speedShip;

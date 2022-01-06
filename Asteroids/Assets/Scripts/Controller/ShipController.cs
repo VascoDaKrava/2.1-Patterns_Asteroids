@@ -18,15 +18,25 @@ namespace Asteroids
 
         #region ClassLifeCycles
 
-        public ShipController(InputManager inputManager)
+        /// <summary>
+        /// Create ShipController
+        /// </summary>
+        /// <param name="inputManager"></param>
+        public ShipController(InputManager inputManager, Rigidbody rigidbody)
         {
             _inputManager = inputManager;
+
+            _shipModel = new ShipModel(rigidbody);
+            _shipView = new ShipView();
         }
 
         #endregion
 
         #region Methods
 
+        /// <summary>
+        /// Move ship
+        /// </summary>
         private void LetMoveShip()
         {
             _moveDirection = _inputManager.GetDirection();

@@ -4,8 +4,15 @@ namespace Asteroids
 {
     public sealed class InputManager
     {
-        
+
+        #region Fields
+
         private Vector3 _direction;
+
+        #endregion
+
+
+        #region Methods
 
         /// <summary>
         /// Return normalized Vector 3 of direction if pressed move-keys
@@ -19,7 +26,8 @@ namespace Asteroids
 
             return _direction.normalized;
         }
-        
+
+        #endregion
 
     }
 }

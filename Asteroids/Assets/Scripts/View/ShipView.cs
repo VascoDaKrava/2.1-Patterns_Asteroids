@@ -15,12 +15,20 @@ namespace Asteroids
 
         #region Methods
 
+        /// <summary>
+        /// Display speed of ship
+        /// </summary>
+        /// <param name="speed"></param>
         public void CurrentSpeedShip(float speed)
         {
             _speedShip = speed;
             Debug.Log(_speedShip);
         }
 
+        /// <summary>
+        /// Display strength of ship
+        /// </summary>
+        /// <param name="strength"></param>
         public void CurrentStrengthShip(int strength)
         {
             _strengthShip = strength;
