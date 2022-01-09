@@ -13,8 +13,9 @@ namespace Asteroids
 
         private Transform _bulletStartPosition;
         private Timers _timers;
-        private InputManager _inputManagerLink;
-        private GameObject _bullet;
+        private InputManager _inputManager;
+        private ResourceManager _resourceManager;
+        private GameStarter _gameStarter;
 
         #endregion
 
@@ -23,13 +24,14 @@ namespace Asteroids
 
         public FireController(
             GameStarter gameStarter,
-            Transform bulletStartPositionLink,
+            Transform bulletStartPosition,
             InputManager inputManagerLink,
-            ResourceManager resourceManagerLink) : base(gameStarter)
+            ResourceManager resourceManager) : base(gameStarter)
         {
-            _bulletStartPosition = bulletStartPositionLink;
-            _inputManagerLink = inputManagerLink;
-            _bullet = resourceManagerLink.MissileAIM9 as GameObject;
+            _bulletStartPosition = bulletStartPosition;
+            _inputManager = inputManagerLink;
+            _resourceManager = resourceManager;
+            _gameStarter = gameStarter;
             _timers = new Timers(gameStarter);
         }
 
@@ -40,16 +42,12 @@ namespace Asteroids
 
         private void TryFire()
         {
-            if (_inputManagerLink.isFire)
+            if (_inputManager.isFire)
             {
                 if (!_timers.isTimerOn)
                 {
                     _timers.StartTimer(_rateOfFire);
-                    GameObject.Instantiate(
-                        _bullet,
-                        _bulletStartPosition.position,
-                        _bulletStartPosition.rotation,
-                        _bulletStartPosition);
+                    new MissileController(_gameStarter, _resourceManager, _bulletStartPosition);
                 }
             }
         }

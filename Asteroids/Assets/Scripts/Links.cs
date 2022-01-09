@@ -10,14 +10,21 @@ namespace Asteroids
         #region Fields
 
         private GameStarter _gameStarter;
-        private ResourceManager _resourceManager;
         private InputManager _inputManager;
-        private ShipController _shipController;
+        private ResourceManager _resourceManager;
         private Rigidbody _shipRigidbody;
-
+        private ShipController _shipController;
         private Transform _bulletStartPosition;
 
         private FireController _fireController;
+
+        #endregion
+
+
+        #region Properties
+
+        public DestroyUpdatableObjectEvent DestroyUpdatableObjectEvent { get; }
+        public CreateUpdatableObjectEvent CreateUpdatableObjectEvent { get; }
 
         #endregion
 
@@ -29,6 +36,8 @@ namespace Asteroids
             _gameStarter = gameStarter;
             _resourceManager = new ResourceManager();
             _inputManager = new InputManager();
+            DestroyUpdatableObjectEvent = new DestroyUpdatableObjectEvent();
+            CreateUpdatableObjectEvent = new CreateUpdatableObjectEvent();
 
             _shipRigidbody = GameObject.FindGameObjectWithTag(Tags.PLAYER_TAG).GetComponent<Rigidbody>();
 

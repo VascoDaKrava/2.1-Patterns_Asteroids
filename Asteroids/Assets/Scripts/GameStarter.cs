@@ -7,6 +7,7 @@ namespace Asteroids
 
     public sealed class GameStarter : MonoBehaviour
     {
+
         #region Fields
 
         private Links _links;
@@ -22,6 +23,9 @@ namespace Asteroids
             _updatables = new List<IUpdatable>();
 
             _links = new Links(this);
+
+            _links.DestroyUpdatableObjectEvent.DestroyUpdatableObject += RemoveFromUpdateList;
+            _links.CreateUpdatableObjectEvent.CreateUpdatableObject += AddToUpdateList;
         }
 
         private void Update()
