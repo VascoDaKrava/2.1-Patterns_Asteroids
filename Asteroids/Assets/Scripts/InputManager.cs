@@ -1,13 +1,25 @@
 ﻿using UnityEngine;
 
+
 namespace Asteroids
 {
+
     public sealed class InputManager
     {
 
         #region Fields
 
         private Vector3 _direction;
+
+        #endregion
+
+
+        #region Properties
+
+        public bool isFire
+        {
+            get { return Input.GetButtonDown(InputKeysAndAxis.KEY_PRIMARY_FIRE); }
+        }
 
         #endregion
 

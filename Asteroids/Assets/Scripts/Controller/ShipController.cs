@@ -63,4 +63,3 @@ namespace Asteroids
         #endregion
     }
 }
-
