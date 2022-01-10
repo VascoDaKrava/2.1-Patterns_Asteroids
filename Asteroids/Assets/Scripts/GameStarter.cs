@@ -1,16 +1,20 @@
-using UnityEngine;
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 
 namespace Asteroids
 {
 
-    public sealed class GameStarter : MonoBehaviour
+    public sealed class GameStarter : MonoBehaviour, IDisposable
     {
+
         #region Fields
 
-        private Links _links;
         private List<IUpdatable> _updatables;
+        private List<IUpdatable> _candidatsForAddingToUpdatables;
+        private CreateUpdatableObjectEvent _createUpdatableObjectEvent;
+        private DestroyUpdatableObjectEvent _destroyUpdatableObjectEvent;
 
         #endregion
 
@@ -20,8 +24,15 @@ namespace Asteroids
         private void Awake()
         {
             _updatables = new List<IUpdatable>();
+            _candidatsForAddingToUpdatables = new List<IUpdatable>();
 
-            _links = new Links(this);
+            _createUpdatableObjectEvent = new CreateUpdatableObjectEvent();
+            _destroyUpdatableObjectEvent = new DestroyUpdatableObjectEvent();
+
+            _createUpdatableObjectEvent.CreateUpdatableObject += AddToUpdateList;
+            _destroyUpdatableObjectEvent.DestroyUpdatableObject += RemoveFromUpdateList;
+
+            new Links(this, _createUpdatableObjectEvent, _destroyUpdatableObjectEvent);
         }
 
         private void Update()
@@ -32,18 +43,27 @@ namespace Asteroids
             }
         }
 
+        private void LateUpdate()
+        {
+            if (_candidatsForAddingToUpdatables.Count > 0)
+            {
+                _updatables.AddRange(_candidatsForAddingToUpdatables);
+                _candidatsForAddingToUpdatables.Clear();
+            }
+        }
+
         #endregion
 
 
         #region Methods
 
         /// <summary>
-        /// Add item to list for Update
+        /// Add item to list for Update (in the current LateUpdate)
         /// </summary>
         /// <param name="updatableObject"></param>
         public void AddToUpdateList(IUpdatable updatableObject)
         {
-            _updatables.Add(updatableObject);
+            _candidatsForAddingToUpdatables.Add(updatableObject);
         }
 
         /// <summary>
@@ -56,5 +76,17 @@ namespace Asteroids
         }
 
         #endregion
+
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            _createUpdatableObjectEvent.CreateUpdatableObject -= AddToUpdateList;
+            _destroyUpdatableObjectEvent.DestroyUpdatableObject -= RemoveFromUpdateList;
+        }
+
+        #endregion
+
     }
 }

@@ -18,7 +18,7 @@ namespace Asteroids
 
         public bool isFire
         {
-            get { return Input.GetButtonDown(InputKeysAndAxis.KEY_PRIMARY_FIRE); }
+            get { return Input.GetButton(InputKeysAndAxis.KEY_PRIMARY_FIRE); }
         }
 
         #endregion

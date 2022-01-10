@@ -8,22 +8,35 @@ namespace Asteroids
         
         #region Fields
 
-        private GameStarter _gameStarter;
+        private DestroyUpdatableObjectEvent _destroyUpdatableObject;
 
         #endregion
 
 
         #region ClassLifeCycles
 
-        public UpdatableObject(GameStarter gameStarterLink)
+        public UpdatableObject(CreateUpdatableObjectEvent createUpdatableObject, DestroyUpdatableObjectEvent destroyUpdatableObject)
         {
-            _gameStarter = gameStarterLink;
-            _gameStarter.AddToUpdateList(this);
+            _destroyUpdatableObject = destroyUpdatableObject;
+            createUpdatableObject.Invoke(this);
         }
 
-        ~UpdatableObject()
+        // Деструктор, который не вызывается, когда надо...
+        //~UpdatableObject()
+        //{
+        //    _destroyUpdatableObject.Invoke(this);
+        //    _gameStarter.RemoveFromUpdateList(this);
+        //    Debug.Log($"Destructor : {this}");
+        //}
+
+        #endregion
+
+
+        #region Methods
+
+        internal void RemoveFromUpdate()
         {
-            _gameStarter.RemoveFromUpdateList(this);
+            _destroyUpdatableObject.Invoke(this);
         }
 
         #endregion

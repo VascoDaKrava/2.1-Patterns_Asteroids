@@ -9,12 +9,14 @@ namespace Asteroids
 
         #region Fields
 
-        private float _rateOfFire = 2.0f; // Time in seconds between shots
+        private float _rateOfFire = 1.0f; // Time in seconds between shots
 
         private Transform _bulletStartPosition;
         private Timers _timers;
-        private InputManager _inputManagerLink;
-        private GameObject _bullet;
+        private InputManager _inputManager;
+        private ResourceManager _resourceManager;
+        private CreateUpdatableObjectEvent _createUpdatableObjectEvent;
+        private DestroyUpdatableObjectEvent _destroyUpdatableObjectEvent;
 
         #endregion
 
@@ -22,15 +24,19 @@ namespace Asteroids
         #region ClassLifeCycles
 
         public FireController(
-            GameStarter gameStarter,
-            Transform bulletStartPositionLink,
+            CreateUpdatableObjectEvent createUpdatableObjectEvent,
+            DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
+            Transform bulletStartPosition,
             InputManager inputManagerLink,
-            ResourceManager resourceManagerLink) : base(gameStarter)
+            ResourceManager resourceManager) :
+            base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
-            _bulletStartPosition = bulletStartPositionLink;
-            _inputManagerLink = inputManagerLink;
-            _bullet = resourceManagerLink.MissileAIM9 as GameObject;
-            _timers = new Timers(gameStarter);
+            _bulletStartPosition = bulletStartPosition;
+            _inputManager = inputManagerLink;
+            _resourceManager = resourceManager;
+            _createUpdatableObjectEvent = createUpdatableObjectEvent;
+            _destroyUpdatableObjectEvent = destroyUpdatableObjectEvent;
+            _timers = new Timers(createUpdatableObjectEvent, destroyUpdatableObjectEvent);
         }
 
         #endregion
@@ -40,15 +46,15 @@ namespace Asteroids
 
         private void TryFire()
         {
-            if (_inputManagerLink.isFire)
+            if (_inputManager.isFire)
             {
                 if (!_timers.isTimerOn)
                 {
                     _timers.StartTimer(_rateOfFire);
-                    GameObject.Instantiate(
-                        _bullet,
-                        _bulletStartPosition.position,
-                        _bulletStartPosition.rotation,
+                    new MissileController(
+                        _createUpdatableObjectEvent,
+                        _destroyUpdatableObjectEvent,
+                        _resourceManager,
                         _bulletStartPosition);
                 }
             }
