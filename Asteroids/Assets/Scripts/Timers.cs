@@ -25,7 +25,10 @@ namespace Asteroids
 
         #region ClassLifeCycles
 
-        public Timers(GameStarter gameStarterLink) : base(gameStarterLink)
+        public Timers(
+            CreateUpdatableObjectEvent createUpdatableObject,
+            DestroyUpdatableObjectEvent destroyUpdatableObject) :
+            base(createUpdatableObject, destroyUpdatableObject)
         {
         }
 

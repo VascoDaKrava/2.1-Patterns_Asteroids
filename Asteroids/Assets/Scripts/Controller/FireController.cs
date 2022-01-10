@@ -9,13 +9,14 @@ namespace Asteroids
 
         #region Fields
 
-        private float _rateOfFire = 2.0f; // Time in seconds between shots
+        private float _rateOfFire = 1.0f; // Time in seconds between shots
 
         private Transform _bulletStartPosition;
         private Timers _timers;
         private InputManager _inputManager;
         private ResourceManager _resourceManager;
-        private GameStarter _gameStarter;
+        private CreateUpdatableObjectEvent _createUpdatableObjectEvent;
+        private DestroyUpdatableObjectEvent _destroyUpdatableObjectEvent;
 
         #endregion
 
@@ -23,16 +24,19 @@ namespace Asteroids
         #region ClassLifeCycles
 
         public FireController(
-            GameStarter gameStarter,
+            CreateUpdatableObjectEvent createUpdatableObjectEvent,
+            DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             Transform bulletStartPosition,
             InputManager inputManagerLink,
-            ResourceManager resourceManager) : base(gameStarter)
+            ResourceManager resourceManager) :
+            base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _bulletStartPosition = bulletStartPosition;
             _inputManager = inputManagerLink;
             _resourceManager = resourceManager;
-            _gameStarter = gameStarter;
-            _timers = new Timers(gameStarter);
+            _createUpdatableObjectEvent = createUpdatableObjectEvent;
+            _destroyUpdatableObjectEvent = destroyUpdatableObjectEvent;
+            _timers = new Timers(createUpdatableObjectEvent, destroyUpdatableObjectEvent);
         }
 
         #endregion
@@ -47,7 +51,11 @@ namespace Asteroids
                 if (!_timers.isTimerOn)
                 {
                     _timers.StartTimer(_rateOfFire);
-                    new MissileController(_gameStarter, _resourceManager, _bulletStartPosition);
+                    new MissileController(
+                        _createUpdatableObjectEvent,
+                        _destroyUpdatableObjectEvent,
+                        _resourceManager,
+                        _bulletStartPosition);
                 }
             }
         }

@@ -15,29 +15,25 @@ namespace Asteroids
         private Rigidbody _shipRigidbody;
         private ShipController _shipController;
         private Transform _bulletStartPosition;
-
-        private FireController _fireController;
-
-        #endregion
-
-
-        #region Properties
-
-        public DestroyUpdatableObjectEvent DestroyUpdatableObjectEvent { get; }
-        public CreateUpdatableObjectEvent CreateUpdatableObjectEvent { get; }
+        private CreateUpdatableObjectEvent _createUpdatableObjectEvent;
+        private DestroyUpdatableObjectEvent _destroyUpdatableObjectEvent;
 
         #endregion
 
 
         #region ClassLifeCycles
 
-        public Links(GameStarter gameStarter)
+        public Links(
+            GameStarter gameStarter,
+            CreateUpdatableObjectEvent createUpdatableObjectEvent,
+            DestroyUpdatableObjectEvent destroyUpdatableObjectEvent)
         {
             _gameStarter = gameStarter;
+            _createUpdatableObjectEvent = createUpdatableObjectEvent;
+            _destroyUpdatableObjectEvent = destroyUpdatableObjectEvent;
+
             _resourceManager = new ResourceManager();
             _inputManager = new InputManager();
-            DestroyUpdatableObjectEvent = new DestroyUpdatableObjectEvent();
-            CreateUpdatableObjectEvent = new CreateUpdatableObjectEvent();
 
             _shipRigidbody = GameObject.FindGameObjectWithTag(Tags.PLAYER_TAG).GetComponent<Rigidbody>();
 
@@ -46,7 +42,12 @@ namespace Asteroids
             _shipController = new ShipController(_inputManager, _shipRigidbody);
             _gameStarter.AddToUpdateList(_shipController);
 
-            _fireController = new FireController(_gameStarter, _bulletStartPosition, _inputManager, _resourceManager);
+            new FireController(
+                _createUpdatableObjectEvent,
+                _destroyUpdatableObjectEvent,
+                _bulletStartPosition,
+                _inputManager,
+                _resourceManager);
         }
 
         #endregion

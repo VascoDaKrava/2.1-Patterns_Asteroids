@@ -19,10 +19,15 @@ namespace Asteroids
 
         #region ClassLifeCicles
 
-        public MissileController(GameStarter gameStarter, ResourceManager resourceManager, Transform bulletStartPosition) : base(gameStarter)
+        public MissileController(
+            CreateUpdatableObjectEvent createUpdatableObject,
+            DestroyUpdatableObjectEvent destroyUpdatableObject,
+            ResourceManager resourceManager,
+            Transform bulletStartPosition) :
+            base(createUpdatableObject, destroyUpdatableObject)
         {
             _missileModel = new MissileModel();
-            
+
             _missileView = GameObject.Instantiate(
                 resourceManager.MissileAIM9 as GameObject,
                 bulletStartPosition.position,
@@ -32,9 +37,6 @@ namespace Asteroids
 
             _missileView.Damage = _missileModel.Damage;
             _missileView.MissileController = this;
-
-
-            
         }
 
         #endregion
@@ -44,7 +46,7 @@ namespace Asteroids
 
         private void MissileFly()
         {
-            _missileRigidbody.velocity = Vector3.forward * 5f;
+            _missileRigidbody.velocity = _missileRigidbody.gameObject.transform.forward * _missileModel.Speed;
         }
 
         #endregion
@@ -54,6 +56,7 @@ namespace Asteroids
 
         public void Dispose()
         {
+            RemoveFromUpdate();
             _missileModel.Dispose();
         }
 
