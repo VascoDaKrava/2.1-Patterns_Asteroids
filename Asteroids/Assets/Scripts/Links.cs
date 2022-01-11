@@ -15,6 +15,7 @@ namespace Asteroids
         private Rigidbody _shipRigidbody;
         private ShipController _shipController;
         private Transform _bulletStartPosition;
+        private Transform _spawnPosition;
         private CreateUpdatableObjectEvent _createUpdatableObjectEvent;
         private DestroyUpdatableObjectEvent _destroyUpdatableObjectEvent;
 
@@ -38,6 +39,7 @@ namespace Asteroids
             _shipRigidbody = GameObject.FindGameObjectWithTag(Tags.PLAYER_TAG).GetComponent<Rigidbody>();
 
             _bulletStartPosition = GameObject.FindGameObjectWithTag(Tags.BULLET_START_POSITION_TAG).transform;
+            _spawnPosition = GameObject.FindGameObjectWithTag(Tags.SPAWN_POSITION_TAG).transform;
 
             _shipController = new ShipController(_inputManager, _shipRigidbody);
             _gameStarter.AddToUpdateList(_shipController);
@@ -47,6 +49,12 @@ namespace Asteroids
                 _destroyUpdatableObjectEvent,
                 _bulletStartPosition,
                 _inputManager,
+                _resourceManager);
+
+            new SpawnController(
+                _createUpdatableObjectEvent,
+                _destroyUpdatableObjectEvent,
+                _spawnPosition, 
                 _resourceManager);
         }
 

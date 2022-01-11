@@ -9,7 +9,7 @@ namespace Asteroids
 
         private int _strength;
         private int _damage;
-        private float _timeOfDeath = 5.0f;
+        private float _timeOfDeath = 20.0f;
 
         #endregion
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 namespace Asteroids
@@ -29,7 +30,8 @@ namespace Asteroids
 
             _asteroidView = GameObject.Instantiate(
                 resourceManager.Asteroid as GameObject,
-                spawnPosition.position,
+                spawnPosition.position = new Vector3(Random.Range(-30, 30), 
+                spawnPosition.position.y, Random.Range(spawnPosition.position.z, 100)),
                 spawnPosition.rotation).GetComponent<AsteroidView>();
 
             _asteroidRigidbody = _asteroidView.gameObject.GetComponent<Rigidbody>();

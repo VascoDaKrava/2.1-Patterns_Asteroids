@@ -9,7 +9,7 @@ namespace Asteroids
         #region Fields
 
         private int _strengthAsteroid = 20;
-        private float _speedAsteroid = 3.0f;
+        private float _speedAsteroid = 5.0f;
         private Vector3 _direction;
         private int _damageAsteroid = 10;
 
