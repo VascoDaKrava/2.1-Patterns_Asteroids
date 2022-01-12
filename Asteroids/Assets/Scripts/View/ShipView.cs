@@ -3,12 +3,22 @@ using UnityEngine;
 
 namespace Asteroids
 {
-    public sealed class ShipView
+    public sealed class ShipView : MonoBehaviour, IDamageable
     {
+
         #region Fields
 
-        private float _speedShip;
-        private int _strengthShip;
+        private ShipController _shipController;
+
+        #endregion
+
+
+        #region Properties
+
+        public ShipController ShipController
+        {
+            set { _shipController = value; }
+        }
 
         #endregion
 
@@ -16,23 +26,31 @@ namespace Asteroids
         #region Methods
 
         /// <summary>
-        /// Display speed of ship
-        /// </summary>
-        /// <param name="speed"></param>
-        public void CurrentSpeedShip(float speed)
-        {
-            _speedShip = speed;
-            Debug.Log(_speedShip);
-        }
-
-        /// <summary>
         /// Display strength of ship
         /// </summary>
         /// <param name="strength"></param>
         public void CurrentStrengthShip(int strength)
         {
-            _strengthShip = strength;
-            Debug.Log(_strengthShip);
+            Debug.Log(strength);
+        }
+
+        /// <summary>
+        /// Destroy ship
+        /// </summary>
+        /// <param name="deathTime"></param>
+        public void DestroyShip()
+        {
+            Destroy(gameObject);
+        }
+
+        #endregion
+
+
+        #region IDamageable
+
+        public void GetDamage(int damage)
+        {
+            _shipController.ChangeStrength(damage);
         }
 
         #endregion

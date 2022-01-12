@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace Asteroids
 {
-    public sealed class SpawnController : UpdatableObject
+    public sealed class EnemySpawner : UpdatableObject
     {
 
         #region Fields
 
-        private float _rateOfSpawn = 1.5f; // Time in seconds between spawns
+        private float _rateOfSpawn = 7.0f; // Time in seconds between spawns
 
         private Transform _spawnPosition;
         private Timers _timers;
@@ -21,7 +21,7 @@ namespace Asteroids
 
         #region ClassLifeCycles
 
-        public SpawnController(
+        public EnemySpawner(
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             Transform spawnPosition,
@@ -40,8 +40,12 @@ namespace Asteroids
 
         #region Methods
 
+        /// <summary>
+        /// Spawn asteroids after a certain time
+        /// </summary>
         private void AsteroidSpawn()
         {
+
             if (!_timers.isTimerOn)
             {
                 _timers.StartTimer(_rateOfSpawn);

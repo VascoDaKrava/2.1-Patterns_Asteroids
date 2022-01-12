@@ -9,9 +9,10 @@ namespace Asteroids
         #region Fields
 
         private int _strengthAsteroid = 20;
-        private float _speedAsteroid = 5.0f;
+        private float _speedAsteroid = 15.0f;
         private Vector3 _direction;
-        private int _damageAsteroid = 10;
+        private int _damageAsteroid = 20;
+        private float _deathTime = 7.0f;
 
         #endregion
 
@@ -27,18 +28,31 @@ namespace Asteroids
 
             set
             {
-                _strengthAsteroid -= value;
+                _strengthAsteroid = value;
             }
         }
-
-        public float Speed { get => _speedAsteroid; }
-
-        public int Damage { get => _damageAsteroid; }
 
         /// <summary>
         /// Direction moving of Asteroid
         /// </summary>
-        public Vector3 Direction { get => _direction; }
+        public Vector3 Direction
+        {
+            get => _direction;
+
+            set
+            {
+                _direction = value;
+            }
+        }
+
+        /// <summary>
+        /// Time for destroy asteroid
+        /// </summary>
+        public float DeathTime { get => _deathTime; }
+
+        public float Speed { get => _speedAsteroid; }
+
+        public int Damage { get => _damageAsteroid; }
 
         #endregion
 
@@ -50,6 +64,7 @@ namespace Asteroids
         }
 
         #endregion
+
 
     }
 }

@@ -7,7 +7,7 @@ namespace Asteroids
         /// </summary>
         /// <param name="damage"></param>
         /// <returns></returns>
-        public int GetDamage(int damage);
+        public void GetDamage(int damage);
     }
 }
 

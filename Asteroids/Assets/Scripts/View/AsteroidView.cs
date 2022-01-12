@@ -2,28 +2,21 @@
 
 namespace Asteroids
 {
-    public sealed class AsteroidView: MonoBehaviour
+    public sealed class AsteroidView: MonoBehaviour, IDamageable
     {
 
         #region Fields
 
-        private int _strength;
-        private int _damage;
-        private float _timeOfDeath = 20.0f;
+        private AsteroidController _asteroidController;
 
         #endregion
 
 
         #region Properties
 
-        public int Strength
+        public AsteroidController AsteroidController
         {
-            set { _strength = value; }
-        }
-
-        public int Damage
-        {
-            set { _damage = value; }
+            set { _asteroidController = value; }
         }
 
         #endregion
@@ -33,12 +26,15 @@ namespace Asteroids
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<IDamageable>(out IDamageable damageable))
+            if (other.CompareTag(Tags.PLAYER_TAG))
             {
-                damageable.GetDamage(_damage);
-            }
+                if (other.TryGetComponent<IDamageable>(out IDamageable damageable))
+                {
+                    damageable.GetDamage(_asteroidController.AsteroidDamageValue);
+                }
 
-            DestroyAsteroid();
+                DestroyAsteroid();
+            } 
         }
 
         #endregion
@@ -46,12 +42,35 @@ namespace Asteroids
 
         #region Methods
 
-        private void DestroyAsteroid()
+        /// <summary>
+        /// Destroy asteroid
+        /// </summary>
+        public void DestroyAsteroid()
         {
-            Destroy(gameObject, _timeOfDeath);
+            _asteroidController.Dispose();
+            Destroy(gameObject);
+        }
+
+        /// <summary>
+        /// Destroy asteroid after a certain time
+        /// </summary>
+        /// <param name="deathTime"></param>
+        public void DestroyAsteroidTime(float deathTime)
+        {
+            _asteroidController.Dispose();
+            Destroy(gameObject, deathTime);
         }
 
         #endregion
 
+
+        #region IDamageable
+
+        public void GetDamage (int damage)
+        {
+            _asteroidController.ChangeStrength(damage);
+        }
+
+        #endregion
     }
 }

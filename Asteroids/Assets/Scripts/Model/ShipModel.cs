@@ -1,17 +1,17 @@
+using System;
 using UnityEngine;
+
 
 
 namespace Asteroids
 {
-    public sealed class ShipModel
+    public sealed class ShipModel : IDisposable
     {
         #region Fields
 
         private int _strengthShip = 100;
-        private int _minStrengthShip = 0;
-        private int _maxStrengthShip = 100;
 
-        private float _speedShip = 5.0f;
+        private float _speedShip = 10.0f;
 
         private Rigidbody _shipRigidbody;
 
@@ -29,7 +29,7 @@ namespace Asteroids
 
             set
             {
-                _strengthShip = Mathf.Clamp(_strengthShip + value, _minStrengthShip, _maxStrengthShip);
+                _strengthShip = value;
             }
         }
 
@@ -64,6 +64,15 @@ namespace Asteroids
         public void LetMoveShip(Vector3 direction)
         {
             _shipRigidbody.velocity = direction * _speedShip;
+        }
+
+        #endregion
+
+
+        #region IDisposable
+
+        public void Dispose()
+        {
         }
 
         #endregion
