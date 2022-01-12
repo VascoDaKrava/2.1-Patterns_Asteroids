@@ -63,7 +63,11 @@ namespace Asteroids
         /// <param name="direction"></param>
         public void LetMoveShip(Vector3 direction)
         {
-            _shipRigidbody.velocity = direction * _speedShip;
+            if (_shipRigidbody != null)
+            {
+                _shipRigidbody.velocity = direction * _speedShip;
+            }
+            
         }
 
         #endregion

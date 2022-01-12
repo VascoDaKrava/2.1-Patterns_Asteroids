@@ -8,7 +8,7 @@ namespace Asteroids
 
         #region Fields
 
-        private float _rateOfSpawn = 7.0f; // Time in seconds between spawns
+        private float _rateOfSpawn = 4.0f; // Time in seconds between spawns
 
         private Transform _spawnPosition;
         private Timers _timers;

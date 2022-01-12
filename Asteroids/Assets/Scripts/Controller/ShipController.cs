@@ -45,7 +45,7 @@ namespace Asteroids
             _inputManager = inputManager;
 
             _shipModel = new ShipModel(rigidbody);
-            _shipView = new ShipView();
+            _shipView = GameObject.FindGameObjectWithTag(Tags.PLAYER_TAG).GetComponent<ShipView>();
 
             _shipView.ShipController = this;
         }
@@ -76,7 +76,6 @@ namespace Asteroids
             _shipModel.StrengthShip -= value;
             if (_shipModel.StrengthShip <= 0)
             {
-                Dispose();
                 _shipView.DestroyShip();
             }
             _shipView.CurrentStrengthShip(_shipModel.StrengthShip);

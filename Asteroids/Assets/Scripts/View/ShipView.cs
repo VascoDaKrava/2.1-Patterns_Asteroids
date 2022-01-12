@@ -40,6 +40,7 @@ namespace Asteroids
         /// <param name="deathTime"></param>
         public void DestroyShip()
         {
+            _shipController.Dispose();
             Destroy(gameObject);
         }
 
