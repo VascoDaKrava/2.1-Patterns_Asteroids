@@ -17,6 +17,14 @@ namespace Asteroids
             }
         }
 
+        public Object Asteroid
+        {
+            get
+            {
+                return Resources.Load(ResourcesPath.ASTEROID);
+            }
+        }
+
         #endregion
 
     }

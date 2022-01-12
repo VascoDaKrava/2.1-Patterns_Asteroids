@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Asteroids
 {
-    public sealed class ShipController : IUpdatable
+    public sealed class ShipController : UpdatableObject
     {
 
         #region Fields
@@ -16,18 +16,38 @@ namespace Asteroids
         #endregion
 
 
+        #region Properties
+
+        /// <summary>
+        /// Get value of ship strength
+        /// </summary>
+        public int ShipStrengthValue
+        {
+            get => _shipModel.StrengthShip;
+        }
+
+        #endregion
+
+
         #region ClassLifeCycles
 
         /// <summary>
         /// Create ShipController
         /// </summary>
         /// <param name="inputManager"></param>
-        public ShipController(InputManager inputManager, Rigidbody rigidbody)
+        public ShipController(
+            CreateUpdatableObjectEvent createUpdatableObjectEvent,
+            DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
+            InputManager inputManager, 
+            Rigidbody rigidbody) :
+            base (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _inputManager = inputManager;
 
             _shipModel = new ShipModel(rigidbody);
-            _shipView = new ShipView();
+            _shipView = GameObject.FindGameObjectWithTag(Tags.PLAYER_TAG).GetComponent<ShipView>();
+
+            _shipView.ShipController = this;
         }
 
         #endregion
@@ -47,17 +67,39 @@ namespace Asteroids
             }
         }
 
+        /// <summary>
+        /// Changing ship strength from asteroid damage
+        /// </summary>
+        /// <param name="value"></param>
+        public void ChangeStrength(int value)
+        {
+            _shipModel.StrengthShip -= value;
+            if (_shipModel.StrengthShip <= 0)
+            {
+                _shipView.DestroyShip();
+            }
+            _shipView.CurrentStrengthShip(_shipModel.StrengthShip);
+        }
+
+        #endregion
+
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            RemoveFromUpdate();
+            _shipModel.Dispose();
+        }
+
         #endregion
 
 
         #region IUpdatable
 
-        public void LetUpdate()
+        public override void LetUpdate()
         {
             LetMoveShip();
-
-            _shipView.CurrentSpeedShip(_shipModel.SpeedShip);
-            _shipView.CurrentStrengthShip(_shipModel.StrengthShip);
         }
 
         #endregion

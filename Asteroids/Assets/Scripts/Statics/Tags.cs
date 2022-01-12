@@ -10,7 +10,10 @@ namespace Asteroids
         #region Fields
 
         public const string PLAYER_TAG = "Player";
+        public const string ASTEROID_TAG = "Asteroid";
+        public const string SPAWN_POSITION_TAG = "Spawner";
         public const string BULLET_START_POSITION_TAG = "BulletStartPosition";
+        
 
         #endregion
 
