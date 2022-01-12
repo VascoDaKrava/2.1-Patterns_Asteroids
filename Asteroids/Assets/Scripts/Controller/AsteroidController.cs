@@ -16,8 +16,8 @@ namespace Asteroids
 
         private float _minSpawnPositionX = -50.0f;
         private float _maxSpawnPositionX = 50.0f;
-        private float _minDirectionX = -0.3f;
-        private float _maxDirectionX = 0.3f;
+        private float _minDirectionX = -0.7f;
+        private float _maxDirectionX = 0.7f;
         private float _minDirectionZ = 0.0f;
         private float _maxDirectionZ = -1.0f;
 
@@ -60,6 +60,7 @@ namespace Asteroids
                 0.0f, Random.Range(_minDirectionZ, _maxDirectionZ));
 
             _asteroidView.AsteroidController = this;
+            _asteroidView.DestroyAsteroidTime(_asteroidModel.DeathTime);
         }
 
         #endregion
@@ -72,7 +73,11 @@ namespace Asteroids
         /// </summary>
         private void AsteroidFly()
         {
-            _asteroidRigidbody.velocity = _asteroidModel.Direction * _asteroidModel.Speed;
+            if (_asteroidRigidbody != null)
+            {
+                _asteroidRigidbody.velocity = _asteroidModel.Direction * _asteroidModel.Speed;
+            }
+            
         }
 
         /// <summary>
@@ -107,7 +112,7 @@ namespace Asteroids
         public override void LetUpdate()
         {
             AsteroidFly();
-            //_asteroidView.DestroyAsteroidTime(_asteroidModel.DeathTime);
+            
         }
 
         #endregion
