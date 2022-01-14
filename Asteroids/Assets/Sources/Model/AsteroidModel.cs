@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Asteroids
 {
-    public sealed class AsteroidModel : IDisposable
+    public sealed class AsteroidModel
     {
 
         #region Fields
@@ -55,16 +55,6 @@ namespace Asteroids
         public int Damage { get => _damageAsteroid; }
 
         #endregion
-
-
-        #region IDisposable
-
-        public void Dispose()
-        {  
-        }
-
-        #endregion
-
 
     }
 }

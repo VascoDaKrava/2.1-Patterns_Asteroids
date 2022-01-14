@@ -101,7 +101,6 @@ namespace Asteroids
         public void Dispose()
         {
             RemoveFromUpdate();
-            _asteroidModel.Dispose();
         }
 
         #endregion

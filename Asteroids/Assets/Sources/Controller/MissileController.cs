@@ -57,7 +57,6 @@ namespace Asteroids
         public void Dispose()
         {
             RemoveFromUpdate();
-            _missileModel.Dispose();
         }
 
         #endregion
