@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Asteroids
 {
 
-    public sealed class Links
+    public sealed class RootStarter
     {
 
         #region Fields
@@ -24,7 +24,7 @@ namespace Asteroids
 
         #region ClassLifeCycles
 
-        public Links(
+        public RootStarter(
             GameStarter gameStarter,
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent)

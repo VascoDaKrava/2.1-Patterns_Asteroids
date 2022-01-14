@@ -32,7 +32,7 @@ namespace Asteroids
             _createUpdatableObjectEvent.CreateUpdatableObject += AddToUpdateList;
             _destroyUpdatableObjectEvent.DestroyUpdatableObject += RemoveFromUpdateList;
 
-            new Links(this, _createUpdatableObjectEvent, _destroyUpdatableObjectEvent);
+            new RootStarter(this, _createUpdatableObjectEvent, _destroyUpdatableObjectEvent);
         }
 
         private void Update()
