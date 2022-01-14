@@ -45,7 +45,8 @@ namespace Asteroids
             _inputManager = inputManager;
 
             _shipModel = new ShipModel(rigidbody);
-            _shipView = GameObject.FindGameObjectWithTag(Tags.PLAYER_TAG).GetComponent<ShipView>();
+            _shipView = GameObject.FindObjectOfType<ShipView>();
+                //GameObject.FindGameObjectWithTag(Tags.PLAYER_TAG).GetComponent<ShipView>();
 
             _shipView.ShipController = this;
         }

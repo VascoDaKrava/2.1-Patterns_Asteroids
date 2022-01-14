@@ -26,7 +26,8 @@ namespace Asteroids
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag(Tags.PLAYER_TAG))
+            // If enter to the FLYING_AREA do nothing
+            if (!other.CompareTag(Tags.FLYING_AREA))
             {
                 if (other.TryGetComponent<IDamageable>(out IDamageable damageable))
                 {
@@ -34,7 +35,7 @@ namespace Asteroids
                 }
 
                 DestroyAsteroid();
-            } 
+            }
         }
 
         #endregion

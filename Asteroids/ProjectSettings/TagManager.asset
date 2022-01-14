@@ -5,9 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - BulletStartPosition
-  - GameScriptObject
-  - Asteroid
   - Spawner
+  - FlyingArea
   layers:
   - Default
   - TransparentFX
