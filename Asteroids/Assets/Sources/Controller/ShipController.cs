@@ -45,7 +45,7 @@ namespace Asteroids
             _inputManager = inputManager;
 
             _shipModel = new ShipModel(rigidbody);
-            _shipView = GameObject.FindGameObjectWithTag(Tags.PLAYER_TAG).GetComponent<ShipView>();
+            _shipView = GameObject.FindObjectOfType<ShipView>();
 
             _shipView.ShipController = this;
         }
@@ -89,7 +89,6 @@ namespace Asteroids
         public void Dispose()
         {
             RemoveFromUpdate();
-            _shipModel.Dispose();
         }
 
         #endregion

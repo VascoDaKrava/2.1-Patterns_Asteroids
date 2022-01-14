@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Asteroids
 {
-    public sealed class ShipModel : IDisposable
+    public sealed class ShipModel
     {
         #region Fields
 
@@ -67,20 +67,10 @@ namespace Asteroids
             {
                 _shipRigidbody.velocity = direction * _speedShip;
             }
-            
+
         }
 
         #endregion
-
-
-        #region IDisposable
-
-        public void Dispose()
-        {
-        }
-
-        #endregion
-
 
     }
 }

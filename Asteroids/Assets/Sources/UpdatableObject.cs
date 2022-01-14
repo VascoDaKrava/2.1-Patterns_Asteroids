@@ -21,14 +21,6 @@ namespace Asteroids
             createUpdatableObject.Invoke(this);
         }
 
-        // Деструктор, который не вызывается, когда надо...
-        //~UpdatableObject()
-        //{
-        //    _destroyUpdatableObject.Invoke(this);
-        //    _gameStarter.RemoveFromUpdateList(this);
-        //    Debug.Log($"Destructor : {this}");
-        //}
-
         #endregion
 
 

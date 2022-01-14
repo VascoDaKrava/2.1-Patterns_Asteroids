@@ -29,7 +29,7 @@ namespace Asteroids
             _missileModel = new MissileModel();
 
             _missileView = GameObject.Instantiate(
-                resourceManager.MissileAIM9 as GameObject,
+                resourceManager.MissileAIM9,
                 bulletStartPosition.position,
                 bulletStartPosition.rotation).GetComponent<MissileView>();
 
@@ -57,7 +57,6 @@ namespace Asteroids
         public void Dispose()
         {
             RemoveFromUpdate();
-            _missileModel.Dispose();
         }
 
         #endregion
