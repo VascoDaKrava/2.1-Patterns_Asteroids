@@ -49,7 +49,7 @@ namespace Asteroids
             _asteroidModel = new AsteroidModel();
 
             _asteroidView = GameObject.Instantiate(
-                resourceManager.Asteroid as GameObject,
+                resourceManager.Asteroid,
                 spawnPosition.position = new Vector3(Random.Range(_minSpawnPositionX, _maxSpawnPositionX), 
                 spawnPosition.position.y, spawnPosition.position.z),
                 spawnPosition.rotation).GetComponent<AsteroidView>();
