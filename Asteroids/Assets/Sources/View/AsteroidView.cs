@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Asteroids
 {
@@ -7,16 +8,19 @@ namespace Asteroids
 
         #region Fields
 
-        private AsteroidController _asteroidController;
+        private int _damage;
+
+        public OnTriggerChangeEvent onTriggerChangeEvent;
+        public OnGetDamageEvent onGetDamageEvent;
 
         #endregion
 
 
         #region Properties
 
-        public AsteroidController AsteroidController
+        public int Damage
         {
-            set { _asteroidController = value; }
+            set { _damage = value; }
         }
 
         #endregion
@@ -31,7 +35,8 @@ namespace Asteroids
             {
                 if (other.TryGetComponent<IDamageable>(out IDamageable damageable))
                 {
-                    damageable.GetDamage(_asteroidController.AsteroidDamageValue);
+                    //onTriggerChangeEvent?.Invoke(other.gameObject);
+                    damageable.GetDamage(_damage);
                 }
 
                 DestroyAsteroid();
@@ -48,7 +53,6 @@ namespace Asteroids
         /// </summary>
         public void DestroyAsteroid()
         {
-            _asteroidController.Dispose();
             Destroy(gameObject);
         }
 
@@ -58,7 +62,6 @@ namespace Asteroids
         /// <param name="deathTime"></param>
         public void DestroyAsteroidTime(float deathTime)
         {
-            _asteroidController.Dispose();
             Destroy(gameObject, deathTime);
         }
 
@@ -69,7 +72,8 @@ namespace Asteroids
 
         public void GetDamage (int damage)
         {
-            _asteroidController.ChangeStrength(damage);
+            //_asteroidController.ChangeStrength(damage);
+            onGetDamageEvent?.Invoke(damage);
         }
 
         #endregion

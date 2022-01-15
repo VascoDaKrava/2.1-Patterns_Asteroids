@@ -59,8 +59,11 @@ namespace Asteroids
             _asteroidModel.Direction = new Vector3(Random.Range(_minDirectionX, _maxDirectionX),
                 0.0f, Random.Range(_minDirectionZ, _maxDirectionZ));
 
-            _asteroidView.AsteroidController = this;
             _asteroidView.DestroyAsteroidTime(_asteroidModel.DeathTime);
+
+            _asteroidView.Damage = _asteroidModel.Damage;      // is it ok?
+
+            _asteroidView.onGetDamageEvent.OnGetDamage += ChangeStrength;
         }
 
         #endregion
@@ -101,6 +104,7 @@ namespace Asteroids
         public void Dispose()
         {
             RemoveFromUpdate();
+            _asteroidView.onGetDamageEvent.OnGetDamage -= ChangeStrength;
         }
 
         #endregion
@@ -111,7 +115,6 @@ namespace Asteroids
         public override void LetUpdate()
         {
             AsteroidFly();
-            
         }
 
         #endregion
