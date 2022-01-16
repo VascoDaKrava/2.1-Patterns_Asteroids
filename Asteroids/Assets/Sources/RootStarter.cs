@@ -18,6 +18,7 @@ namespace Asteroids
         private Transform _spawnPosition;
         private CreateUpdatableObjectEvent _createUpdatableObjectEvent;
         private DestroyUpdatableObjectEvent _destroyUpdatableObjectEvent;
+        private OnTriggerChangeEvent _onTriggerChangeEvent;
 
         #endregion
 
@@ -32,6 +33,7 @@ namespace Asteroids
             _gameStarter = gameStarter;
             _createUpdatableObjectEvent = createUpdatableObjectEvent;
             _destroyUpdatableObjectEvent = destroyUpdatableObjectEvent;
+            _onTriggerChangeEvent = new OnTriggerChangeEvent();
 
             _resourceManager = new ResourceManager();
             _inputManager = new InputManager();
@@ -59,6 +61,7 @@ namespace Asteroids
             new EnemySpawner(
                 _createUpdatableObjectEvent,
                 _destroyUpdatableObjectEvent,
+                _onTriggerChangeEvent,
                 _spawnPosition, 
                 _resourceManager);
         }

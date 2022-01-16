@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Asteroids
 {
@@ -8,19 +7,22 @@ namespace Asteroids
 
         #region Fields
 
-        private int _damage;
-
-        public OnTriggerChangeEvent onTriggerChangeEvent;
-        public OnGetDamageEvent onGetDamageEvent;
+        private OnTriggerChangeEvent _onTriggerChangeEvent;
 
         #endregion
 
+        public OnGetDamageEvent OnGetDamageEvent;
 
         #region Properties
 
-        public int Damage
+        public OnTriggerChangeEvent OnTriggerChangeEvent
         {
-            set { _damage = value; }
+            get => _onTriggerChangeEvent;
+
+            set
+            {
+                _onTriggerChangeEvent = value;
+            }
         }
 
         #endregion
@@ -33,15 +35,18 @@ namespace Asteroids
             // If enter to the FLYING_AREA do nothing
             if (!other.CompareTag(Tags.FLYING_AREA))
             {
-                if (other.TryGetComponent<IDamageable>(out IDamageable damageable))
-                {
-                    //onTriggerChangeEvent?.Invoke(other.gameObject);
-                    damageable.GetDamage(_damage);
-                }
 
-                DestroyAsteroid();
+                OnTriggerChangeEvent?.Invoke(this.gameObject, other.gameObject);
+
+                //if (other.TryGetComponent<IDamageable>(out IDamageable damageable))
+                //{
+                //    damageable.GetDamage(_damage);
+                //    DestroyAsteroid();
+                //}
             }
         }
+
+
 
         #endregion
 
@@ -72,8 +77,7 @@ namespace Asteroids
 
         public void GetDamage (int damage)
         {
-            //_asteroidController.ChangeStrength(damage);
-            onGetDamageEvent?.Invoke(damage);
+            OnGetDamageEvent?.Invoke(damage);
         }
 
         #endregion

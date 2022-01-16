@@ -15,6 +15,7 @@ namespace Asteroids
         private ResourceManager _resourceManager;
         private CreateUpdatableObjectEvent _createUpdatableObjectEvent;
         private DestroyUpdatableObjectEvent _destroyUpdatableObjectEvent;
+        private OnTriggerChangeEvent _onTriggerChangeEvent;
 
         #endregion
 
@@ -24,6 +25,7 @@ namespace Asteroids
         public EnemySpawner(
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
+            OnTriggerChangeEvent onTriggerChangeEvent,
             Transform spawnPosition,
             ResourceManager resourceManager) :
             base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
@@ -32,6 +34,7 @@ namespace Asteroids
             _resourceManager = resourceManager;
             _createUpdatableObjectEvent = createUpdatableObjectEvent;
             _destroyUpdatableObjectEvent = destroyUpdatableObjectEvent;
+            _onTriggerChangeEvent = onTriggerChangeEvent;
             _timers = new Timers(createUpdatableObjectEvent, destroyUpdatableObjectEvent);
         }
 
@@ -52,6 +55,7 @@ namespace Asteroids
                 new AsteroidController(
                     _createUpdatableObjectEvent,
                     _destroyUpdatableObjectEvent,
+                    _onTriggerChangeEvent,
                     _resourceManager,
                     _spawnPosition);
             }
