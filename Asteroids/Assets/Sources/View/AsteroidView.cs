@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+
 namespace Asteroids
 {
     public sealed class AsteroidView: MonoBehaviour, IDamageable
@@ -84,5 +85,6 @@ namespace Asteroids
         }
 
         #endregion
+
     }
 }

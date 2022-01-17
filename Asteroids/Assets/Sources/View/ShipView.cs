@@ -28,6 +28,7 @@ namespace Asteroids
 
         #endregion
 
+
         #region UnityMethods
 
         private void OnEnable()
@@ -36,6 +37,7 @@ namespace Asteroids
         }
 
         #endregion
+
 
         #region Methods
 
@@ -68,6 +70,7 @@ namespace Asteroids
         }
 
         #endregion
+
     }
 }
 

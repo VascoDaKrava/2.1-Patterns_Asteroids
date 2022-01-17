@@ -1,5 +1,6 @@
 ﻿using System;
 
+
 namespace Asteroids
 {
     public sealed class OnGetDamageEvent
@@ -31,5 +32,6 @@ namespace Asteroids
         }
 
         #endregion
+
     }
 }

@@ -55,7 +55,6 @@ namespace Asteroids
 
         #endregion
 
-      
 
         #region Methods
 

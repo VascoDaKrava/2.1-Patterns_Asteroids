@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace Asteroids
 {
-
     public sealed class RootStarter
     {
 
@@ -29,7 +28,6 @@ namespace Asteroids
         {
             _createUpdatableObjectEvent = createUpdatableObjectEvent;
             _destroyUpdatableObjectEvent = destroyUpdatableObjectEvent;
-            
 
             _resourceManager = new ResourceManager();
             _inputManager = new InputManager();

@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace Asteroids
 {
-
     public sealed class Timers : UpdatableObject
     {
         #region Fields

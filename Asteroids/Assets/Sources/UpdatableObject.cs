@@ -39,5 +39,6 @@ namespace Asteroids
         public abstract void LetUpdate();
 
         #endregion
+
     }
 }
