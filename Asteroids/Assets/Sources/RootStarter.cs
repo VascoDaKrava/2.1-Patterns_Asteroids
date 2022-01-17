@@ -9,11 +9,9 @@ namespace Asteroids
 
         #region Fields
 
-        private GameStarter _gameStarter;
         private InputManager _inputManager;
         private ResourceManager _resourceManager;
         private Rigidbody _shipRigidbody;
-        private ShipController _shipController;
         private Transform _bulletStartPosition;
         private Transform _spawnPosition;
         private CreateUpdatableObjectEvent _createUpdatableObjectEvent;
@@ -25,11 +23,9 @@ namespace Asteroids
         #region ClassLifeCycles
 
         public RootStarter(
-            GameStarter gameStarter,
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent)
         {
-            _gameStarter = gameStarter;
             _createUpdatableObjectEvent = createUpdatableObjectEvent;
             _destroyUpdatableObjectEvent = destroyUpdatableObjectEvent;
 
@@ -41,13 +37,11 @@ namespace Asteroids
             _bulletStartPosition = GameObject.FindGameObjectWithTag(Tags.BULLET_START_POSITION_TAG).transform;
             _spawnPosition = GameObject.FindGameObjectWithTag(Tags.SPAWN_POSITION_TAG).transform;
 
-            _shipController = new ShipController(
+            new ShipController(
                 _createUpdatableObjectEvent, 
                 _destroyUpdatableObjectEvent, 
                 _inputManager, 
                 _shipRigidbody);
-
-            _gameStarter.AddToUpdateList(_shipController);
 
             new FireController(
                 _createUpdatableObjectEvent,
