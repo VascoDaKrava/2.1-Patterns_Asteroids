@@ -24,25 +24,11 @@ namespace Asteroids
         #endregion
 
 
-        #region Properties
-
-        /// <summary>
-        /// Get value of asteroid damage
-        /// </summary>
-        public int AsteroidDamageValue
-        {
-            get => _asteroidModel.Damage;
-        }
-
-        #endregion
-
-
         #region ClassLifeCycles
 
         public AsteroidController(
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
-            OnTriggerChangeEvent onTriggerChangeEvent,
             ResourceManager resourceManager,
             Transform spawnPosition) :
             base (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
@@ -60,11 +46,11 @@ namespace Asteroids
             _asteroidModel.Direction = new Vector3(Random.Range(_minDirectionX, _maxDirectionX),
                 0.0f, Random.Range(_minDirectionZ, _maxDirectionZ));
 
-            _asteroidView.DestroyAsteroidTime(_asteroidModel.DeathTime);
+            _asteroidView.Damage = _asteroidModel.Damage;
 
-            _asteroidView.OnTriggerChangeEvent = onTriggerChangeEvent;
-            onTriggerChangeEvent.OnTriggerChange += Trigger;
             _asteroidView.OnGetDamageEvent.OnGetDamage += ChangeStrength;
+
+            _asteroidView.DestroyAsteroidTime(_asteroidModel.DeathTime);
         }
 
         #endregion
@@ -83,23 +69,6 @@ namespace Asteroids
                 _asteroidRigidbody.velocity = _asteroidModel.Direction * _asteroidModel.Speed;
             }
             
-        }
-
-        private void Trigger (GameObject attacked, GameObject attack)
-        {
-            if (attacked == _asteroidView.gameObject)
-            {
-                _asteroidView.GetDamage(_asteroidModel.Damage);    // я не знаю как сюда передпть число урона от друго обьекта, поставил чтобы не ругалось
-            }
-            else if (attack == _asteroidView.gameObject)
-            {
-                if (attacked.TryGetComponent<IDamageable>(out IDamageable damageable))
-                {
-                    damageable.GetDamage(_asteroidModel.Damage);   // сюда по идее правильно передаю
-                    _asteroidView.DestroyAsteroid();
-                }
-            }
-
         }
 
         /// <summary>
@@ -123,7 +92,8 @@ namespace Asteroids
         public void Dispose()
         {
             RemoveFromUpdate();
-            _asteroidView.OnTriggerChangeEvent.OnTriggerChange -= Trigger;
+            _asteroidView.OnGetDamageEvent.OnGetDamage -= ChangeStrength;
+
         }
 
         #endregion

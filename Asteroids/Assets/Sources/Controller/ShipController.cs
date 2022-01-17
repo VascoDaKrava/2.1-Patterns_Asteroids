@@ -47,7 +47,7 @@ namespace Asteroids
             _shipModel = new ShipModel(rigidbody);
             _shipView = GameObject.FindObjectOfType<ShipView>();
 
-            _shipView.ShipController = this;
+            _shipView.OnGetDamageEvent.OnGetDamage += ChangeStrength;
         }
 
         #endregion
@@ -89,6 +89,7 @@ namespace Asteroids
         public void Dispose()
         {
             RemoveFromUpdate();
+            _shipView.OnGetDamageEvent.OnGetDamage -= ChangeStrength;
         }
 
         #endregion

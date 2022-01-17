@@ -8,20 +8,34 @@ namespace Asteroids
 
         #region Fields
 
-        private ShipController _shipController;
+        private int _damage;
+        private OnGetDamageEvent _onGetDamageEvent;
 
         #endregion
 
 
         #region Properties
 
-        public ShipController ShipController
+        public int Damage
         {
-            set { _shipController = value; }
+            set { _damage = value; }
+        }
+
+        public OnGetDamageEvent OnGetDamageEvent
+        {
+            get => _onGetDamageEvent;
         }
 
         #endregion
 
+        #region UnityMethods
+
+        private void OnEnable()
+        {
+            _onGetDamageEvent = new OnGetDamageEvent();
+        }
+
+        #endregion
 
         #region Methods
 
@@ -40,7 +54,6 @@ namespace Asteroids
         /// <param name="deathTime"></param>
         public void DestroyShip()
         {
-            _shipController.Dispose();
             Destroy(gameObject);
         }
 
@@ -51,7 +64,7 @@ namespace Asteroids
 
         public void GetDamage(int damage)
         {
-            _shipController.ChangeStrength(damage);
+           _onGetDamageEvent?.Invoke(damage);
         }
 
         #endregion

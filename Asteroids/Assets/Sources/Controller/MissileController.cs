@@ -36,7 +36,6 @@ namespace Asteroids
             _missileRigidbody = _missileView.gameObject.GetComponent<Rigidbody>();
 
             _missileView.Damage = _missileModel.Damage;
-            _missileView.MissileController = this;
         }
 
         #endregion
@@ -46,7 +45,11 @@ namespace Asteroids
 
         private void MissileFly()
         {
-            _missileRigidbody.velocity = _missileRigidbody.gameObject.transform.forward * _missileModel.Speed;
+            if (_missileRigidbody != null)
+            {
+                _missileRigidbody.velocity = _missileRigidbody.gameObject.transform.forward * _missileModel.Speed;
+            }
+            
         }
 
         #endregion

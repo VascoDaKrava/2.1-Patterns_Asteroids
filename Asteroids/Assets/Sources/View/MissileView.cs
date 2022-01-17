@@ -10,7 +10,6 @@ namespace Asteroids
         #region Fields
 
         private int _damage;
-        private MissileController _missileController;
 
         #endregion
 
@@ -20,11 +19,6 @@ namespace Asteroids
         public int Damage
         {
             set { _damage = value; }
-        }
-
-        public MissileController MissileController 
-        {
-            set { _missileController = value; }
         }
 
         #endregion
@@ -49,7 +43,6 @@ namespace Asteroids
 
         private void DestroyMissile()
         {
-            _missileController.Dispose();
             Destroy(gameObject);
         }
 
