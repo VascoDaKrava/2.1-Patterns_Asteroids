@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Asteroids
 {
@@ -13,8 +12,7 @@ namespace Asteroids
         private Transform _spawnPosition;
         private Timers _timers;
         private ResourceManager _resourceManager;
-        private CreateUpdatableObjectEvent _createUpdatableObjectEvent;
-        private DestroyUpdatableObjectEvent _destroyUpdatableObjectEvent;
+        private UpdatableControllersFactory _controllersFactory;
 
         #endregion
 
@@ -25,14 +23,14 @@ namespace Asteroids
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             Transform spawnPosition,
-            ResourceManager resourceManager) :
+            ResourceManager resourceManager,
+            UpdatableControllersFactory controllersFactory) :
             base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _spawnPosition = spawnPosition;
             _resourceManager = resourceManager;
-            _createUpdatableObjectEvent = createUpdatableObjectEvent;
-            _destroyUpdatableObjectEvent = destroyUpdatableObjectEvent;
-            _timers = new Timers(createUpdatableObjectEvent, destroyUpdatableObjectEvent);
+            _controllersFactory = controllersFactory;
+            _timers = _controllersFactory.CreateTimers();
         }
 
         #endregion
@@ -49,11 +47,7 @@ namespace Asteroids
             if (!_timers.isTimerOn)
             {
                 _timers.StartTimer(_rateOfSpawn);
-                new AsteroidController(
-                    _createUpdatableObjectEvent,
-                    _destroyUpdatableObjectEvent,
-                    _resourceManager,
-                    _spawnPosition);
+                _controllersFactory.CreateAsteroidController(_resourceManager, _spawnPosition);
             }
         }
 

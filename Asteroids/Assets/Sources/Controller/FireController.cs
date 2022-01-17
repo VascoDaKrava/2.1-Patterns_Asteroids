@@ -15,8 +15,7 @@ namespace Asteroids
         private Timers _timers;
         private InputManager _inputManager;
         private ResourceManager _resourceManager;
-        private CreateUpdatableObjectEvent _createUpdatableObjectEvent;
-        private DestroyUpdatableObjectEvent _destroyUpdatableObjectEvent;
+        private UpdatableControllersFactory _controllersFactory;
 
         #endregion
 
@@ -28,15 +27,15 @@ namespace Asteroids
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             Transform bulletStartPosition,
             InputManager inputManagerLink,
-            ResourceManager resourceManager) :
+            ResourceManager resourceManager,
+            UpdatableControllersFactory controllersFactory) :
             base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _bulletStartPosition = bulletStartPosition;
             _inputManager = inputManagerLink;
             _resourceManager = resourceManager;
-            _createUpdatableObjectEvent = createUpdatableObjectEvent;
-            _destroyUpdatableObjectEvent = destroyUpdatableObjectEvent;
-            _timers = new Timers(createUpdatableObjectEvent, destroyUpdatableObjectEvent);
+            _controllersFactory = controllersFactory;
+            _timers = _controllersFactory.CreateTimers();
         }
 
         #endregion
@@ -51,11 +50,7 @@ namespace Asteroids
                 if (!_timers.isTimerOn)
                 {
                     _timers.StartTimer(_rateOfFire);
-                    new MissileController(
-                        _createUpdatableObjectEvent,
-                        _destroyUpdatableObjectEvent,
-                        _resourceManager,
-                        _bulletStartPosition);
+                    _controllersFactory.CreateMissileController(_resourceManager, _bulletStartPosition);
                 }
             }
         }
@@ -71,5 +66,6 @@ namespace Asteroids
         }
 
         #endregion
+
     }
 }

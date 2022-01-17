@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Asteroids
 {
-
     public sealed class MissileController : UpdatableObject, IDisposable
     {
 

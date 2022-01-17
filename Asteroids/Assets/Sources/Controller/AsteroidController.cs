@@ -92,7 +92,6 @@ namespace Asteroids
         {
             RemoveFromUpdate();
             _asteroidView.OnGetDamageEvent.OnGetDamage -= ChangeStrength;
-
         }
 
         #endregion

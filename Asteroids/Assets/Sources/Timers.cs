@@ -5,6 +5,7 @@ namespace Asteroids
 {
     public sealed class Timers : UpdatableObject
     {
+
         #region Fields
 
         private float _secondsElapsed;

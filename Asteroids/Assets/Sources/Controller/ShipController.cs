@@ -38,7 +38,7 @@ namespace Asteroids
         public ShipController(
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
-            InputManager inputManager, 
+            InputManager inputManager,
             Rigidbody rigidbody) :
             base (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
@@ -104,5 +104,6 @@ namespace Asteroids
         }
 
         #endregion
+
     }
 }
