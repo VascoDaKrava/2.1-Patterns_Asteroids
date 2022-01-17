@@ -43,7 +43,6 @@ namespace Asteroids
                 _inputManager, 
                 _shipRigidbody);
 
-
             new FireController(
                 _createUpdatableObjectEvent,
                 _destroyUpdatableObjectEvent,
