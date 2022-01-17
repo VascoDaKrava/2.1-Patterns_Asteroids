@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace Asteroids
 {
-
     public sealed class GameStarter : MonoBehaviour, IDisposable
     {
 
@@ -32,7 +31,7 @@ namespace Asteroids
             _createUpdatableObjectEvent.CreateUpdatableObject += AddToUpdateList;
             _destroyUpdatableObjectEvent.DestroyUpdatableObject += RemoveFromUpdateList;
 
-            new RootStarter(this, _createUpdatableObjectEvent, _destroyUpdatableObjectEvent);
+            new RootStarter(_createUpdatableObjectEvent, _destroyUpdatableObjectEvent);
         }
 
         private void Update()
@@ -61,7 +60,7 @@ namespace Asteroids
         /// Add item to list for Update (in the current LateUpdate)
         /// </summary>
         /// <param name="updatableObject"></param>
-        public void AddToUpdateList(IUpdatable updatableObject)
+        private void AddToUpdateList(IUpdatable updatableObject)
         {
             _candidatsForAddingToUpdatables.Add(updatableObject);
         }
@@ -70,7 +69,7 @@ namespace Asteroids
         /// Remove item from list for Update
         /// </summary>
         /// <param name="updatableObject"></param>
-        public void RemoveFromUpdateList(IUpdatable updatableObject)
+        private void RemoveFromUpdateList(IUpdatable updatableObject)
         {
             _updatables.Remove(updatableObject);
         }

@@ -1,6 +1,5 @@
 namespace Asteroids
 {
-
     /// <summary>
     /// Contain Tags
     /// </summary>

@@ -24,19 +24,6 @@ namespace Asteroids
         #endregion
 
 
-        #region Properties
-
-        /// <summary>
-        /// Get value of asteroid damage
-        /// </summary>
-        public int AsteroidDamageValue
-        {
-            get => _asteroidModel.Damage;
-        }
-
-        #endregion
-
-
         #region ClassLifeCycles
 
         public AsteroidController(
@@ -59,7 +46,10 @@ namespace Asteroids
             _asteroidModel.Direction = new Vector3(Random.Range(_minDirectionX, _maxDirectionX),
                 0.0f, Random.Range(_minDirectionZ, _maxDirectionZ));
 
-            _asteroidView.AsteroidController = this;
+            _asteroidView.Damage = _asteroidModel.Damage;
+
+            _asteroidView.OnGetDamageEvent.OnGetDamage += ChangeStrength;
+
             _asteroidView.DestroyAsteroidTime(_asteroidModel.DeathTime);
         }
 
@@ -101,6 +91,8 @@ namespace Asteroids
         public void Dispose()
         {
             RemoveFromUpdate();
+            _asteroidView.OnGetDamageEvent.OnGetDamage -= ChangeStrength;
+
         }
 
         #endregion
@@ -111,7 +103,6 @@ namespace Asteroids
         public override void LetUpdate()
         {
             AsteroidFly();
-            
         }
 
         #endregion

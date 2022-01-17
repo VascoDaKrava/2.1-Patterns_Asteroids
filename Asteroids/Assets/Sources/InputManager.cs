@@ -3,7 +3,6 @@
 
 namespace Asteroids
 {
-
     public sealed class InputManager
     {
 
