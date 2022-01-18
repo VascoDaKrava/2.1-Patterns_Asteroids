@@ -74,17 +74,20 @@ namespace Asteroids
         /// Create new MissileController
         /// </summary>
         /// <param name="resourceManager">Link to ResourceManager</param>
-        /// <param name="bulletStartPosition">Link to Transform, where bullet was instantiate</param>
+        /// <param name="bulletStartPosition">Position, where bullet was instantiate</param>
+        /// <param name="bulletStartDirection">Direction of bullet, when it was instantiate</param>
         /// <returns></returns>
         public MissileController CreateMissileController(
             ResourceManager resourceManager,
-            Transform bulletStartPosition)
+            Vector3 bulletStartPosition,
+            Quaternion bulletStartDirection)
         {
             return new MissileController(
                 _createUpdatable,
                 _destroyUpdatable,
                 resourceManager,
-                bulletStartPosition);
+                bulletStartPosition,
+                bulletStartDirection);
         }
 
         /// <summary>

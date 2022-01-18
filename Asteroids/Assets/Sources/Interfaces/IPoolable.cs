@@ -1,9 +1,12 @@
+using UnityEngine;
+
+
 namespace Asteroids
 {
     public interface IPoolable
     {
-        public void PrepareForPop();
+        public void PrepareAfterPop(Vector3 position, Quaternion rotation);
 
-        public void PrepareForPush();
+        public void PrepareBeforePush();
     }
 }

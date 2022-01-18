@@ -10,12 +10,13 @@ namespace Asteroids
         #region Fields
 
         private float _rateOfFire = 1.0f; // Time in seconds between shots
+        private int _misselesInPool = 10;
 
-        private Transform _bulletStartPosition;
+        private Transform _bulletStartTransform;
         private Timers _timers;
         private InputManager _inputManager;
-        private ResourceManager _resourceManager;
         private UpdatableControllersFactory _controllersFactory;
+        private MissilePool _missilePool;
 
         #endregion
 
@@ -25,17 +26,17 @@ namespace Asteroids
         public FireController(
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
-            Transform bulletStartPosition,
+            Transform bulletStartTransform,
             InputManager inputManagerLink,
             ResourceManager resourceManager,
             UpdatableControllersFactory controllersFactory) :
             base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
-            _bulletStartPosition = bulletStartPosition;
+            _bulletStartTransform = bulletStartTransform;
             _inputManager = inputManagerLink;
-            _resourceManager = resourceManager;
             _controllersFactory = controllersFactory;
             _timers = _controllersFactory.CreateTimers();
+            _missilePool = new MissilePool(controllersFactory, resourceManager, _misselesInPool);
         }
 
         #endregion
@@ -50,7 +51,7 @@ namespace Asteroids
                 if (!_timers.isTimerOn)
                 {
                     _timers.StartTimer(_rateOfFire);
-                    _controllersFactory.CreateMissileController(_resourceManager, _bulletStartPosition);
+                    _missilePool.Pop(_bulletStartTransform.position, _bulletStartTransform.rotation);
                 }
             }
         }

@@ -21,19 +21,18 @@ namespace Asteroids
             CreateUpdatableObjectEvent createUpdatableObject,
             DestroyUpdatableObjectEvent destroyUpdatableObject,
             ResourceManager resourceManager,
-            Transform bulletStartPosition) :
+            Vector3 bulletStartPosition,
+            Quaternion bulletStartDirection) :
             base(createUpdatableObject, destroyUpdatableObject)
         {
             _missileModel = new MissileModel();
 
             _missileView = GameObject.Instantiate(
                 resourceManager.MissileAIM9,
-                bulletStartPosition.position,
-                bulletStartPosition.rotation).GetComponent<MissileView>();
+                bulletStartPosition,
+                bulletStartDirection).GetComponent<MissileView>();
 
             _missileRigidbody = _missileView.gameObject.GetComponent<Rigidbody>();
-
-            _missileView.Damage = _missileModel.Damage;
         }
 
         #endregion
@@ -49,6 +48,19 @@ namespace Asteroids
             }
         }
 
+        private void CheckHit()
+        {
+            if (_missileView.IsHit)
+            {
+                if (_missileView.HittingCollider.TryGetComponent<IDamageable>(out IDamageable damageable))
+                {
+                    damageable.GetDamage(_missileModel.Damage);
+                }
+                
+                PrepareBeforePush();
+            }
+        }
+
         #endregion
 
 
@@ -57,6 +69,7 @@ namespace Asteroids
         public override void LetUpdate()
         {
             MissileFly();
+            CheckHit();
         }
 
         #endregion
@@ -64,13 +77,17 @@ namespace Asteroids
 
         #region IPoolable
 
-        public void PrepareForPop()
+        public void PrepareAfterPop(Vector3 position, Quaternion rotation)
         {
-            
+            _missileRigidbody.gameObject.SetActive(true);
+            _missileRigidbody.transform.position = position;
+            _missileRigidbody.transform.rotation = rotation;
+            AddToUpdate();
         }
 
-        public void PrepareForPush()
+        public void PrepareBeforePush()
         {
+            _missileView.IsHit = false;
             _missileRigidbody.gameObject.SetActive(false);
             RemoveFromUpdate();
         }

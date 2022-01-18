@@ -8,17 +8,27 @@ namespace Asteroids
 
         #region Fields
 
-        private int _damage;
+        private bool _isHit;
 
         #endregion
 
 
         #region Properties
 
-        public int Damage
+        public bool IsHit
         {
-            set { _damage = value; }
+            get
+            {
+                return _isHit;
+            }
+
+            set
+            {
+                _isHit = value;
+            }
         }
+
+        public Collider HittingCollider { get; private set; }
 
         #endregion
 
@@ -27,23 +37,8 @@ namespace Asteroids
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<IDamageable>(out IDamageable damageable))
-            {
-                damageable.GetDamage(_damage);
-            }
-
-            DestroyMissile();
-        }
-
-        #endregion
-
-
-        #region Methods
-
-        private void DestroyMissile()
-        {
-            //Destroy(gameObject);
-
+            _isHit = true;
+            HittingCollider = other;
         }
 
         #endregion
