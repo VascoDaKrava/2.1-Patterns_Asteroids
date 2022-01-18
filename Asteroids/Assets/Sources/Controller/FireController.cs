@@ -10,7 +10,7 @@ namespace Asteroids
         #region Fields
 
         private float _rateOfFire = 1.0f; // Time in seconds between shots
-        private int _misselesInPool = 10;
+        private int _misselesInPool = 3;
 
         private Transform _bulletStartTransform;
         private Timers _timers;

@@ -7,6 +7,6 @@ namespace Asteroids
     {
         public void PrepareAfterPop(Vector3 position, Quaternion rotation);
 
-        public void PrepareBeforePush();
+        public void PrepareBeforePush(MissilePool missilePool);
     }
 }

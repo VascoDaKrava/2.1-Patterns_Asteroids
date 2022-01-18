@@ -20,8 +20,8 @@ namespace Asteroids
             _missiles = new Stack<MissileController>(_poolCapacity);
             for (int i = 0; i < _poolCapacity; i++)
             {
-                _missiles.Push(controllersFactory.CreateMissileController(resourceManager, Vector3.zero, Quaternion.identity));
-                _missiles.Peek().PrepareBeforePush();
+                Push(controllersFactory.CreateMissileController(resourceManager, Vector3.zero, Quaternion.identity));
+                _missiles.Peek().PrepareBeforePush(this);
             }
         }
 
@@ -33,14 +33,10 @@ namespace Asteroids
             Debug.Log($"Bullets left : {_missiles.Count} / {_poolCapacity}");
         }
 
-        public void Push()
+        public void Push(MissileController missileController)
         {
-
-        }
-
-        private void MakeMissileInactive(MissileController missile)
-        {
-            //missile.
+            _missiles.Push(missileController);
+            Debug.Log($"Bullets left : {_missiles.Count} / {_poolCapacity}");
         }
     }
 }

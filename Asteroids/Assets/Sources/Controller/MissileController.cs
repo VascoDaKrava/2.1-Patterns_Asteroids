@@ -11,6 +11,7 @@ namespace Asteroids
         private MissileModel _missileModel;
         private MissileView _missileView;
         private Rigidbody _missileRigidbody;
+        private MissilePool _missilePool;
 
         #endregion
 
@@ -57,7 +58,8 @@ namespace Asteroids
                     damageable.GetDamage(_missileModel.Damage);
                 }
                 
-                PrepareBeforePush();
+                PrepareBeforePush(_missilePool);
+                _missilePool.Push(this);
             }
         }
 
@@ -85,8 +87,9 @@ namespace Asteroids
             AddToUpdate();
         }
 
-        public void PrepareBeforePush()
+        public void PrepareBeforePush(MissilePool missilePool)
         {
+            if (_missilePool == null) _missilePool = missilePool;
             _missileView.IsHit = false;
             _missileRigidbody.gameObject.SetActive(false);
             RemoveFromUpdate();
