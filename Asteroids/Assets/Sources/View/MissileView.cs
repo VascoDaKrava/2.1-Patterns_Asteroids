@@ -42,7 +42,8 @@ namespace Asteroids
 
         private void DestroyMissile()
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+
         }
 
         #endregion

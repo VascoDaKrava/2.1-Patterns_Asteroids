@@ -50,8 +50,6 @@ namespace Asteroids
             }
         }
 
-
-
         #endregion
 
 

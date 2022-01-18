@@ -1,10 +1,9 @@
-using System;
 using UnityEngine;
 
 
 namespace Asteroids
 {
-    public sealed class MissileController : UpdatableObject, IDisposable
+    public sealed class MissileController : UpdatableObject, IPoolable
     {
 
         #region Fields
@@ -48,17 +47,6 @@ namespace Asteroids
             {
                 _missileRigidbody.velocity = _missileRigidbody.gameObject.transform.forward * _missileModel.Speed;
             }
-            
-        }
-
-        #endregion
-
-
-        #region IDisposable
-
-        public void Dispose()
-        {
-            RemoveFromUpdate();
         }
 
         #endregion
@@ -69,6 +57,22 @@ namespace Asteroids
         public override void LetUpdate()
         {
             MissileFly();
+        }
+
+        #endregion
+
+
+        #region IPoolable
+
+        public void PrepareForPop()
+        {
+            
+        }
+
+        public void PrepareForPush()
+        {
+            _missileRigidbody.gameObject.SetActive(false);
+            RemoveFromUpdate();
         }
 
         #endregion

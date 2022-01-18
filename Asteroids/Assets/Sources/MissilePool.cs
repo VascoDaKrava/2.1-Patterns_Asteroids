@@ -23,12 +23,12 @@ namespace Asteroids
             }
         }
 
-        public void GetFromPool()
+        public void Pop(Transform position, Vector3 direction)
         {
 
         }
 
-        public void PushToPool()
+        public void Push()
         {
 
         }
