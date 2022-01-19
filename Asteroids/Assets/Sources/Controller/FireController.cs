@@ -17,6 +17,7 @@ namespace Asteroids
         private InputManager _inputManager;
         private UpdatableControllersFactory _controllersFactory;
         private MissilePool _missilePool;
+        private bool _isAutoFireOn;
 
         #endregion
 
@@ -56,6 +57,24 @@ namespace Asteroids
             }
         }
 
+        private void ChangeAutoFire()
+        {
+            if (_inputManager.isSecondFire)
+                _isAutoFireOn = !_isAutoFireOn;
+
+            if (_isAutoFireOn)
+                DoAutoFire();
+        }
+
+        private void DoAutoFire()
+        {
+            foreach (Collider item in Physics.OverlapSphere(_bulletStartTransform.position, 100f))
+            {
+                Debug.Log($"C : {item.gameObject}, D = {Vector3.Distance(item.transform.position, _bulletStartTransform.position)}");
+            }
+            _isAutoFireOn = false;
+        }
+
         #endregion
 
 
@@ -64,6 +83,7 @@ namespace Asteroids
         public override void LetUpdate()
         {
             TryFire();
+            ChangeAutoFire();
         }
 
         #endregion

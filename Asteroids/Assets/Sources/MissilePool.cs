@@ -7,9 +7,15 @@ namespace Asteroids
     public sealed class MissilePool
     {
 
-        private int _poolCapacity;
+        #region Fields
 
+        private int _poolCapacity;
         private Stack<MissileController> _missiles;
+
+        #endregion
+
+
+        #region ClassLifeCicles
 
         public MissilePool(
             UpdatableControllersFactory controllersFactory,
@@ -25,6 +31,11 @@ namespace Asteroids
             }
         }
 
+        #endregion
+
+
+        #region Methods
+
         public void Pop(Vector3 position, Quaternion direction)
         {
             if (_missiles.Count == 0) return;
@@ -38,5 +49,8 @@ namespace Asteroids
             _missiles.Push(missileController);
             Debug.Log($"Bullets left : {_missiles.Count} / {_poolCapacity}");
         }
+
+        #endregion
+
     }
 }
