@@ -9,11 +9,15 @@ namespace Asteroids
 
         #region Fields
 
-        private float _rateOfFire = 1.0f; // Time in seconds between shots
         private int _misselesInPool = 3;
+        private float _rateOfFire = 1.0f; // Time in seconds between shots
+        private float _sonarRange = 50.0f;
+        private float _sonarReloadTime = 5.0f; // Time in seconds between using sonar/autofire
 
         private Transform _bulletStartTransform;
-        private Timers _timers;
+        private Transform _enemyTargetTransform;
+        private Timers _primaryFireTimer;
+        private Timers _sonarTimer;
         private InputManager _inputManager;
         private UpdatableControllersFactory _controllersFactory;
         private MissilePool _missilePool;
@@ -36,7 +40,8 @@ namespace Asteroids
             _bulletStartTransform = bulletStartTransform;
             _inputManager = inputManagerLink;
             _controllersFactory = controllersFactory;
-            _timers = _controllersFactory.CreateTimers();
+            _primaryFireTimer = _controllersFactory.CreateTimers();
+            _sonarTimer = _controllersFactory.CreateTimers();
             _missilePool = new MissilePool(controllersFactory, resourceManager, _misselesInPool);
         }
 
@@ -45,34 +50,57 @@ namespace Asteroids
 
         #region Methods
 
-        private void TryFire()
+        private void PrimaryFire()
         {
-            if (_inputManager.isFire)
+            if (_inputManager.isPrimaryFire)
             {
-                if (!_timers.isTimerOn)
+                if (!_primaryFireTimer.isTimerOn)
                 {
-                    _timers.StartTimer(_rateOfFire);
+                    _primaryFireTimer.StartTimer(_rateOfFire);
                     _missilePool.Pop(_bulletStartTransform.position, _bulletStartTransform.rotation);
                 }
             }
         }
 
-        private void ChangeAutoFire()
+        private void SecondaryFire()
         {
-            if (_inputManager.isSecondFire)
+            if (_inputManager.isSecondaryFire)
                 _isAutoFireOn = !_isAutoFireOn;
 
-            if (_isAutoFireOn)
-                DoAutoFire();
+            if (_isAutoFireOn && !_sonarTimer.isTimerOn)
+            {
+                _sonarTimer.StartTimer(_sonarReloadTime);
+                if (StartSonar(_bulletStartTransform.position, _sonarRange, out _enemyTargetTransform))
+                {
+                    StartHomingMissile();
+                    //_enemyTargetTransform.gameObject.AddComponent<>
+                    Debug.Log("Target = " + _enemyTargetTransform.gameObject);
+                }
+                _isAutoFireOn = false;
+            }
         }
 
-        private void DoAutoFire()
+        private void StartHomingMissile()
+        { }
+
+        private bool StartSonar(Vector3 startPosition, float radius, out Transform target)
         {
-            foreach (Collider item in Physics.OverlapSphere(_bulletStartTransform.position, 100f))
+            target = null;
+            float nearestDistance = float.PositiveInfinity;
+            float currentDistanceToTarget = float.PositiveInfinity;
+
+            foreach (Collider item in Physics.OverlapSphere(_bulletStartTransform.position, 50f, TagsAndLayers.ENEMY_LAYER, QueryTriggerInteraction.Collide))
             {
-                Debug.Log($"C : {item.gameObject}, D = {Vector3.Distance(item.transform.position, _bulletStartTransform.position)}");
+                currentDistanceToTarget = Vector3.Distance(item.transform.position, _bulletStartTransform.position);
+
+                if (nearestDistance > currentDistanceToTarget)
+                {
+                    nearestDistance = currentDistanceToTarget;
+                    target = item.transform;
+                }
             }
-            _isAutoFireOn = false;
+
+            return target;
         }
 
         #endregion
@@ -82,8 +110,8 @@ namespace Asteroids
 
         public override void LetUpdate()
         {
-            TryFire();
-            ChangeAutoFire();
+            PrimaryFire();
+            SecondaryFire();
         }
 
         #endregion

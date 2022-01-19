@@ -15,12 +15,12 @@ namespace Asteroids
 
         #region Properties
 
-        public bool isFire
+        public bool isPrimaryFire
         {
             get { return Input.GetButton(InputKeysAndAxis.KEY_PRIMARY_FIRE); }
         }
 
-        public bool isSecondFire
+        public bool isSecondaryFire
         {
             get { return Input.GetButtonDown(InputKeysAndAxis.KEY_AUTO_FIRE); }
         }

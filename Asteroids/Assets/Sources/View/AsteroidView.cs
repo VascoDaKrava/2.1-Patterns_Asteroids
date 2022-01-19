@@ -39,7 +39,7 @@ namespace Asteroids
         private void OnTriggerEnter(Collider other)
         {
             // If enter to the FLYING_AREA do nothing
-            if (!other.CompareTag(Tags.FLYING_AREA))
+            if (!other.CompareTag(TagsAndLayers.FLYING_AREA_TAG))
             {
 
                 if (other.TryGetComponent<IDamageable>(out IDamageable damageable))
