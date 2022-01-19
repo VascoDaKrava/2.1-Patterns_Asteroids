@@ -3,14 +3,11 @@ using UnityEngine;
 
 namespace Asteroids
 {
-    public class MissileController : UpdatableObject, IPoolable
+    public sealed class LineMissileController : AbstractMissile, IPoolable
     {
 
         #region Fields
 
-        private MissileModel _missileModel;
-        private MissileView _missileView;
-        private Rigidbody _missileRigidbody;
         private MissilePool _missilePool;
 
         #endregion
@@ -18,22 +15,13 @@ namespace Asteroids
 
         #region ClassLifeCicles
 
-        public MissileController(
-            CreateUpdatableObjectEvent createUpdatableObject,
-            DestroyUpdatableObjectEvent destroyUpdatableObject,
-            ResourceManager resourceManager,
-            Vector3 bulletStartPosition,
-            Quaternion bulletStartDirection) :
-            base(createUpdatableObject, destroyUpdatableObject)
+        public LineMissileController(CreateUpdatableObjectEvent createUpdatableObject,
+           DestroyUpdatableObjectEvent destroyUpdatableObject,
+           ResourceManager resourceManager,
+           Vector3 bulletStartPosition,
+           Quaternion bulletStartDirection) :
+           base(createUpdatableObject, destroyUpdatableObject, resourceManager, bulletStartPosition, bulletStartDirection)
         {
-            _missileModel = new MissileModel();
-
-            _missileView = GameObject.Instantiate(
-                resourceManager.MissileAIM9,
-                bulletStartPosition,
-                bulletStartDirection).GetComponent<MissileView>();
-
-            _missileRigidbody = _missileView.gameObject.GetComponent<Rigidbody>();
         }
 
         #endregion
@@ -41,7 +29,7 @@ namespace Asteroids
 
         #region Methods
 
-        private void MissileFly()
+        protected override void MissileFly()
         {
             if (_missileRigidbody != null)
             {

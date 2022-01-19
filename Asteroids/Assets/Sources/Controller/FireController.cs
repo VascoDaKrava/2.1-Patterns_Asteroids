@@ -80,7 +80,7 @@ namespace Asteroids
 
         private void StartHomingMissile(Transform target)
         {
-            //_controllersFactory.CreateMissileController(_bulletStartTransform.position, _bulletStartTransform.rotation);
+            _controllersFactory.CreateMissileController(_bulletStartTransform.position, _bulletStartTransform.rotation, target);
         }
 
         /// <summary>

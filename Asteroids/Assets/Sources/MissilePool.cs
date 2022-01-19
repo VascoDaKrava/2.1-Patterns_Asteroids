@@ -10,7 +10,7 @@ namespace Asteroids
         #region Fields
 
         private int _poolCapacity;
-        private Stack<MissileController> _missiles;
+        private Stack<LineMissileController> _missiles;
 
         #endregion
 
@@ -22,7 +22,7 @@ namespace Asteroids
             int poolCapacity)
         {
             _poolCapacity = poolCapacity;
-            _missiles = new Stack<MissileController>(_poolCapacity);
+            _missiles = new Stack<LineMissileController>(_poolCapacity);
             for (int i = 0; i < _poolCapacity; i++)
             {
                 Push(controllersFactory.CreateMissileController(Vector3.zero, Quaternion.identity));
@@ -43,7 +43,7 @@ namespace Asteroids
             Debug.Log($"Bullets left : {_missiles.Count} / {_poolCapacity}");
         }
 
-        public void Push(MissileController missileController)
+        public void Push(LineMissileController missileController)
         {
             _missiles.Push(missileController);
             Debug.Log($"Bullets left : {_missiles.Count} / {_poolCapacity}");

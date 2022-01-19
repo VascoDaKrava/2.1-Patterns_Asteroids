@@ -70,21 +70,42 @@ namespace Asteroids
         }
 
         /// <summary>
-        /// Create new MissileController
+        /// Create new LineMissileController
         /// </summary>
         /// <param name="bulletStartPosition">Position, where bullet was instantiate</param>
         /// <param name="bulletStartDirection">Direction of bullet, when it was instantiate</param>
         /// <returns></returns>
-        public MissileController CreateMissileController(
+        public LineMissileController CreateMissileController(
             Vector3 bulletStartPosition,
             Quaternion bulletStartDirection)
         {
-            return new MissileController(
+            return new LineMissileController(
                 _createUpdatable,
                 _destroyUpdatable,
                 _resourceManager,
                 bulletStartPosition,
                 bulletStartDirection);
+        }
+
+        /// <summary>
+        /// Create new HomingMissileController
+        /// </summary>
+        /// <param name="bulletStartPosition">Position, where bullet was instantiate</param>
+        /// <param name="bulletStartDirection">Direction of bullet, when it was instantiate</param>
+        /// <param name="target">Transform of target of missile</param>
+        /// <returns></returns>
+        public HomingMissileController CreateMissileController(
+            Vector3 bulletStartPosition,
+            Quaternion bulletStartDirection,
+            Transform target)
+        {
+            return new HomingMissileController(
+                _createUpdatable,
+                _destroyUpdatable,
+                _resourceManager,
+                bulletStartPosition,
+                bulletStartDirection,
+                target);
         }
 
         /// <summary>

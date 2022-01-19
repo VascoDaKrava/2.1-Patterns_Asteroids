@@ -28,12 +28,12 @@ namespace Asteroids
 
         #region Methods
 
-        internal void RemoveFromUpdate()
+        protected void RemoveFromUpdate()
         {
             _destroyUpdatableObjectEvent.Invoke(this);
         }
 
-        internal void AddToUpdate()
+        protected void AddToUpdate()
         {
             _createUpdatableObjectEvent.Invoke(this);
         }
