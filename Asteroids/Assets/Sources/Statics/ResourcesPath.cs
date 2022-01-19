@@ -11,7 +11,6 @@ namespace Asteroids
         public const string MISSILE_AIM9 = "MissileAIM9";
         public const string ASTEROID = "Asteroid";
 
-
         #endregion
 
     }

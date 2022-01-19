@@ -17,15 +17,9 @@ namespace Asteroids
 
         public bool IsHit
         {
-            get
-            {
-                return _isHit;
-            }
+            get => _isHit;
 
-            set
-            {
-                _isHit = value;
-            }
+            set => _isHit = value;
         }
 
         public Collider HittingCollider { get; private set; }

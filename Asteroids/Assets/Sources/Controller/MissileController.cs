@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Asteroids
 {
-    public sealed class MissileController : UpdatableObject, IPoolable
+    public class MissileController : UpdatableObject, IPoolable
     {
 
         #region Fields

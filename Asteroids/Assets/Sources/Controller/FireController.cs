@@ -80,16 +80,23 @@ namespace Asteroids
 
         private void StartHomingMissile(Transform target)
         {
-            //_controllersFactory.CreateMissileController();
+            //_controllersFactory.CreateMissileController(_bulletStartTransform.position, _bulletStartTransform.rotation);
         }
 
+        /// <summary>
+        /// Search enemies in radius of startPosition and return nearest as target
+        /// </summary>
+        /// <param name="startPosition"></param>
+        /// <param name="radius"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
         private bool StartSonar(Vector3 startPosition, float radius, out Transform target)
         {
             target = null;
             float nearestDistance = float.PositiveInfinity;
-            float currentDistanceToTarget = float.PositiveInfinity;
+            float currentDistanceToTarget;
 
-            foreach (Collider item in Physics.OverlapSphere(_bulletStartTransform.position, 50f, TagsAndLayers.ENEMY_LAYER, QueryTriggerInteraction.Collide))
+            foreach (Collider item in Physics.OverlapSphere(startPosition, radius, TagsAndLayers.ENEMY_LAYER, QueryTriggerInteraction.Collide))
             {
                 currentDistanceToTarget = Vector3.Distance(item.transform.position, _bulletStartTransform.position);
 
