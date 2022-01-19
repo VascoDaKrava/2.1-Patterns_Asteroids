@@ -33,7 +33,6 @@ namespace Asteroids
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             Transform bulletStartTransform,
             InputManager inputManagerLink,
-            ResourceManager resourceManager,
             UpdatableControllersFactory controllersFactory) :
             base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
@@ -42,7 +41,7 @@ namespace Asteroids
             _controllersFactory = controllersFactory;
             _primaryFireTimer = _controllersFactory.CreateTimers();
             _sonarTimer = _controllersFactory.CreateTimers();
-            _missilePool = new MissilePool(controllersFactory, resourceManager, _misselesInPool);
+            _missilePool = new MissilePool(controllersFactory, _misselesInPool);
         }
 
         #endregion
@@ -72,16 +71,17 @@ namespace Asteroids
                 _sonarTimer.StartTimer(_sonarReloadTime);
                 if (StartSonar(_bulletStartTransform.position, _sonarRange, out _enemyTargetTransform))
                 {
-                    StartHomingMissile();
-                    //_enemyTargetTransform.gameObject.AddComponent<>
+                    StartHomingMissile(_enemyTargetTransform);
                     Debug.Log("Target = " + _enemyTargetTransform.gameObject);
                 }
                 _isAutoFireOn = false;
             }
         }
 
-        private void StartHomingMissile()
-        { }
+        private void StartHomingMissile(Transform target)
+        {
+            //_controllersFactory.CreateMissileController();
+        }
 
         private bool StartSonar(Vector3 startPosition, float radius, out Transform target)
         {

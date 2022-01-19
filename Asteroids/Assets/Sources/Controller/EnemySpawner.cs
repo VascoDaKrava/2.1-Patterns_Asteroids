@@ -11,7 +11,6 @@ namespace Asteroids
 
         private Transform _spawnPosition;
         private Timers _timers;
-        private ResourceManager _resourceManager;
         private UpdatableControllersFactory _controllersFactory;
 
         #endregion
@@ -23,12 +22,10 @@ namespace Asteroids
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             Transform spawnPosition,
-            ResourceManager resourceManager,
             UpdatableControllersFactory controllersFactory) :
             base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _spawnPosition = spawnPosition;
-            _resourceManager = resourceManager;
             _controllersFactory = controllersFactory;
             _timers = _controllersFactory.CreateTimers();
         }
@@ -47,7 +44,7 @@ namespace Asteroids
             if (!_timers.isTimerOn)
             {
                 _timers.StartTimer(_rateOfSpawn);
-                _controllersFactory.CreateAsteroidController(_resourceManager, _spawnPosition);
+                _controllersFactory.CreateAsteroidController(_spawnPosition);
             }
         }
 

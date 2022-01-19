@@ -13,16 +13,18 @@ namespace Asteroids
 
         private CreateUpdatableObjectEvent _createUpdatable;
         private DestroyUpdatableObjectEvent _destroyUpdatable;
+        private ResourceManager _resourceManager;
 
         #endregion
 
 
         #region ClassLifeCicles
 
-        public UpdatableControllersFactory(CreateUpdatableObjectEvent createUpdatable, DestroyUpdatableObjectEvent destroyUpdatable)
+        public UpdatableControllersFactory(CreateUpdatableObjectEvent createUpdatable, DestroyUpdatableObjectEvent destroyUpdatable, ResourceManager resourceManager)
         {
             _createUpdatable = createUpdatable;
             _destroyUpdatable = destroyUpdatable;
+            _resourceManager = resourceManager;
         }
 
         #endregion
@@ -52,13 +54,11 @@ namespace Asteroids
         /// </summary>
         /// <param name="bulletStartPosition">Link to Transform, where bullet was instantiate</param>
         /// <param name="inputManagerLink">Link to InputManager</param>
-        /// <param name="resourceManager">Link to ResourceManager</param>
         /// <param name="updatableControllersFactory">Link to ControllersFactory</param>
         /// <returns></returns>
         public FireController CreateFireController(
             Transform bulletStartPosition,
             InputManager inputManagerLink,
-            ResourceManager resourceManager,
             UpdatableControllersFactory updatableControllersFactory)
         {
             return new FireController(
@@ -66,26 +66,23 @@ namespace Asteroids
                 _destroyUpdatable,
                 bulletStartPosition,
                 inputManagerLink,
-                resourceManager,
                 updatableControllersFactory);
         }
 
         /// <summary>
         /// Create new MissileController
         /// </summary>
-        /// <param name="resourceManager">Link to ResourceManager</param>
         /// <param name="bulletStartPosition">Position, where bullet was instantiate</param>
         /// <param name="bulletStartDirection">Direction of bullet, when it was instantiate</param>
         /// <returns></returns>
         public MissileController CreateMissileController(
-            ResourceManager resourceManager,
             Vector3 bulletStartPosition,
             Quaternion bulletStartDirection)
         {
             return new MissileController(
                 _createUpdatable,
                 _destroyUpdatable,
-                resourceManager,
+                _resourceManager,
                 bulletStartPosition,
                 bulletStartDirection);
         }
@@ -105,36 +102,31 @@ namespace Asteroids
         /// Create new EnemySpawner
         /// </summary>
         /// <param name="spawnPosition">Link to Transform, where Enemy was instantiate</param>
-        /// <param name="resourceManager">Link to ResourceManager</param>
         /// <param name="controllersFactory">Link to ControllersFactory</param>
         /// <returns></returns>
         public EnemySpawner CreateEnemySpawner(
             Transform spawnPosition,
-            ResourceManager resourceManager,
             UpdatableControllersFactory controllersFactory)
         {
             return new EnemySpawner(
                 _createUpdatable,
                 _destroyUpdatable,
                 spawnPosition,
-                resourceManager,
                 controllersFactory);
         }
 
         /// <summary>
         /// Create new AsteroidController
         /// </summary>
-        /// <param name="resourceManager">Link to ResourceManager</param>
         /// <param name="spawnPosition">Link to Transform, where Enemy was instantiate</param>
         /// <returns></returns>
         public AsteroidController CreateAsteroidController(
-            ResourceManager resourceManager,
             Transform spawnPosition)
         {
             return new AsteroidController(
                 _createUpdatable,
                 _destroyUpdatable,
-                resourceManager,
+                _resourceManager,
                 spawnPosition);
         }
 

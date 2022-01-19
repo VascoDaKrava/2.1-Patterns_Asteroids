@@ -19,14 +19,13 @@ namespace Asteroids
 
         public MissilePool(
             UpdatableControllersFactory controllersFactory,
-            ResourceManager resourceManager,
             int poolCapacity)
         {
             _poolCapacity = poolCapacity;
             _missiles = new Stack<MissileController>(_poolCapacity);
             for (int i = 0; i < _poolCapacity; i++)
             {
-                Push(controllersFactory.CreateMissileController(resourceManager, Vector3.zero, Quaternion.identity));
+                Push(controllersFactory.CreateMissileController(Vector3.zero, Quaternion.identity));
                 _missiles.Peek().PrepareBeforePush(this);
             }
         }
