@@ -3,27 +3,21 @@
 
 namespace Asteroids
 {
-    public sealed class AsteroidView: MonoBehaviour, IDamageable
+    public sealed class AsteroidView : MonoBehaviour
     {
 
         #region Fields
 
-        private int _damage;
-        private OnGetDamageEvent _onGetDamageEvent;
+        private CollisionDetectorEvent _collisionDetectorEvent;
 
         #endregion
 
 
         #region Properties
 
-        public int Damage
+        public CollisionDetectorEvent CollisionDetectorEvent
         {
-            set { _damage = value; }
-        }
-
-        public OnGetDamageEvent OnGetDamageEvent
-        {
-            get => _onGetDamageEvent;
+            set { _collisionDetectorEvent = value; }
         }
 
         #endregion
@@ -31,23 +25,11 @@ namespace Asteroids
 
         #region UnityMethods
 
-        private void OnEnable()
-        {
-            _onGetDamageEvent = new OnGetDamageEvent();
-        }
-
         private void OnTriggerEnter(Collider other)
         {
             // If enter to the FLYING_AREA do nothing
             if (!other.CompareTag(TagsAndLayers.FLYING_AREA_TAG))
-            {
-
-                if (other.TryGetComponent<IDamageable>(out IDamageable damageable))
-                {
-                    damageable.GetDamage(_damage);
-                    DestroyAsteroid();
-                }
-            }
+                _collisionDetectorEvent.Invoke(gameObject.transform, other.transform);
         }
 
         #endregion
@@ -70,16 +52,6 @@ namespace Asteroids
         public void DestroyAsteroidTime(float deathTime)
         {
             Destroy(gameObject, deathTime);
-        }
-
-        #endregion
-
-
-        #region IDamageable
-
-        public void GetDamage (int damage)
-        {
-           _onGetDamageEvent?.Invoke(damage);
         }
 
         #endregion

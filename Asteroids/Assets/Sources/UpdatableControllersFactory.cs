@@ -14,17 +14,23 @@ namespace Asteroids
         private CreateUpdatableObjectEvent _createUpdatable;
         private DestroyUpdatableObjectEvent _destroyUpdatable;
         private ResourceManager _resourceManager;
+        private CollisionDetectorEvent _collisionDetectorEvent;
 
         #endregion
 
 
         #region ClassLifeCicles
 
-        public UpdatableControllersFactory(CreateUpdatableObjectEvent createUpdatable, DestroyUpdatableObjectEvent destroyUpdatable, ResourceManager resourceManager)
+        public UpdatableControllersFactory(
+            CreateUpdatableObjectEvent createUpdatable,
+            DestroyUpdatableObjectEvent destroyUpdatable,
+            ResourceManager resourceManager,
+            CollisionDetectorEvent collisionDetectorEvent)
         {
             _createUpdatable = createUpdatable;
             _destroyUpdatable = destroyUpdatable;
             _resourceManager = resourceManager;
+            _collisionDetectorEvent = collisionDetectorEvent;
         }
 
         #endregion
@@ -141,14 +147,14 @@ namespace Asteroids
         /// </summary>
         /// <param name="spawnPosition">Link to Transform, where Enemy was instantiate</param>
         /// <returns></returns>
-        public AsteroidController CreateAsteroidController(
-            Transform spawnPosition)
+        public AsteroidController CreateAsteroidController(Transform spawnPosition)
         {
             return new AsteroidController(
                 _createUpdatable,
                 _destroyUpdatable,
                 _resourceManager,
-                spawnPosition);
+                spawnPosition,
+                _collisionDetectorEvent);
         }
 
         #endregion

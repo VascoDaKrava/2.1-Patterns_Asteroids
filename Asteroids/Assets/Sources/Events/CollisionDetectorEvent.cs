@@ -12,14 +12,14 @@ namespace Asteroids
 
         #region Fields / Events
 
-        private event Action<Collider, Collider> _collisionDetector;
+        private event Action<Transform, Transform> _collisionDetector;
 
         #endregion
 
 
         #region Properties / Subscription and Unsubscription
 
-        public event Action<Collider, Collider> CollisionDetector
+        public event Action<Transform, Transform> CollisionDetector
         {
             add { _collisionDetector += value; }
             remove { _collisionDetector -= value; }
@@ -33,9 +33,9 @@ namespace Asteroids
         /// <summary>
         /// Invoke CollisionDetector event
         /// </summary>
-        /// <param name="caller">Collider, who invoke event</param>
-        /// <param name="called">Collider, who make collision with caller</param>
-        public void Invoke(Collider caller, Collider called)
+        /// <param name="caller">Transform of GameObject, who invoke event</param>
+        /// <param name="called">Transform of GameObject, who make collision with caller</param>
+        public void Invoke(Transform caller, Transform called)
         {
             _collisionDetector?.Invoke(caller, called);
         }

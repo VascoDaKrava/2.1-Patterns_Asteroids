@@ -14,6 +14,7 @@ namespace Asteroids
         private Transform _bulletStartTransform;
         private Transform _spawnPosition;
         private UpdatableControllersFactory _controllersFactory;
+        private CollisionDetectorEvent _collisionDetectorEvent;
 
         #endregion
 
@@ -26,8 +27,14 @@ namespace Asteroids
         {
             _resourceManager = new ResourceManager();
             _inputManager = new InputManager();
+            _collisionDetectorEvent = new CollisionDetectorEvent();
 
-            _controllersFactory = new UpdatableControllersFactory(createUpdatableObjectEvent, destroyUpdatableObjectEvent, _resourceManager);
+            _controllersFactory = new UpdatableControllersFactory(
+                createUpdatableObjectEvent,
+                destroyUpdatableObjectEvent,
+                _resourceManager,
+                _collisionDetectorEvent);
+
             _shipRigidbody = GameObject.FindGameObjectWithTag(TagsAndLayers.PLAYER_TAG).GetComponent<Rigidbody>();
             _bulletStartTransform = GameObject.FindGameObjectWithTag(TagsAndLayers.BULLET_START_POSITION_TAG).transform;
             _spawnPosition = GameObject.FindGameObjectWithTag(TagsAndLayers.SPAWN_POSITION_TAG).transform;
