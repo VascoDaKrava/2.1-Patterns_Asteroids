@@ -5,6 +5,7 @@ namespace Asteroids
 {
     public sealed class ShipModel
     {
+
         #region Fields
 
         private int _strengthShip = 100;
@@ -65,7 +66,6 @@ namespace Asteroids
             {
                 _shipRigidbody.velocity = direction * _speedShip;
             }
-
         }
 
         #endregion

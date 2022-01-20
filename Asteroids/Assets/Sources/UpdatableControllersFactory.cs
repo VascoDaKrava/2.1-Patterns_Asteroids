@@ -55,7 +55,8 @@ namespace Asteroids
                 _createUpdatable,
                 _destroyUpdatable,
                 inputManager,
-                rigidbody);
+                rigidbody,
+                _takeDamageEvent);
         }
 
         /// <summary>

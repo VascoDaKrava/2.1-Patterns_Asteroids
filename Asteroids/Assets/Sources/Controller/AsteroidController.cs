@@ -98,6 +98,7 @@ namespace Asteroids
                 if (callerView == _asteroidView)
                 {
                     _takeDamageEvent.Invoke(called, _asteroidModel.Damage);
+                    Dispose();
                 }
             }
         }

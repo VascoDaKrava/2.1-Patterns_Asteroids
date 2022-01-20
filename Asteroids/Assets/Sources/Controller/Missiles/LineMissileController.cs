@@ -38,7 +38,7 @@ namespace Asteroids
         {
             if (_missileView.IsHit)
             {
-                if (_missileView.HittingCollider.TryGetComponent<IDamageable>(out IDamageable damageable))
+                if (_missileView.HittingCollider.TryGetComponent(out IDamageable damageable))
                 {
                     damageable.GetDamage(_missileModel.Damage);
                 }

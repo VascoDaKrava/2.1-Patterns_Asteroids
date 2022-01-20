@@ -12,6 +12,7 @@ namespace Asteroids
         private InputManager _inputManager;
         private ShipModel _shipModel;
         private ShipView _shipView;
+        private TakeDamageEvent _takeDamageEvent;
 
         #endregion
 
@@ -39,21 +40,32 @@ namespace Asteroids
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             InputManager inputManager,
-            Rigidbody rigidbody) :
+            Rigidbody rigidbody,
+            TakeDamageEvent takeDamageEvent) :
             base (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _inputManager = inputManager;
-
+            _takeDamageEvent = takeDamageEvent;
+            _takeDamageEvent.TakeDamage += TakeDamageEventHandler;
             _shipModel = new ShipModel(rigidbody);
             _shipView = GameObject.FindObjectOfType<ShipView>();
-
-            _shipView.OnGetDamageEvent.OnGetDamage += ChangeStrength;
         }
 
         #endregion
 
 
         #region Methods
+
+        private void TakeDamageEventHandler(Transform damageReciever, int damage)
+        {
+            if (damageReciever.TryGetComponent(out ShipView damageRecieverView))
+            {
+                if (damageRecieverView == _shipView)
+                {
+                    ChangeStrength(damage);
+                }
+            }
+        }
 
         /// <summary>
         /// Move ship
@@ -79,7 +91,7 @@ namespace Asteroids
             {
                 _shipView.DestroyShip();
             }
-            _shipView.CurrentStrengthShip(_shipModel.StrengthShip);
+            Debug.Log($"Ship strange = {_shipModel.StrengthShip}");
         }
 
         #endregion
@@ -90,7 +102,7 @@ namespace Asteroids
         public void Dispose()
         {
             RemoveFromUpdate();
-            _shipView.OnGetDamageEvent.OnGetDamage -= ChangeStrength;
+            _shipView.DestroyShip();
         }
 
         #endregion
