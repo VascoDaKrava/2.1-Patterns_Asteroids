@@ -66,16 +66,25 @@ namespace Asteroids
             if (_inputManager.isSecondaryFire)
                 _isAutoFireOn = !_isAutoFireOn;
 
-            if (_isAutoFireOn && !_sonarTimer.isTimerOn)
+            if (_isAutoFireOn)
             {
-                _sonarTimer.StartTimer(_sonarReloadTime);
-                if (StartSonar(_bulletStartTransform.position, _sonarRange, out _enemyTargetTransform))
+                Debug.Log("Autofire is ON");
+                if (!_sonarTimer.isTimerOn)
                 {
-                    StartHomingMissile(_enemyTargetTransform);
-                    Debug.Log("Target = " + _enemyTargetTransform.gameObject);
+                    _sonarTimer.StartTimer(_sonarReloadTime);
+                    if (StartSonar(_bulletStartTransform.position, _sonarRange, out _enemyTargetTransform))
+                    {
+                        StartHomingMissile(_enemyTargetTransform);
+                        Debug.Log("Target = " + _enemyTargetTransform.gameObject);
+                    }
+                    else
+                        Debug.Log("No Target");
                 }
-                _isAutoFireOn = false;
+                else
+                    Debug.Log("Wait for recharge");
             }
+            else
+                Debug.Log("Autofire is OFF");
         }
 
         private void StartHomingMissile(Transform target)

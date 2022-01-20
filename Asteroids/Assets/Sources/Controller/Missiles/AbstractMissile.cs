@@ -5,6 +5,7 @@ namespace Asteroids
 {
     public abstract class AbstractMissile : UpdatableObject
     {
+
         #region Fields
 
         protected MissileModel _missileModel;
@@ -36,10 +37,24 @@ namespace Asteroids
 
         #endregion
 
+
         #region Methods
 
         protected abstract void MissileFly();
-                
+
+        protected abstract void CheckHit();
+
+        #endregion
+
+
+        #region IUpdatable
+
+        public override void LetUpdate()
+        {
+            CheckHit();
+            MissileFly();
+        }
+
         #endregion
 
     }

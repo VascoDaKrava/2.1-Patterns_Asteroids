@@ -15,12 +15,12 @@ namespace Asteroids
 
         #region ClassLifeCicles
 
-        public HomingMissileController(CreateUpdatableObjectEvent createUpdatableObject, 
-            DestroyUpdatableObjectEvent destroyUpdatableObject, 
-            ResourceManager resourceManager, 
+        public HomingMissileController(CreateUpdatableObjectEvent createUpdatableObject,
+            DestroyUpdatableObjectEvent destroyUpdatableObject,
+            ResourceManager resourceManager,
             Vector3 bulletStartPosition,
             Quaternion bulletStartDirection,
-            Transform target) : 
+            Transform target) :
             base(createUpdatableObject, destroyUpdatableObject, resourceManager, bulletStartPosition, bulletStartDirection)
         {
             _target = target;
@@ -33,12 +33,32 @@ namespace Asteroids
 
         protected override void MissileFly()
         {
-            _missileRigidbody.velocity = _missileRigidbody.gameObject.transform.forward * _missileModel.Speed;
+            Debug.Log("Target " + _target);
+            if (_target == null)
+                Destroy();
+            else
+            {
+                _missileRigidbody.MoveRotation(Quaternion.LookRotation(_target.position - _missileRigidbody.transform.position));
+                _missileRigidbody.velocity = _missileRigidbody.transform.forward * _missileModel.Speed;
+            }
         }
 
-        public override void LetUpdate()
+        protected override void CheckHit()
         {
-            MissileFly();
+            if (_missileView.IsHit)
+            {
+                if (_missileView.HittingCollider.TryGetComponent<IDamageable>(out IDamageable damageable))
+                {
+                    damageable.GetDamage(_missileModel.Damage);
+                }
+                Destroy();
+            }
+        }
+
+        private void Destroy()
+        {
+            _missileView.Destroy();
+            RemoveFromUpdate();
         }
 
         #endregion

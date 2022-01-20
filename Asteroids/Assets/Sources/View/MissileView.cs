@@ -37,5 +37,15 @@ namespace Asteroids
 
         #endregion
 
+
+        #region Methods
+
+        public void Destroy()
+        {
+            Destroy(gameObject);
+        }
+
+        #endregion
+
     }
 }

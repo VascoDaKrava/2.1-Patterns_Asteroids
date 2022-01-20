@@ -31,13 +31,10 @@ namespace Asteroids
 
         protected override void MissileFly()
         {
-            if (_missileRigidbody != null)
-            {
-                _missileRigidbody.velocity = _missileRigidbody.gameObject.transform.forward * _missileModel.Speed;
-            }
+            _missileRigidbody.velocity = _missileRigidbody.transform.forward * _missileModel.Speed;
         }
 
-        private void CheckHit()
+        protected override void CheckHit()
         {
             if (_missileView.IsHit)
             {
@@ -45,21 +42,10 @@ namespace Asteroids
                 {
                     damageable.GetDamage(_missileModel.Damage);
                 }
-                
+
                 PrepareBeforePush(_missilePool);
                 _missilePool.Push(this);
             }
-        }
-
-        #endregion
-
-
-        #region IUpdatable
-
-        public override void LetUpdate()
-        {
-            MissileFly();
-            CheckHit();
         }
 
         #endregion

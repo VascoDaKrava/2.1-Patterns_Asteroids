@@ -40,13 +40,13 @@ namespace Asteroids
             if (_missiles.Count == 0) return;
             _missiles.Peek().PrepareAfterPop(position, direction);
             _missiles.Pop();
-            Debug.Log($"Bullets left : {_missiles.Count} / {_poolCapacity}");
+            Debug.Log($"Missiles in pool : {_missiles.Count} / {_poolCapacity}");
         }
 
         public void Push(LineMissileController missileController)
         {
             _missiles.Push(missileController);
-            Debug.Log($"Bullets left : {_missiles.Count} / {_poolCapacity}");
+            Debug.Log($"Missiles in pool : {_missiles.Count} / {_poolCapacity}");
         }
 
         #endregion
