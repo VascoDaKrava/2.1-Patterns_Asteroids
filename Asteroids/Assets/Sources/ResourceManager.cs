@@ -8,21 +8,9 @@ namespace Asteroids
 
         #region Properties
 
-        public GameObject MissileAIM9
-        {
-            get
-            {
-                return Resources.Load(ResourcesPath.MISSILE_AIM9) as GameObject;
-            }
-        }
+        public GameObject MissileAIM9 => Resources.Load(ResourcesPath.MISSILE_AIM9) as GameObject;
 
-        public GameObject Asteroid
-        {
-            get
-            {
-                return Resources.Load(ResourcesPath.ASTEROID) as GameObject;
-            }
-        }
+        public GameObject Asteroid => Resources.Load(ResourcesPath.ASTEROID) as GameObject;
 
         #endregion
 

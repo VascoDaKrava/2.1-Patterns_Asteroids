@@ -13,16 +13,18 @@ namespace Asteroids
 
         private CreateUpdatableObjectEvent _createUpdatable;
         private DestroyUpdatableObjectEvent _destroyUpdatable;
+        private ResourceManager _resourceManager;
 
         #endregion
 
 
         #region ClassLifeCicles
 
-        public UpdatableControllersFactory(CreateUpdatableObjectEvent createUpdatable, DestroyUpdatableObjectEvent destroyUpdatable)
+        public UpdatableControllersFactory(CreateUpdatableObjectEvent createUpdatable, DestroyUpdatableObjectEvent destroyUpdatable, ResourceManager resourceManager)
         {
             _createUpdatable = createUpdatable;
             _destroyUpdatable = destroyUpdatable;
+            _resourceManager = resourceManager;
         }
 
         #endregion
@@ -52,13 +54,11 @@ namespace Asteroids
         /// </summary>
         /// <param name="bulletStartPosition">Link to Transform, where bullet was instantiate</param>
         /// <param name="inputManagerLink">Link to InputManager</param>
-        /// <param name="resourceManager">Link to ResourceManager</param>
         /// <param name="updatableControllersFactory">Link to ControllersFactory</param>
         /// <returns></returns>
         public FireController CreateFireController(
             Transform bulletStartPosition,
             InputManager inputManagerLink,
-            ResourceManager resourceManager,
             UpdatableControllersFactory updatableControllersFactory)
         {
             return new FireController(
@@ -66,25 +66,46 @@ namespace Asteroids
                 _destroyUpdatable,
                 bulletStartPosition,
                 inputManagerLink,
-                resourceManager,
                 updatableControllersFactory);
         }
 
         /// <summary>
-        /// Create new MissileController
+        /// Create new LineMissileController
         /// </summary>
-        /// <param name="resourceManager">Link to ResourceManager</param>
-        /// <param name="bulletStartPosition">Link to Transform, where bullet was instantiate</param>
+        /// <param name="bulletStartPosition">Position, where bullet was instantiate</param>
+        /// <param name="bulletStartDirection">Direction of bullet, when it was instantiate</param>
         /// <returns></returns>
-        public MissileController CreateMissileController(
-            ResourceManager resourceManager,
-            Transform bulletStartPosition)
+        public LineMissileController CreateMissileController(
+            Vector3 bulletStartPosition,
+            Quaternion bulletStartDirection)
         {
-            return new MissileController(
+            return new LineMissileController(
                 _createUpdatable,
                 _destroyUpdatable,
-                resourceManager,
-                bulletStartPosition);
+                _resourceManager,
+                bulletStartPosition,
+                bulletStartDirection);
+        }
+
+        /// <summary>
+        /// Create new HomingMissileController
+        /// </summary>
+        /// <param name="bulletStartPosition">Position, where bullet was instantiate</param>
+        /// <param name="bulletStartDirection">Direction of bullet, when it was instantiate</param>
+        /// <param name="target">Transform of target of missile</param>
+        /// <returns></returns>
+        public HomingMissileController CreateMissileController(
+            Vector3 bulletStartPosition,
+            Quaternion bulletStartDirection,
+            Transform target)
+        {
+            return new HomingMissileController(
+                _createUpdatable,
+                _destroyUpdatable,
+                _resourceManager,
+                bulletStartPosition,
+                bulletStartDirection,
+                target);
         }
 
         /// <summary>
@@ -102,36 +123,31 @@ namespace Asteroids
         /// Create new EnemySpawner
         /// </summary>
         /// <param name="spawnPosition">Link to Transform, where Enemy was instantiate</param>
-        /// <param name="resourceManager">Link to ResourceManager</param>
         /// <param name="controllersFactory">Link to ControllersFactory</param>
         /// <returns></returns>
         public EnemySpawner CreateEnemySpawner(
             Transform spawnPosition,
-            ResourceManager resourceManager,
             UpdatableControllersFactory controllersFactory)
         {
             return new EnemySpawner(
                 _createUpdatable,
                 _destroyUpdatable,
                 spawnPosition,
-                resourceManager,
                 controllersFactory);
         }
 
         /// <summary>
         /// Create new AsteroidController
         /// </summary>
-        /// <param name="resourceManager">Link to ResourceManager</param>
         /// <param name="spawnPosition">Link to Transform, where Enemy was instantiate</param>
         /// <returns></returns>
         public AsteroidController CreateAsteroidController(
-            ResourceManager resourceManager,
             Transform spawnPosition)
         {
             return new AsteroidController(
                 _createUpdatable,
                 _destroyUpdatable,
-                resourceManager,
+                _resourceManager,
                 spawnPosition);
         }
 

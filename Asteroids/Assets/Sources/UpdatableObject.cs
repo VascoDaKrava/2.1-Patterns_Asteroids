@@ -8,7 +8,8 @@ namespace Asteroids
         
         #region Fields
 
-        private DestroyUpdatableObjectEvent _destroyUpdatableObject;
+        private DestroyUpdatableObjectEvent _destroyUpdatableObjectEvent;
+        private CreateUpdatableObjectEvent _createUpdatableObjectEvent;
 
         #endregion
 
@@ -17,8 +18,9 @@ namespace Asteroids
 
         public UpdatableObject(CreateUpdatableObjectEvent createUpdatableObject, DestroyUpdatableObjectEvent destroyUpdatableObject)
         {
-            _destroyUpdatableObject = destroyUpdatableObject;
-            createUpdatableObject.Invoke(this);
+            _destroyUpdatableObjectEvent = destroyUpdatableObject;
+            _createUpdatableObjectEvent = createUpdatableObject;
+            AddToUpdate();
         }
 
         #endregion
@@ -26,9 +28,14 @@ namespace Asteroids
 
         #region Methods
 
-        internal void RemoveFromUpdate()
+        protected void RemoveFromUpdate()
         {
-            _destroyUpdatableObject.Invoke(this);
+            _destroyUpdatableObjectEvent.Invoke(this);
+        }
+
+        protected void AddToUpdate()
+        {
+            _createUpdatableObjectEvent.Invoke(this);
         }
 
         #endregion

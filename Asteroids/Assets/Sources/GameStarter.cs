@@ -12,6 +12,7 @@ namespace Asteroids
 
         private List<IUpdatable> _updatables;
         private List<IUpdatable> _candidatsForAddingToUpdatables;
+        private List<IUpdatable> _candidatsForRemovingFromUpdatables;
         private CreateUpdatableObjectEvent _createUpdatableObjectEvent;
         private DestroyUpdatableObjectEvent _destroyUpdatableObjectEvent;
 
@@ -24,6 +25,7 @@ namespace Asteroids
         {
             _updatables = new List<IUpdatable>();
             _candidatsForAddingToUpdatables = new List<IUpdatable>();
+            _candidatsForRemovingFromUpdatables = new List<IUpdatable>();
 
             _createUpdatableObjectEvent = new CreateUpdatableObjectEvent();
             _destroyUpdatableObjectEvent = new DestroyUpdatableObjectEvent();
@@ -49,6 +51,13 @@ namespace Asteroids
                 _updatables.AddRange(_candidatsForAddingToUpdatables);
                 _candidatsForAddingToUpdatables.Clear();
             }
+
+            if (_candidatsForRemovingFromUpdatables.Count > 0)
+            {
+                foreach (IUpdatable item in _candidatsForRemovingFromUpdatables)
+                    _updatables.Remove(item);
+                _candidatsForRemovingFromUpdatables.Clear();
+            }
         }
 
         #endregion
@@ -71,7 +80,7 @@ namespace Asteroids
         /// <param name="updatableObject"></param>
         private void RemoveFromUpdateList(IUpdatable updatableObject)
         {
-            _updatables.Remove(updatableObject);
+            _candidatsForRemovingFromUpdatables.Add(updatableObject);
         }
 
         #endregion

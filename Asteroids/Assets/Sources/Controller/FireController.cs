@@ -9,13 +9,19 @@ namespace Asteroids
 
         #region Fields
 
+        private int _misselesInPool = 3;
         private float _rateOfFire = 1.0f; // Time in seconds between shots
+        private float _sonarRange = 50.0f;
+        private float _sonarReloadTime = 5.0f; // Time in seconds between using sonar/autofire
 
-        private Transform _bulletStartPosition;
-        private Timers _timers;
+        private Transform _bulletStartTransform;
+        private Transform _enemyTargetTransform;
+        private Timers _primaryFireTimer;
+        private Timers _sonarTimer;
         private InputManager _inputManager;
-        private ResourceManager _resourceManager;
         private UpdatableControllersFactory _controllersFactory;
+        private MissilePool _missilePool;
+        private bool _isAutoFireOn;
 
         #endregion
 
@@ -25,17 +31,17 @@ namespace Asteroids
         public FireController(
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
-            Transform bulletStartPosition,
+            Transform bulletStartTransform,
             InputManager inputManagerLink,
-            ResourceManager resourceManager,
             UpdatableControllersFactory controllersFactory) :
             base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
-            _bulletStartPosition = bulletStartPosition;
+            _bulletStartTransform = bulletStartTransform;
             _inputManager = inputManagerLink;
-            _resourceManager = resourceManager;
             _controllersFactory = controllersFactory;
-            _timers = _controllersFactory.CreateTimers();
+            _primaryFireTimer = _controllersFactory.CreateTimers();
+            _sonarTimer = _controllersFactory.CreateTimers();
+            _missilePool = new MissilePool(controllersFactory, _misselesInPool);
         }
 
         #endregion
@@ -43,16 +49,74 @@ namespace Asteroids
 
         #region Methods
 
-        private void TryFire()
+        private void PrimaryFire()
         {
-            if (_inputManager.isFire)
+            if (_inputManager.isPrimaryFire)
             {
-                if (!_timers.isTimerOn)
+                if (!_primaryFireTimer.isTimerOn)
                 {
-                    _timers.StartTimer(_rateOfFire);
-                    _controllersFactory.CreateMissileController(_resourceManager, _bulletStartPosition);
+                    _primaryFireTimer.StartTimer(_rateOfFire);
+                    _missilePool.Pop(_bulletStartTransform.position, _bulletStartTransform.rotation);
                 }
             }
+        }
+
+        private void SecondaryFire()
+        {
+            if (_inputManager.isSecondaryFire)
+                _isAutoFireOn = !_isAutoFireOn;
+
+            if (_isAutoFireOn)
+            {
+                Debug.Log("Autofire is ON");
+                if (!_sonarTimer.isTimerOn)
+                {
+                    _sonarTimer.StartTimer(_sonarReloadTime);
+                    if (StartSonar(_bulletStartTransform.position, _sonarRange, out _enemyTargetTransform))
+                    {
+                        StartHomingMissile(_enemyTargetTransform);
+                        Debug.Log("Target = " + _enemyTargetTransform.gameObject);
+                    }
+                    else
+                        Debug.Log("No Target");
+                }
+                else
+                    Debug.Log("Wait for recharge");
+            }
+            else
+                Debug.Log("Autofire is OFF");
+        }
+
+        private void StartHomingMissile(Transform target)
+        {
+            _controllersFactory.CreateMissileController(_bulletStartTransform.position, _bulletStartTransform.rotation, target);
+        }
+
+        /// <summary>
+        /// Search enemies in radius of startPosition and return nearest as target
+        /// </summary>
+        /// <param name="startPosition"></param>
+        /// <param name="radius"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        private bool StartSonar(Vector3 startPosition, float radius, out Transform target)
+        {
+            target = null;
+            float nearestDistance = float.PositiveInfinity;
+            float currentDistanceToTarget;
+
+            foreach (Collider item in Physics.OverlapSphere(startPosition, radius, TagsAndLayers.ENEMY_LAYER, QueryTriggerInteraction.Collide))
+            {
+                currentDistanceToTarget = Vector3.Distance(item.transform.position, _bulletStartTransform.position);
+
+                if (nearestDistance > currentDistanceToTarget)
+                {
+                    nearestDistance = currentDistanceToTarget;
+                    target = item.transform;
+                }
+            }
+
+            return target;
         }
 
         #endregion
@@ -62,7 +126,8 @@ namespace Asteroids
 
         public override void LetUpdate()
         {
-            TryFire();
+            PrimaryFire();
+            SecondaryFire();
         }
 
         #endregion
