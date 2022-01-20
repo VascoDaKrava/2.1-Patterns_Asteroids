@@ -15,6 +15,7 @@ namespace Asteroids
         private Rigidbody _asteroidRigidbody;
 
         private CollisionDetectorEvent _collisionDetectorEvent;
+        private TakeDamageEvent _takeDamageEvent;
 
         private float _minSpawnPositionX = -50.0f;
         private float _maxSpawnPositionX = 50.0f;
@@ -33,10 +34,12 @@ namespace Asteroids
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             ResourceManager resourceManager,
             Transform spawnPosition,
-            CollisionDetectorEvent collisionDetectorEvent) :
+            CollisionDetectorEvent collisionDetectorEvent,
+            TakeDamageEvent takeDamageEvent) :
             base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _collisionDetectorEvent = collisionDetectorEvent;
+            _takeDamageEvent = takeDamageEvent;
 
             _asteroidModel = new AsteroidModel();
 
@@ -55,6 +58,7 @@ namespace Asteroids
             _asteroidView.CollisionDetectorEvent = _collisionDetectorEvent;
 
             _collisionDetectorEvent.CollisionDetector += CollisionEventHandler;
+            _takeDamageEvent.TakeDamage += TakeDamageEventHandler;
         }
 
         #endregion
@@ -83,6 +87,7 @@ namespace Asteroids
             if (_asteroidModel.Strength <= 0)
             {
                 _asteroidView.DestroyAsteroid();
+                Dispose();
             }
         }
 
@@ -92,7 +97,18 @@ namespace Asteroids
             {
                 if (callerView == _asteroidView)
                 {
-                    //if (called)
+                    _takeDamageEvent.Invoke(called, _asteroidModel.Damage);
+                }
+            }
+        }
+
+        private void TakeDamageEventHandler(Transform damageReciever, int damage)
+        {
+            if (damageReciever.TryGetComponent(out AsteroidView damageRecieverView))
+            {
+                if (damageRecieverView == _asteroidView)
+                {
+                    ChangeStrength(damage);
                 }
             }
         }
@@ -105,6 +121,10 @@ namespace Asteroids
         public void Dispose()
         {
             _asteroidView.DestroyAsteroid();
+            
+            _collisionDetectorEvent.CollisionDetector -= CollisionEventHandler;
+            _takeDamageEvent.TakeDamage -= TakeDamageEventHandler;
+
             RemoveFromUpdate();
         }
 

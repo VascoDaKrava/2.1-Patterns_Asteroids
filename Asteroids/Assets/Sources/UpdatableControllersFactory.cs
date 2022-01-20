@@ -15,6 +15,7 @@ namespace Asteroids
         private DestroyUpdatableObjectEvent _destroyUpdatable;
         private ResourceManager _resourceManager;
         private CollisionDetectorEvent _collisionDetectorEvent;
+        private TakeDamageEvent _takeDamageEvent;
 
         #endregion
 
@@ -25,12 +26,14 @@ namespace Asteroids
             CreateUpdatableObjectEvent createUpdatable,
             DestroyUpdatableObjectEvent destroyUpdatable,
             ResourceManager resourceManager,
-            CollisionDetectorEvent collisionDetectorEvent)
+            CollisionDetectorEvent collisionDetectorEvent,
+            TakeDamageEvent takeDamageEvent)
         {
             _createUpdatable = createUpdatable;
             _destroyUpdatable = destroyUpdatable;
             _resourceManager = resourceManager;
             _collisionDetectorEvent = collisionDetectorEvent;
+            _takeDamageEvent = takeDamageEvent;
         }
 
         #endregion
@@ -154,7 +157,8 @@ namespace Asteroids
                 _destroyUpdatable,
                 _resourceManager,
                 spawnPosition,
-                _collisionDetectorEvent);
+                _collisionDetectorEvent,
+                _takeDamageEvent);
         }
 
         #endregion
