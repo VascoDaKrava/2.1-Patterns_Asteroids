@@ -26,7 +26,7 @@ namespace Asteroids
             for (int i = 0; i < _poolCapacity; i++)
             {
                 Push(controllersFactory.CreateMissileController(Vector3.zero, Quaternion.identity));
-                _missiles.Peek().PrepareBeforePush(this);
+                _missiles.Peek().SetMissilePool = this;
             }
         }
 

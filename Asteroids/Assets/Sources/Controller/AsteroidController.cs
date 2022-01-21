@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 namespace Asteroids
 {
-    public sealed class AsteroidController: UpdatableObject, IDisposable
+    public sealed class AsteroidController : UpdatableObject, IDisposable
     {
 
         #region Fields
@@ -13,6 +13,9 @@ namespace Asteroids
         private AsteroidModel _asteroidModel;
         private AsteroidView _asteroidView;
         private Rigidbody _asteroidRigidbody;
+
+        private CollisionDetectorEvent _collisionDetectorEvent;
+        private TakeDamageEvent _takeDamageEvent;
 
         private float _minSpawnPositionX = -50.0f;
         private float _maxSpawnPositionX = 50.0f;
@@ -30,14 +33,19 @@ namespace Asteroids
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             ResourceManager resourceManager,
-            Transform spawnPosition) :
-            base (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
+            Transform spawnPosition,
+            CollisionDetectorEvent collisionDetectorEvent,
+            TakeDamageEvent takeDamageEvent) :
+            base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
+            _collisionDetectorEvent = collisionDetectorEvent;
+            _takeDamageEvent = takeDamageEvent;
+
             _asteroidModel = new AsteroidModel();
 
             _asteroidView = GameObject.Instantiate(
                 resourceManager.Asteroid,
-                spawnPosition.position = new Vector3(Random.Range(_minSpawnPositionX, _maxSpawnPositionX), 
+                spawnPosition.position = new Vector3(Random.Range(_minSpawnPositionX, _maxSpawnPositionX),
                 spawnPosition.position.y, spawnPosition.position.z),
                 spawnPosition.rotation).GetComponent<AsteroidView>();
 
@@ -46,11 +54,11 @@ namespace Asteroids
             _asteroidModel.Direction = new Vector3(Random.Range(_minDirectionX, _maxDirectionX),
                 0.0f, Random.Range(_minDirectionZ, _maxDirectionZ));
 
-            _asteroidView.Damage = _asteroidModel.Damage;
-
-            _asteroidView.OnGetDamageEvent.OnGetDamage += ChangeStrength;
-
             _asteroidView.DestroyAsteroidTime(_asteroidModel.DeathTime);
+            _asteroidView.CollisionDetectorEvent = _collisionDetectorEvent;
+
+            _collisionDetectorEvent.CollisionDetector += CollisionEventHandler;
+            _takeDamageEvent.TakeDamage += TakeDamageEventHandler;
         }
 
         #endregion
@@ -67,19 +75,44 @@ namespace Asteroids
             {
                 _asteroidRigidbody.velocity = _asteroidModel.Direction * _asteroidModel.Speed;
             }
-            
         }
 
         /// <summary>
         /// Changing asteroid strength from missile damage
         /// </summary>
         /// <param name="value"></param>
-        public void ChangeStrength (int value)
+        public void ChangeStrength(int value)
         {
             _asteroidModel.Strength -= value;
             if (_asteroidModel.Strength <= 0)
             {
                 _asteroidView.DestroyAsteroid();
+                Dispose();
+            }
+        }
+
+        private void CollisionEventHandler(Transform caller, Transform called)
+        {
+            if (caller.TryGetComponent(out AsteroidView callerView))
+            {
+                if (callerView == _asteroidView)
+                {
+                    _takeDamageEvent.Invoke(called, _asteroidModel.Damage);
+
+                    if (called.CompareTag(TagsAndLayers.PLAYER_TAG))
+                        Dispose();
+                }
+            }
+        }
+
+        private void TakeDamageEventHandler(Transform damageReciever, int damage)
+        {
+            if (damageReciever.TryGetComponent(out AsteroidView damageRecieverView))
+            {
+                if (damageRecieverView == _asteroidView)
+                {
+                    ChangeStrength(damage);
+                }
             }
         }
 
@@ -90,8 +123,12 @@ namespace Asteroids
 
         public void Dispose()
         {
+            _asteroidView.DestroyAsteroid();
+
+            _collisionDetectorEvent.CollisionDetector -= CollisionEventHandler;
+            _takeDamageEvent.TakeDamage -= TakeDamageEventHandler;
+
             RemoveFromUpdate();
-            _asteroidView.OnGetDamageEvent.OnGetDamage -= ChangeStrength;
         }
 
         #endregion

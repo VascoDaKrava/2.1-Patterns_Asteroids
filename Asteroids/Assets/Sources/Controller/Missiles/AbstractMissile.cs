@@ -11,6 +11,8 @@ namespace Asteroids
         protected MissileModel _missileModel;
         protected MissileView _missileView;
         protected Rigidbody _missileRigidbody;
+        private CollisionDetectorEvent _collisionDetectorEvent;
+        private TakeDamageEvent _takeDamageEvent;
 
         #endregion
 
@@ -22,9 +24,14 @@ namespace Asteroids
             DestroyUpdatableObjectEvent destroyUpdatableObject,
             ResourceManager resourceManager,
             Vector3 bulletStartPosition,
-            Quaternion bulletStartDirection) :
+            Quaternion bulletStartDirection,
+            CollisionDetectorEvent collisionDetectorEvent,
+            TakeDamageEvent takeDamageEvent) :
             base(createUpdatableObject, destroyUpdatableObject)
         {
+            _collisionDetectorEvent = collisionDetectorEvent;
+            _takeDamageEvent = takeDamageEvent;
+
             _missileModel = new MissileModel();
 
             _missileView = GameObject.Instantiate(
@@ -32,7 +39,11 @@ namespace Asteroids
                 bulletStartPosition,
                 bulletStartDirection).GetComponent<MissileView>();
 
+            _missileView.CollisionDetectorEvent = _collisionDetectorEvent;
+
             _missileRigidbody = _missileView.gameObject.GetComponent<Rigidbody>();
+
+            _collisionDetectorEvent.CollisionDetector += CollisionEventHandler;
         }
 
         #endregion
@@ -42,7 +53,24 @@ namespace Asteroids
 
         protected abstract void MissileFly();
 
-        protected abstract void CheckHit();
+        protected abstract void Hit();
+
+        private void CollisionEventHandler(Transform caller, Transform called)
+        {
+            if (caller.TryGetComponent(out MissileView callerView))
+            {
+                if (callerView == _missileView)
+                {
+                    _takeDamageEvent.Invoke(called, _missileModel.Damage);
+                    Hit();
+                }
+            }
+        }
+
+        public virtual void Destroy()
+        {
+            _collisionDetectorEvent.CollisionDetector -= CollisionEventHandler;
+        }
 
         #endregion
 
@@ -51,7 +79,6 @@ namespace Asteroids
 
         public override void LetUpdate()
         {
-            CheckHit();
             MissileFly();
         }
 

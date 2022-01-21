@@ -13,15 +13,25 @@ namespace Asteroids
         #endregion
 
 
+        #region Properties
+
+        public MissilePool SetMissilePool { set => _missilePool = value; get => _missilePool; }
+
+        #endregion
+
+
         #region ClassLifeCicles
 
         public LineMissileController(CreateUpdatableObjectEvent createUpdatableObject,
            DestroyUpdatableObjectEvent destroyUpdatableObject,
            ResourceManager resourceManager,
            Vector3 bulletStartPosition,
-           Quaternion bulletStartDirection) :
-           base(createUpdatableObject, destroyUpdatableObject, resourceManager, bulletStartPosition, bulletStartDirection)
+           Quaternion bulletStartDirection,
+           CollisionDetectorEvent collisionDetectorEvent,
+           TakeDamageEvent takeDamageEvent) :
+           base(createUpdatableObject, destroyUpdatableObject, resourceManager, bulletStartPosition, bulletStartDirection, collisionDetectorEvent, takeDamageEvent)
         {
+            PrepareBeforePush();
         }
 
         #endregion
@@ -34,18 +44,9 @@ namespace Asteroids
             _missileRigidbody.velocity = _missileRigidbody.transform.forward * _missileModel.Speed;
         }
 
-        protected override void CheckHit()
+        protected override void Hit()
         {
-            if (_missileView.IsHit)
-            {
-                if (_missileView.HittingCollider.TryGetComponent<IDamageable>(out IDamageable damageable))
-                {
-                    damageable.GetDamage(_missileModel.Damage);
-                }
-
-                PrepareBeforePush(_missilePool);
-                _missilePool.Push(this);
-            }
+            ReturnToPool(_missilePool, this);
         }
 
         #endregion
@@ -61,12 +62,16 @@ namespace Asteroids
             AddToUpdate();
         }
 
-        public void PrepareBeforePush(MissilePool missilePool)
+        public void PrepareBeforePush()
         {
-            if (_missilePool == null) _missilePool = missilePool;
-            _missileView.IsHit = false;
-            _missileRigidbody.gameObject.SetActive(false);
             RemoveFromUpdate();
+            _missileRigidbody.gameObject.SetActive(false);
+        }
+
+        public void ReturnToPool(MissilePool missilePool, LineMissileController lineMissile)
+        {
+            PrepareBeforePush();
+            missilePool.Push(lineMissile);
         }
 
         #endregion

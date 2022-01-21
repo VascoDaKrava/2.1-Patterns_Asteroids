@@ -20,8 +20,10 @@ namespace Asteroids
             ResourceManager resourceManager,
             Vector3 bulletStartPosition,
             Quaternion bulletStartDirection,
+            CollisionDetectorEvent collisionDetectorEvent,
+            TakeDamageEvent takeDamageEvent,
             Transform target) :
-            base(createUpdatableObject, destroyUpdatableObject, resourceManager, bulletStartPosition, bulletStartDirection)
+            base(createUpdatableObject, destroyUpdatableObject, resourceManager, bulletStartPosition, bulletStartDirection, collisionDetectorEvent, takeDamageEvent)
         {
             _target = target;
         }
@@ -38,27 +40,25 @@ namespace Asteroids
                 Destroy();
             else
             {
-                _missileRigidbody.MoveRotation(Quaternion.LookRotation(_target.position - _missileRigidbody.transform.position));
-                _missileRigidbody.velocity = _missileRigidbody.transform.forward * _missileModel.Speed;
-            }
-        }
-
-        protected override void CheckHit()
-        {
-            if (_missileView.IsHit)
-            {
-                if (_missileView.HittingCollider.TryGetComponent<IDamageable>(out IDamageable damageable))
+                if (_missileRigidbody)
                 {
-                    damageable.GetDamage(_missileModel.Damage);
+                    _missileRigidbody.MoveRotation(Quaternion.LookRotation(_target.position - _missileRigidbody.transform.position));
+                    _missileRigidbody.velocity = _missileRigidbody.transform.forward * _missileModel.Speed;
                 }
-                Destroy();
             }
         }
 
-        private void Destroy()
+        protected override void Hit()
         {
-            _missileView.Destroy();
+            Destroy();
+        }
+
+        public override void Destroy()
+        {
             RemoveFromUpdate();
+            base.Destroy();
+            if (_missileView)
+                _missileView.DestroyMissile();
         }
 
         #endregion
