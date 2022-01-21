@@ -20,8 +20,10 @@ namespace Asteroids
             ResourceManager resourceManager,
             Vector3 bulletStartPosition,
             Quaternion bulletStartDirection,
+            CollisionDetectorEvent collisionDetectorEvent,
+            TakeDamageEvent takeDamageEvent,
             Transform target) :
-            base(createUpdatableObject, destroyUpdatableObject, resourceManager, bulletStartPosition, bulletStartDirection)
+            base(createUpdatableObject, destroyUpdatableObject, resourceManager, bulletStartPosition, bulletStartDirection, collisionDetectorEvent, takeDamageEvent)
         {
             _target = target;
         }
@@ -43,22 +45,16 @@ namespace Asteroids
             }
         }
 
-        protected override void CheckHit()
+        protected override void Hit()
         {
-            if (_missileView.IsHit)
-            {
-                if (_missileView.HittingCollider.TryGetComponent<IDamageable>(out IDamageable damageable))
-                {
-                    damageable.GetDamage(_missileModel.Damage);
-                }
                 Destroy();
-            }
         }
 
-        private void Destroy()
+        public override void Destroy()
         {
-            _missileView.Destroy();
             RemoveFromUpdate();
+            base.Destroy();
+            _missileView.Destroy();
         }
 
         #endregion

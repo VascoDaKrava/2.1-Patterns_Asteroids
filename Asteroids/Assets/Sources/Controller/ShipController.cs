@@ -42,7 +42,7 @@ namespace Asteroids
             InputManager inputManager,
             Rigidbody rigidbody,
             TakeDamageEvent takeDamageEvent) :
-            base (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
+            base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _inputManager = inputManager;
             _takeDamageEvent = takeDamageEvent;
@@ -89,7 +89,7 @@ namespace Asteroids
             _shipModel.StrengthShip -= value;
             if (_shipModel.StrengthShip <= 0)
             {
-                _shipView.DestroyShip();
+                Dispose();
             }
             Debug.Log($"Ship strange = {_shipModel.StrengthShip}");
         }
@@ -101,6 +101,7 @@ namespace Asteroids
 
         public void Dispose()
         {
+            _takeDamageEvent.TakeDamage -= TakeDamageEventHandler;
             RemoveFromUpdate();
             _shipView.DestroyShip();
         }

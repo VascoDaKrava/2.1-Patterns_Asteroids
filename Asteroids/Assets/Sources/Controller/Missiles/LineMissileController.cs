@@ -19,8 +19,10 @@ namespace Asteroids
            DestroyUpdatableObjectEvent destroyUpdatableObject,
            ResourceManager resourceManager,
            Vector3 bulletStartPosition,
-           Quaternion bulletStartDirection) :
-           base(createUpdatableObject, destroyUpdatableObject, resourceManager, bulletStartPosition, bulletStartDirection)
+           Quaternion bulletStartDirection,
+           CollisionDetectorEvent collisionDetectorEvent,
+           TakeDamageEvent takeDamageEvent) :
+           base(createUpdatableObject, destroyUpdatableObject, resourceManager, bulletStartPosition, bulletStartDirection, collisionDetectorEvent, takeDamageEvent)
         {
         }
 
@@ -34,18 +36,10 @@ namespace Asteroids
             _missileRigidbody.velocity = _missileRigidbody.transform.forward * _missileModel.Speed;
         }
 
-        protected override void CheckHit()
+        protected override void Hit()
         {
-            if (_missileView.IsHit)
-            {
-                if (_missileView.HittingCollider.TryGetComponent(out IDamageable damageable))
-                {
-                    damageable.GetDamage(_missileModel.Damage);
-                }
-
-                PrepareBeforePush(_missilePool);
-                _missilePool.Push(this);
-            }
+            PrepareBeforePush(_missilePool);
+            _missilePool.Push(this);
         }
 
         #endregion
@@ -63,10 +57,9 @@ namespace Asteroids
 
         public void PrepareBeforePush(MissilePool missilePool)
         {
-            if (_missilePool == null) _missilePool = missilePool;
-            _missileView.IsHit = false;
-            _missileRigidbody.gameObject.SetActive(false);
             RemoveFromUpdate();
+            if (_missilePool == null) _missilePool = missilePool;
+            _missileRigidbody.gameObject.SetActive(false);
         }
 
         #endregion

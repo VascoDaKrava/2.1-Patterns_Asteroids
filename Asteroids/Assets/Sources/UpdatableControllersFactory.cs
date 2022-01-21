@@ -94,7 +94,9 @@ namespace Asteroids
                 _destroyUpdatable,
                 _resourceManager,
                 bulletStartPosition,
-                bulletStartDirection);
+                bulletStartDirection,
+                _collisionDetectorEvent,
+                _takeDamageEvent);
         }
 
         /// <summary>
@@ -115,6 +117,8 @@ namespace Asteroids
                 _resourceManager,
                 bulletStartPosition,
                 bulletStartDirection,
+                _collisionDetectorEvent,
+                _takeDamageEvent,
                 target);
         }
 

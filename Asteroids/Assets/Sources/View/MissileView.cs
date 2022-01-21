@@ -8,21 +8,17 @@ namespace Asteroids
 
         #region Fields
 
-        private bool _isHit;
+        private CollisionDetectorEvent _collisionDetectorEvent;
 
         #endregion
 
 
         #region Properties
 
-        public bool IsHit
+        public CollisionDetectorEvent CollisionDetectorEvent
         {
-            get => _isHit;
-
-            set => _isHit = value;
+            set { _collisionDetectorEvent = value; }
         }
-
-        public Collider HittingCollider { get; private set; }
 
         #endregion
 
@@ -31,8 +27,7 @@ namespace Asteroids
 
         private void OnTriggerEnter(Collider other)
         {
-            _isHit = true;
-            HittingCollider = other;
+            _collisionDetectorEvent.Invoke(gameObject.transform, other.transform);
         }
 
         #endregion

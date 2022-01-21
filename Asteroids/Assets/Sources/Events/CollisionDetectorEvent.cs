@@ -37,6 +37,7 @@ namespace Asteroids
         /// <param name="called">Transform of GameObject, who make collision with caller</param>
         public void Invoke(Transform caller, Transform called)
         {
+            Debug.Log($"From ColEv : {caller} <-- {called}");
             _collisionDetector?.Invoke(caller, called);
         }
 
