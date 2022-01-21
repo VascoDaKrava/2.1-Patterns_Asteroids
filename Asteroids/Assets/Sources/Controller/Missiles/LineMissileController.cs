@@ -13,6 +13,13 @@ namespace Asteroids
         #endregion
 
 
+        #region Properties
+
+        public MissilePool SetMissilePool { set => _missilePool = value; get => _missilePool; }
+
+        #endregion
+
+
         #region ClassLifeCicles
 
         public LineMissileController(CreateUpdatableObjectEvent createUpdatableObject,
@@ -24,6 +31,7 @@ namespace Asteroids
            TakeDamageEvent takeDamageEvent) :
            base(createUpdatableObject, destroyUpdatableObject, resourceManager, bulletStartPosition, bulletStartDirection, collisionDetectorEvent, takeDamageEvent)
         {
+            PrepareBeforePush();
         }
 
         #endregion
@@ -38,8 +46,7 @@ namespace Asteroids
 
         protected override void Hit()
         {
-            PrepareBeforePush(_missilePool);
-            _missilePool.Push(this);
+            ReturnToPool(_missilePool, this);
         }
 
         #endregion
@@ -55,11 +62,16 @@ namespace Asteroids
             AddToUpdate();
         }
 
-        public void PrepareBeforePush(MissilePool missilePool)
+        public void PrepareBeforePush()
         {
             RemoveFromUpdate();
-            if (_missilePool == null) _missilePool = missilePool;
             _missileRigidbody.gameObject.SetActive(false);
+        }
+
+        public void ReturnToPool(MissilePool missilePool, LineMissileController lineMissile)
+        {
+            PrepareBeforePush();
+            missilePool.Push(lineMissile);
         }
 
         #endregion
