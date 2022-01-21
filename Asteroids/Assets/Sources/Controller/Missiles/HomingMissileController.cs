@@ -40,21 +40,25 @@ namespace Asteroids
                 Destroy();
             else
             {
-                _missileRigidbody.MoveRotation(Quaternion.LookRotation(_target.position - _missileRigidbody.transform.position));
-                _missileRigidbody.velocity = _missileRigidbody.transform.forward * _missileModel.Speed;
+                if (_missileRigidbody)
+                {
+                    _missileRigidbody.MoveRotation(Quaternion.LookRotation(_target.position - _missileRigidbody.transform.position));
+                    _missileRigidbody.velocity = _missileRigidbody.transform.forward * _missileModel.Speed;
+                }
             }
         }
 
         protected override void Hit()
         {
-                Destroy();
+            Destroy();
         }
 
         public override void Destroy()
         {
             RemoveFromUpdate();
             base.Destroy();
-            _missileView.Destroy();
+            if (_missileView)
+                _missileView.DestroyMissile();
         }
 
         #endregion

@@ -35,7 +35,7 @@ namespace Asteroids
 
         #region Methods
 
-        public void Destroy()
+        public void DestroyMissile()
         {
             Destroy(gameObject);
         }
