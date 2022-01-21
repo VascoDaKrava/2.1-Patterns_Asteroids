@@ -98,7 +98,9 @@ namespace Asteroids
                 if (callerView == _asteroidView)
                 {
                     _takeDamageEvent.Invoke(called, _asteroidModel.Damage);
-                    //Dispose();
+
+                    if (called.CompareTag(TagsAndLayers.PLAYER_TAG))
+                        Dispose();
                 }
             }
         }
@@ -122,7 +124,7 @@ namespace Asteroids
         public void Dispose()
         {
             _asteroidView.DestroyAsteroid();
-            
+
             _collisionDetectorEvent.CollisionDetector -= CollisionEventHandler;
             _takeDamageEvent.TakeDamage -= TakeDamageEventHandler;
 
