@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 7237886424783436604}
   - component: {fileID: 5456114122655706608}
   - component: {fileID: 7005611286016010903}
-  - component: {fileID: 4075810859136466324}
+  - component: {fileID: 6976767154644073530}
   m_Layer: 6
   m_Name: Asteroid
   m_TagString: Untagged
@@ -94,7 +94,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 52
   m_CollisionDetection: 0
---- !u!114 &4075810859136466324
+--- !u!114 &6976767154644073530
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

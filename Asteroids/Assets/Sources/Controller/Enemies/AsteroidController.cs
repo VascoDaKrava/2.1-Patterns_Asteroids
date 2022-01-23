@@ -17,8 +17,14 @@ namespace Asteroids
 
         #region Properties
 
-        public EnemyModel EnemyModel { set => _enemyModel = value; }
-        public EnemyView EnemyView { set => _enemyView = value; }
+        public EnemyModel EnemyModel 
+        {
+             set => _enemyModel = value; 
+        }
+        public EnemyView EnemyView
+        {
+            set => _enemyView = value;
+        }
 
         #endregion
 
@@ -70,8 +76,8 @@ namespace Asteroids
             _enemyModel.Strength -= value;
             if (_enemyModel.Strength <= 0)
             {
-                //PrepareBeforePush(_enemyPool);
-                //_enemyPool.Push(this);
+                PrepareBeforePush(_enemyPool);
+                _enemyPool.Push(this);
                 Dispose();
             }
         }
