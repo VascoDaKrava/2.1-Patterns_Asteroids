@@ -15,6 +15,14 @@ namespace Asteroids
         #endregion
 
 
+        #region Properties
+
+        public EnemyModel EnemyModel { set => _enemyModel = value; }
+        public EnemyView EnemyView { set => _enemyView = value; }
+
+        #endregion
+
+
         #region ClassLifeCycles
 
         public AsteroidController(

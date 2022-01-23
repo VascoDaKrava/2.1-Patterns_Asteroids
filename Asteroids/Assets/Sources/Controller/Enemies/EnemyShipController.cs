@@ -16,6 +16,13 @@ namespace Asteroids
         #endregion
 
 
+        #region Properties
+
+        public EnemyView EnemyView { set => _enemyView = value; }
+
+        #endregion
+
+
         #region ClassLifeCycles
 
         public EnemyShipController(
@@ -29,7 +36,7 @@ namespace Asteroids
         {
             _enemyShipModel = new EnemyShipModel();
 
-            _collisionDetectorEvent = collisionDetectorEvent;
+             _collisionDetectorEvent = collisionDetectorEvent;
             _takeDamageEvent = takeDamageEvent;
 
             _enemyRigidbody = _enemyView.gameObject.GetComponent<Rigidbody>();
@@ -52,7 +59,7 @@ namespace Asteroids
         {
             if (_enemyRigidbody != null)
             {
-                _enemyRigidbody.velocity = _direction * _enemyShipModel.Speed;
+                _enemyRigidbody.velocity = _direction * _enemyModel.Speed;
             }
         }
 
