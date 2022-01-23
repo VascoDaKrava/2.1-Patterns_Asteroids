@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 namespace Asteroids
 {
-    public abstract class EnemyController : UpdatableObject, IPoolable
+    public abstract class EnemyController : UpdatableObject, IEnemyPoolable
     {
 
         #region Fields
@@ -13,7 +13,6 @@ namespace Asteroids
         protected EnemyModel _enemyModel;
         protected Rigidbody _enemyRigidbody;
         protected Vector3 _direction;
-        protected EnemyFactory _enemyFactory;
         protected EnemyPool _enemyPool;
 
         private float _minDirectionX = -0.7f;
@@ -31,11 +30,8 @@ namespace Asteroids
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent) :
             base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
-            _enemyFactory = new EnemyFactory();
-
             _direction = new Vector3(Random.Range(_minDirectionX, _maxDirectionX),
                 0.0f, Random.Range(_minDirectionZ, _maxDirectionZ));
-
         }
 
         #endregion
@@ -71,13 +67,10 @@ namespace Asteroids
 
         public void PrepareAfterPop(Vector3 position, Quaternion rotation)
         {
-            if (_enemyRigidbody != null)
-            {
-                _enemyRigidbody.gameObject.SetActive(true);
-                _enemyRigidbody.transform.position = position;
-                _enemyRigidbody.transform.rotation = rotation;
-                AddToUpdate();
-            }
+            _enemyRigidbody.gameObject.SetActive(true);
+            _enemyRigidbody.transform.position = position;
+            _enemyRigidbody.transform.rotation = rotation;
+            AddToUpdate();
         }
 
         public void PrepareBeforePush(EnemyPool enemyPool)
