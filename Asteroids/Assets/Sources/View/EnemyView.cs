@@ -51,7 +51,7 @@ namespace Asteroids
         /// <param name="deathTime"></param>
         public void DestroyEnemyTime(float deathTime)
         {
-            Destroy(gameObject, deathTime);
+            //Destroy(gameObject, deathTime);
         }
 
         #endregion

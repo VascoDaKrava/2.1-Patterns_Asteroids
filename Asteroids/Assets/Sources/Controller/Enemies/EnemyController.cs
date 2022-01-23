@@ -81,6 +81,7 @@ namespace Asteroids
             }
             _enemyRigidbody.gameObject.SetActive(false);
             RemoveFromUpdate();
+            //_enemyPool.Push(this);
         }
 
         #endregion

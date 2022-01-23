@@ -17,13 +17,19 @@ namespace Asteroids
 
         #region Properties
 
-        public EnemyModel EnemyModel 
+        public EnemyModel EnemyModel
         {
-             set => _enemyModel = value; 
+            set => _enemyModel = value;
         }
         public EnemyView EnemyView
         {
-            set => _enemyView = value;
+            set
+            {
+                _enemyView = value;
+                _enemyRigidbody = _enemyView.gameObject.GetComponent<Rigidbody>();
+                _enemyView.DestroyEnemyTime(_enemyModel.DeathTime);
+                _enemyView.CollisionDetectorEvent = _collisionDetectorEvent;
+            }
         }
 
         #endregion
@@ -42,10 +48,6 @@ namespace Asteroids
         {
             _collisionDetectorEvent = collisionDetectorEvent;
             _takeDamageEvent = takeDamageEvent;
-
-            _enemyRigidbody = _enemyView.gameObject.GetComponent<Rigidbody>();
-            _enemyView.DestroyEnemyTime(_enemyModel.DeathTime);
-            _enemyView.CollisionDetectorEvent = _collisionDetectorEvent;
 
             _collisionDetectorEvent.CollisionDetector += CollisionEventHandler;
             _takeDamageEvent.TakeDamage += TakeDamageEventHandler;
@@ -78,7 +80,8 @@ namespace Asteroids
             {
                 PrepareBeforePush(_enemyPool);
                 _enemyPool.Push(this);
-                Dispose();
+
+                //Dispose();
             }
         }
 
@@ -91,7 +94,8 @@ namespace Asteroids
                     _takeDamageEvent.Invoke(called, _enemyModel.Damage);
 
                     if (called.CompareTag(TagsAndLayers.PLAYER_TAG))
-                        Dispose();
+                        _enemyPool.Push(this);
+                    //    Dispose();
                 }
             }
         }
@@ -114,7 +118,7 @@ namespace Asteroids
 
         public void Dispose()
         {
-            _enemyView.DestroyEnemy();
+            //_enemyView.DestroyEnemy();
 
             _collisionDetectorEvent.CollisionDetector -= CollisionEventHandler;
             _takeDamageEvent.TakeDamage -= TakeDamageEventHandler;

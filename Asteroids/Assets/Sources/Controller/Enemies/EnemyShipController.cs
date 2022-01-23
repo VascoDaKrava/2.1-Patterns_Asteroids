@@ -9,7 +9,6 @@ namespace Asteroids
 
         #region Fields
 
-        private EnemyShipModel _enemyShipModel;
         private CollisionDetectorEvent _collisionDetectorEvent;
         private TakeDamageEvent _takeDamageEvent;
 
@@ -18,9 +17,15 @@ namespace Asteroids
 
         #region Properties
 
-        public EnemyView EnemyView 
+        public EnemyView EnemyView
         {
-            set => _enemyView = value; 
+            set
+            {
+                _enemyView = value;
+                _enemyRigidbody = _enemyView.gameObject.GetComponent<Rigidbody>();
+                _enemyView.DestroyEnemyTime(_enemyModel.DeathTime);
+                _enemyView.CollisionDetectorEvent = _collisionDetectorEvent;
+            }
         }
 
         #endregion
@@ -37,14 +42,10 @@ namespace Asteroids
             TakeDamageEvent takeDamageEvent) :
             base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
-            _enemyShipModel = new EnemyShipModel();
+            _enemyModel = new EnemyShipModel();
 
-             _collisionDetectorEvent = collisionDetectorEvent;
+            _collisionDetectorEvent = collisionDetectorEvent;
             _takeDamageEvent = takeDamageEvent;
-
-            _enemyRigidbody = _enemyView.gameObject.GetComponent<Rigidbody>();
-            _enemyView.DestroyEnemyTime(_enemyShipModel.DeathTime);
-            _enemyView.CollisionDetectorEvent = _collisionDetectorEvent;
 
             _collisionDetectorEvent.CollisionDetector += CollisionEventHandler;
             _takeDamageEvent.TakeDamage += TakeDamageEventHandler;
@@ -62,7 +63,9 @@ namespace Asteroids
         {
             if (_enemyRigidbody != null)
             {
-                _enemyRigidbody.velocity = _direction * _enemyModel.Speed;
+                _enemyRigidbody.velocity =
+                    _direction *
+                    _enemyModel.Speed;
             }
         }
 
@@ -72,15 +75,15 @@ namespace Asteroids
         /// <param name="value"></param>
         protected override void ChangeStrength(int value)
         {
-            _enemyShipModel.Armor -= value;
-            if (_enemyShipModel.Armor <= 0)
+            _enemyModel.Strength -= value;
+            if (_enemyModel.Strength <= 0)
             {
-                _enemyShipModel.Strength -= value;
-                if (_enemyShipModel.Strength <= 0)
+                _enemyModel.Strength -= value;
+                if (_enemyModel.Strength <= 0)
                 {
                     PrepareBeforePush(_enemyPool);
                     _enemyPool.Push(this);
-                    Dispose();
+                    //Dispose();
                 }
             }
         }
@@ -91,10 +94,10 @@ namespace Asteroids
             {
                 if (callerView == _enemyView)
                 {
-                    _takeDamageEvent.Invoke(called, _enemyShipModel.Damage);
+                    _takeDamageEvent.Invoke(called, _enemyModel.Damage);
 
-                    if (called.CompareTag(TagsAndLayers.PLAYER_TAG))
-                        Dispose();
+                    //if (called.CompareTag(TagsAndLayers.PLAYER_TAG))
+                    //    Dispose();
                 }
             }
         }
@@ -117,7 +120,7 @@ namespace Asteroids
 
         public void Dispose()
         {
-            _enemyView.DestroyEnemy();
+            //_enemyView.DestroyEnemy();
 
             _collisionDetectorEvent.CollisionDetector -= CollisionEventHandler;
             _takeDamageEvent.TakeDamage -= TakeDamageEventHandler;
