@@ -3,7 +3,7 @@
 
 namespace Asteroids
 {
-    public sealed class AsteroidView : MonoBehaviour
+    public sealed class EnemyView : MonoBehaviour
     {
 
         #region Fields
@@ -40,7 +40,7 @@ namespace Asteroids
         /// <summary>
         /// Destroy asteroid
         /// </summary>
-        public void DestroyAsteroid()
+        public void DestroyEnemy()
         {
             Destroy(gameObject);
         }
@@ -49,7 +49,7 @@ namespace Asteroids
         /// Destroy asteroid after a certain time
         /// </summary>
         /// <param name="deathTime"></param>
-        public void DestroyAsteroidTime(float deathTime)
+        public void DestroyEnemyTime(float deathTime)
         {
             Destroy(gameObject, deathTime);
         }
