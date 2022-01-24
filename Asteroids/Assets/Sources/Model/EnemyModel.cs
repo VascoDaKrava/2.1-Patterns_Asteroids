@@ -3,7 +3,23 @@
     public abstract class EnemyModel
     {
 
+        #region Fields
+
+        private int _armorEnemyShip = 40;
+
+        #endregion
+
         #region Properties
+
+        public int ArmorEnemyShip
+        {
+            get => _armorEnemyShip;
+
+            set
+            {
+                _armorEnemyShip = value;
+            }
+        }
 
         /// <summary>
         /// Strength of Asteroid

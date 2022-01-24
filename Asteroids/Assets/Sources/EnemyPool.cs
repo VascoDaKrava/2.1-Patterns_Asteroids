@@ -43,7 +43,7 @@ namespace Asteroids
                     Push(controllersFactory.CreateEnemyShipController(resourceManager, spawnPosition));
                 }
                 
-                _enemies.Peek().PrepareBeforePush(this);
+                _enemies.Peek().SetEnemyPool = this;
             }
         }
 

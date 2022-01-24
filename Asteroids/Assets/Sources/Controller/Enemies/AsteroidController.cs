@@ -1,19 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 namespace Asteroids
 {
-    public sealed class AsteroidController : EnemyController, IDisposable
+    public sealed class AsteroidController : EnemyController, IEnemyPoolable
     {
-
-        #region Fields
-
-        private CollisionDetectorEvent _collisionDetectorEvent;
-        private TakeDamageEvent _takeDamageEvent;
-
-        #endregion
-
 
         #region Properties
 
@@ -21,13 +12,13 @@ namespace Asteroids
         {
             set => _enemyModel = value;
         }
+
         public EnemyView EnemyView
         {
             set
             {
                 _enemyView = value;
                 _enemyRigidbody = _enemyView.gameObject.GetComponent<Rigidbody>();
-                _enemyView.DestroyEnemyTime(_enemyModel.DeathTime);
                 _enemyView.CollisionDetectorEvent = _collisionDetectorEvent;
             }
         }
@@ -40,17 +31,11 @@ namespace Asteroids
         public AsteroidController(
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
-            ResourceManager resourceManager,
-            Transform spawnPosition,
             CollisionDetectorEvent collisionDetectorEvent,
             TakeDamageEvent takeDamageEvent) :
-            base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
+            base(createUpdatableObjectEvent, destroyUpdatableObjectEvent, collisionDetectorEvent, takeDamageEvent)
         {
-            _collisionDetectorEvent = collisionDetectorEvent;
-            _takeDamageEvent = takeDamageEvent;
-
-            _collisionDetectorEvent.CollisionDetector += CollisionEventHandler;
-            _takeDamageEvent.TakeDamage += TakeDamageEventHandler;
+            ReturnToPoolInTime(_enemyPool, this, _enemyModel.DeathTime);
         }
 
         #endregion
@@ -78,52 +63,13 @@ namespace Asteroids
             _enemyModel.Strength -= value;
             if (_enemyModel.Strength <= 0)
             {
-                PrepareBeforePush(_enemyPool);
-                _enemyPool.Push(this);
-
-                //Dispose();
+                Hit();
             }
         }
 
-        private void CollisionEventHandler(Transform caller, Transform called)
+        protected override void Hit()
         {
-            if (caller.TryGetComponent(out EnemyView callerView))
-            {
-                if (callerView == _enemyView)
-                {
-                    _takeDamageEvent.Invoke(called, _enemyModel.Damage);
-
-                    if (called.CompareTag(TagsAndLayers.PLAYER_TAG))
-                        _enemyPool.Push(this);
-                    //    Dispose();
-                }
-            }
-        }
-
-        private void TakeDamageEventHandler(Transform damageReciever, int damage)
-        {
-            if (damageReciever.TryGetComponent(out EnemyView damageRecieverView))
-            {
-                if (damageRecieverView == _enemyView)
-                {
-                    ChangeStrength(damage);
-                }
-            }
-        }
-
-        #endregion
-
-
-        #region IDisposable
-
-        public void Dispose()
-        {
-            //_enemyView.DestroyEnemy();
-
-            _collisionDetectorEvent.CollisionDetector -= CollisionEventHandler;
-            _takeDamageEvent.TakeDamage -= TakeDamageEventHandler;
-
-            RemoveFromUpdate();
+            ReturnToPool(_enemyPool, this);
         }
 
         #endregion

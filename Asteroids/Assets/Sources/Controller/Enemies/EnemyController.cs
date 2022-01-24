@@ -15,6 +15,10 @@ namespace Asteroids
         protected Vector3 _direction;
         protected EnemyPool _enemyPool;
 
+        protected CollisionDetectorEvent _collisionDetectorEvent;
+        private TakeDamageEvent _takeDamageEvent;
+        private Timers _timers;
+
         private float _minDirectionX = -0.7f;
         private float _maxDirectionX = 0.7f;
         private float _minDirectionZ = 0.0f;
@@ -23,15 +27,32 @@ namespace Asteroids
         #endregion
 
 
+        #region Proprties
+
+        public EnemyPool SetEnemyPool { get => _enemyPool; set => _enemyPool = value; }
+
+        #endregion
+
+
         #region ClassLifeCycles
 
         public EnemyController(
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
-            DestroyUpdatableObjectEvent destroyUpdatableObjectEvent) :
+            DestroyUpdatableObjectEvent destroyUpdatableObjectEvent, 
+            CollisionDetectorEvent collisionDetectorEvent,
+            TakeDamageEvent takeDamageEvent) :
             base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
+            _timers = new Timers(createUpdatableObjectEvent, destroyUpdatableObjectEvent);
+
+            _collisionDetectorEvent = collisionDetectorEvent;
+            _takeDamageEvent = takeDamageEvent;
+
             _direction = new Vector3(Random.Range(_minDirectionX, _maxDirectionX),
                 0.0f, Random.Range(_minDirectionZ, _maxDirectionZ));
+
+            _collisionDetectorEvent.CollisionDetector += CollisionEventHandler;
+            _takeDamageEvent.TakeDamage += TakeDamageEventHandler;
         }
 
         #endregion
@@ -50,6 +71,39 @@ namespace Asteroids
         /// <param name="value"></param>
         protected abstract void ChangeStrength(int value);
 
+        protected abstract void Hit();
+
+        private void CollisionEventHandler(Transform caller, Transform called)
+        {
+            if (caller.TryGetComponent(out EnemyView callerView))
+            {
+                if (callerView == _enemyView)
+                {
+                    _takeDamageEvent.Invoke(called, _enemyModel.Damage);
+
+                    if (called.CompareTag(TagsAndLayers.PLAYER_TAG))
+                        Hit();
+                }
+            }
+        }
+
+        private void TakeDamageEventHandler(Transform damageReciever, int damage)
+        {
+            if (damageReciever.TryGetComponent(out EnemyView damageRecieverView))
+            {
+                if (damageRecieverView == _enemyView)
+                {
+                    ChangeStrength(damage);
+                }
+            }
+        }
+
+        public virtual void Destroy()
+        {
+            _collisionDetectorEvent.CollisionDetector -= CollisionEventHandler;
+            _takeDamageEvent.TakeDamage -= TakeDamageEventHandler;
+        }
+
         #endregion
 
 
@@ -63,7 +117,7 @@ namespace Asteroids
         #endregion
 
 
-        #region IPoolable
+        #region IEnemyPoolable
 
         public void PrepareAfterPop(Vector3 position, Quaternion rotation)
         {
@@ -73,18 +127,29 @@ namespace Asteroids
             AddToUpdate();
         }
 
-        public void PrepareBeforePush(EnemyPool enemyPool)
+        public void PrepareBeforePush()
         {
-            if (_enemyPool == null)
-            {
-                _enemyPool = enemyPool;
-            }
-            _enemyRigidbody.gameObject.SetActive(false);
             RemoveFromUpdate();
-            //_enemyPool.Push(this);
+            _enemyRigidbody.gameObject.SetActive(false);
         }
 
-        #endregion
+        public void ReturnToPool(EnemyPool enemyPool, EnemyController enemyController)
+        {
+            PrepareBeforePush();
+            enemyPool.Push(enemyController);
+        }
 
+        public void ReturnToPoolInTime(EnemyPool enemyPool, EnemyController enemyController, float time)
+        {
+            if (!_timers.isTimerOn)
+            {
+                _timers.StartTimer(time);
+                PrepareBeforePush();
+                enemyPool.Push(enemyController);
+            }
+        }
+
+
+        #endregion
     }
 }

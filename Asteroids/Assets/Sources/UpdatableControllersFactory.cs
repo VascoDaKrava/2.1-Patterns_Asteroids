@@ -165,8 +165,6 @@ namespace Asteroids
            var controller = new AsteroidController(
                 _createUpdatable,
                 _destroyUpdatable,
-                _resourceManager,
-                spawnPosition,
                 _collisionDetectorEvent,
                 _takeDamageEvent);
 
@@ -186,8 +184,6 @@ namespace Asteroids
             var controller = new AsteroidController(
                  _createUpdatable,
                  _destroyUpdatable,
-                 _resourceManager,
-                 spawnPosition,
                  _collisionDetectorEvent,
                  _takeDamageEvent);
 
@@ -206,11 +202,10 @@ namespace Asteroids
             var controller = new EnemyShipController(
                  _createUpdatable,
                  _destroyUpdatable,
-                 _resourceManager,
-                 spawnPosition,
                  _collisionDetectorEvent,
                  _takeDamageEvent);
 
+            controller.EnemyModel = new EnemyShipModel();
             controller.EnemyView = _enemyFactory.CreateEnemyShip(resourceManager, spawnPosition);
             return controller;
         }

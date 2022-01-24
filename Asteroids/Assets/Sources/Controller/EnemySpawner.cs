@@ -44,7 +44,7 @@ namespace Asteroids
         /// <summary>
         /// Spawn asteroids after a certain time
         /// </summary>
-        private void AsteroidSpawn()
+        private void EnemySpawn()
         {
 
             if (!_timers.isTimerOn)
@@ -61,7 +61,7 @@ namespace Asteroids
 
         public override void LetUpdate()
         {
-            AsteroidSpawn();
+            EnemySpawn();
         }
 
         #endregion

@@ -5,6 +5,14 @@ namespace Asteroids
 {
      public interface IEnemyPoolable
     {
+        #region Properties
+
+        /// <summary>
+        /// Set pool to returning
+        /// </summary>
+        public EnemyPool SetEnemyPool { set; get; }
+
+        #endregion
 
         #region Methods
 
@@ -18,7 +26,21 @@ namespace Asteroids
         /// <summary>
         /// Make View invisible, remove from update etc.
         /// </summary>
-        public void PrepareBeforePush(EnemyPool enemyPool);
+        public void PrepareBeforePush();
+
+        /// <summary>
+        /// Return enemy to pool
+        /// </summary>
+        /// <param name="missilePool"></param>
+        /// <param name="lineMissile"></param>
+        public void ReturnToPool(EnemyPool enemyPool, EnemyController enemyController);
+
+        /// <summary>
+        /// Return enemy to pool
+        /// </summary>
+        /// <param name="missilePool"></param>
+        /// <param name="lineMissile"></param>
+        public void ReturnToPoolInTime(EnemyPool enemyPool, EnemyController enemyController, float time);
 
         #endregion
     }

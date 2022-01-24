@@ -6,7 +6,6 @@
         #region Fields
 
         private int _strengthEnemyShip = 50;
-        private int _armorEnemyShip = 40;
         private float _speedEnemyShip = 5.0f;
         private int _damageEnemyShip = 50;
         private float _deathTime = 30.0f;
@@ -15,16 +14,6 @@
 
 
         #region Properties
-
-        public int Armor
-        {
-            get => _armorEnemyShip;
-
-            set
-            {
-                _armorEnemyShip = value;
-            }
-        }
 
         /// <summary>
         /// Strength of EnemyShip
