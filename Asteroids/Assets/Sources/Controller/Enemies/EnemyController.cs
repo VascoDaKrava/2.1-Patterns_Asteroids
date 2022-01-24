@@ -14,10 +14,10 @@ namespace Asteroids
         protected Rigidbody _enemyRigidbody;
         protected Vector3 _direction;
         protected EnemyPool _enemyPool;
+        protected Timers _timers;
 
         protected CollisionDetectorEvent _collisionDetectorEvent;
         private TakeDamageEvent _takeDamageEvent;
-        private Timers _timers;
 
         private float _minDirectionX = -0.7f;
         private float _maxDirectionX = 0.7f;
@@ -148,7 +148,6 @@ namespace Asteroids
                 enemyPool.Push(enemyController);
             }
         }
-
 
         #endregion
     }

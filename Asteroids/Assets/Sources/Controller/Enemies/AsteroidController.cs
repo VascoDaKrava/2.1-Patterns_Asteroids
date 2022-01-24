@@ -10,7 +10,11 @@ namespace Asteroids
 
         public EnemyModel EnemyModel
         {
-            set => _enemyModel = value;
+            set
+            {
+                _enemyModel = value;
+                ReturnToPoolInTime(SetEnemyPool, this, _enemyModel.DeathTime);
+            }
         }
 
         public EnemyView EnemyView
@@ -35,7 +39,7 @@ namespace Asteroids
             TakeDamageEvent takeDamageEvent) :
             base(createUpdatableObjectEvent, destroyUpdatableObjectEvent, collisionDetectorEvent, takeDamageEvent)
         {
-            ReturnToPoolInTime(_enemyPool, this, _enemyModel.DeathTime);
+           
         }
 
         #endregion
@@ -73,5 +77,6 @@ namespace Asteroids
         }
 
         #endregion
+        
     }
 }
