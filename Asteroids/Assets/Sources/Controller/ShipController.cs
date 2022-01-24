@@ -10,9 +10,14 @@ namespace Asteroids
 
         private Vector3 _moveDirection;
         private InputManager _inputManager;
+        private ResourceManager _resourceManager;
         private ShipModel _shipModel;
         private ShipView _shipView;
         private TakeDamageEvent _takeDamageEvent;
+<<<<<<< main
+=======
+        private DisplayEndGame _displayEndGame;
+>>>>>>> Created GameLose
 
         #endregion
 
@@ -27,15 +32,18 @@ namespace Asteroids
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             InputManager inputManager,
+            ResourceManager resourceManager,
             Rigidbody rigidbody,
             TakeDamageEvent takeDamageEvent) : base
             (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _inputManager = inputManager;
+            _resourceManager = resourceManager;
             _takeDamageEvent = takeDamageEvent;
             _takeDamageEvent.TakeDamage += TakeDamageEventHandler;
             _shipModel = new ShipModel(rigidbody);
             _shipView = GameObject.FindObjectOfType<ShipView>();
+            _displayEndGame = new DisplayEndGame();
         }
 
         #endregion
@@ -73,11 +81,16 @@ namespace Asteroids
         /// <param name="value"></param>
         public void ChangeStrength(int value)
         {
+<<<<<<< main
             _shipModel.StrengthShip -= value;
             if (_shipModel.StrengthShip <= 0)
             {
                 Dispose();
             }
+=======
+            _displayEndGame.GameOver(_resourceManager);
+            Dispose();
+>>>>>>> Created GameLose
         }
 
         #endregion

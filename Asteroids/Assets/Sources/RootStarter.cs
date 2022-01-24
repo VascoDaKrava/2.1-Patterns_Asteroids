@@ -59,7 +59,7 @@ namespace Asteroids
             _bulletStartTransform = GameObject.FindGameObjectWithTag(TagsAndLayers.BULLET_START_POSITION_TAG).transform;
             _spawnPosition = GameObject.FindGameObjectWithTag(TagsAndLayers.SPAWN_POSITION_TAG).transform;
 
-            _controllersFactory.CreateShipController(_inputManager, _shipRigidbody);
+            _controllersFactory.CreateShipController(_inputManager, _resourceManager, _shipRigidbody);
             _controllersFactory.CreateFireController(_bulletStartTransform, _inputManager, _controllersFactory);
             _controllersFactory.CreateEnemySpawner(_spawnPosition, _resourceManager, _controllersFactory);
         }
