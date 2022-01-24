@@ -49,12 +49,14 @@ namespace Asteroids
         /// <returns></returns>
         public ShipController CreateShipController(
             InputManager inputManager,
+            ResourceManager resourceManager,
             Rigidbody rigidbody)
         {
             return new ShipController(
                 _createUpdatable,
                 _destroyUpdatable,
                 inputManager,
+                resourceManager,
                 rigidbody,
                 _takeDamageEvent);
         }
