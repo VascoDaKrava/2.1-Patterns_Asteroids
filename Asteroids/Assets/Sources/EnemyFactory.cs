@@ -9,21 +9,11 @@ namespace Asteroids
     public sealed class EnemyFactory
     {
 
-        #region Fields
-
-        private float _minSpawnPositionX = -50.0f;
-        private float _maxSpawnPositionX = 50.0f;
-
-        #endregion
-
-
         #region Methods
 
         public EnemyView CreateSmallAsteroid(ResourceManager resourceManager, Transform spawnPosition)
         {
-            var asteroidSmall = GameObject.Instantiate(resourceManager.Asteroid,
-                spawnPosition.position = new Vector3(Random.Range(_minSpawnPositionX, _maxSpawnPositionX),
-                spawnPosition.position.y, spawnPosition.position.z),
+            var asteroidSmall = GameObject.Instantiate(resourceManager.Asteroid, spawnPosition.position,
                 spawnPosition.rotation).GetComponent<EnemyView>();
 
             return asteroidSmall;
@@ -31,9 +21,7 @@ namespace Asteroids
 
         public EnemyView CreateLargeAsteroid(ResourceManager resourceManager, Transform spawnPosition)
         {
-            var asteroidLarge = GameObject.Instantiate(resourceManager.LargeAsteroid,
-                spawnPosition.position = new Vector3(Random.Range(_minSpawnPositionX, _maxSpawnPositionX),
-                spawnPosition.position.y, spawnPosition.position.z),
+            var asteroidLarge = GameObject.Instantiate(resourceManager.LargeAsteroid, spawnPosition.position,
                 spawnPosition.rotation).GetComponent<EnemyView>();
 
             return asteroidLarge;
@@ -41,9 +29,7 @@ namespace Asteroids
 
         public EnemyView CreateEnemyShip(ResourceManager resourseManager, Transform spawnPosition)
         {
-            var enemyShip = GameObject.Instantiate(resourseManager.EnemyShip,
-                spawnPosition.position = new Vector3(Random.Range(_minSpawnPositionX, _maxSpawnPositionX),
-                spawnPosition.position.y, spawnPosition.position.z),
+            var enemyShip = GameObject.Instantiate(resourseManager.EnemyShip, spawnPosition.position,
                 spawnPosition.rotation).GetComponent<EnemyView>();
 
             return enemyShip;

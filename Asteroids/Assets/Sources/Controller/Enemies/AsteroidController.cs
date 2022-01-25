@@ -40,7 +40,6 @@ namespace Asteroids
             TakeDamageEvent takeDamageEvent) :
             base(createUpdatableObjectEvent, destroyUpdatableObjectEvent, collisionDetectorEvent, takeDamageEvent)
         {
-           
         }
 
         #endregion

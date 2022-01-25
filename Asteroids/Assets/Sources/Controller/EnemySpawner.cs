@@ -9,6 +9,8 @@ namespace Asteroids
 
         private int _enemyInPool = 20;
         private float _rateOfSpawn = 4.0f; // Time in seconds between spawns
+        private float _minSpawnPositionX = -50.0f;
+        private float _maxSpawnPositionX = 50.0f;
 
         private Transform _spawnPosition;
         private Timers _timers;
@@ -50,7 +52,10 @@ namespace Asteroids
             if (!_timers.isTimerOn)
             {
                 _timers.StartTimer(_rateOfSpawn);
-                _enemyPool.Pop(_spawnPosition.position, _spawnPosition.rotation);
+                _enemyPool.Pop(_spawnPosition.position = new Vector3(
+                    Random.Range(_minSpawnPositionX, _maxSpawnPositionX),
+                _spawnPosition.position.y, _spawnPosition.position.z),
+                _spawnPosition.rotation);
             }
         }
 
