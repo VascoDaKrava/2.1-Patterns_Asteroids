@@ -5,6 +5,7 @@ namespace Asteroids
 {
      public interface IEnemyPoolable
     {
+
         #region Properties
 
         /// <summary>
@@ -13,6 +14,7 @@ namespace Asteroids
         public EnemyPool SetEnemyPool { set; get; }
 
         #endregion
+
 
         #region Methods
 
@@ -43,5 +45,6 @@ namespace Asteroids
         public void ReturnToPoolInTime();
 
         #endregion
+
     }
 }

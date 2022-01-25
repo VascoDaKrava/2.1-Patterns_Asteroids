@@ -9,6 +9,7 @@
 
         #endregion
 
+
         #region Properties
 
         public int ArmorEnemyShip
@@ -36,5 +37,6 @@
         public abstract int Damage { get; }
 
         #endregion
+
     }
 }

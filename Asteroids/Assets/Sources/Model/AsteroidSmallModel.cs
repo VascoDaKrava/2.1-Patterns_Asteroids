@@ -12,6 +12,7 @@
 
         #endregion
 
+
         #region Properties
 
         /// <summary>
@@ -37,5 +38,6 @@
         public override int Damage { get => _damageAsteroid; }
 
         #endregion
+
     }
 }

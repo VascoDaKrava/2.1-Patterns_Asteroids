@@ -38,5 +38,6 @@
         public override int Damage { get => _damageEnemyShip; }
 
         #endregion
+
     }
 }

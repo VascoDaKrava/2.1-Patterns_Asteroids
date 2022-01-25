@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-
-
-namespace Asteroids
+﻿namespace Asteroids
 {
     public sealed class AsteroidLargeModel : EnemyModel
     {
@@ -14,6 +11,7 @@ namespace Asteroids
         private float _deathTime = 20.0f;
 
         #endregion
+
 
         #region Properties
 

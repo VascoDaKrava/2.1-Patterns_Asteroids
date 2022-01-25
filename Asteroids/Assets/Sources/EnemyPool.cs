@@ -73,5 +73,6 @@ namespace Asteroids
             Debug.Log($"Enemies left : {_enemies.Count} / {_poolCapacity}");
         }
         #endregion
+
     }
 }
