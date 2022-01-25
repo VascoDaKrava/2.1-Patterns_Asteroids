@@ -8,7 +8,7 @@ namespace Asteroids
 
         #region Fields
 
-        private int _strengthShip = 100;
+        private int _strengthShip = 200;
 
         private float _speedShip = 10.0f;
 

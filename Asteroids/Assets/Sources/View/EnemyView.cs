@@ -33,28 +33,5 @@ namespace Asteroids
         }
 
         #endregion
-
-
-        #region Methods
-
-        /// <summary>
-        /// Destroy asteroid
-        /// </summary>
-        public void DestroyEnemy()
-        {
-            Destroy(gameObject);
-        }
-
-        /// <summary>
-        /// Destroy asteroid after a certain time
-        /// </summary>
-        /// <param name="deathTime"></param>
-        public void DestroyEnemyTime(float deathTime)
-        {
-            //Destroy(gameObject, deathTime);
-        }
-
-        #endregion
-
     }
 }

@@ -139,13 +139,13 @@ namespace Asteroids
             enemyPool.Push(enemyController);
         }
 
-        public void ReturnToPoolInTime(EnemyPool enemyPool, EnemyController enemyController, float time)
+        public void ReturnToPoolInTime()
         {
             if (!_timers.isTimerOn)
             {
-                _timers.StartTimer(time);
+                _timers.StartTimer(_enemyModel.DeathTime);
                 PrepareBeforePush();
-                enemyPool.Push(enemyController);
+                _enemyPool.Push(this);
             }
         }
 

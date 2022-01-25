@@ -44,6 +44,7 @@ namespace Asteroids
                 }
                 
                 _enemies.Peek().SetEnemyPool = this;
+                _enemies.Peek().ReturnToPoolInTime();
             }
         }
 

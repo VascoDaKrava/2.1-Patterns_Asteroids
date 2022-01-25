@@ -10,10 +10,11 @@ namespace Asteroids
 
         public EnemyModel EnemyModel
         {
+            get => _enemyModel;
+
             set
             {
                 _enemyModel = value;
-                ReturnToPoolInTime(SetEnemyPool, this, _enemyModel.DeathTime);
             }
         }
 

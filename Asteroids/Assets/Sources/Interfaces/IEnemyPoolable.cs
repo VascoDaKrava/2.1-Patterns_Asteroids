@@ -40,7 +40,7 @@ namespace Asteroids
         /// </summary>
         /// <param name="missilePool"></param>
         /// <param name="lineMissile"></param>
-        public void ReturnToPoolInTime(EnemyPool enemyPool, EnemyController enemyController, float time);
+        public void ReturnToPoolInTime();
 
         #endregion
     }
