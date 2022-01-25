@@ -43,7 +43,7 @@ namespace Asteroids
             _takeDamageEvent.TakeDamage += TakeDamageEventHandler;
             _shipModel = new ShipModel(rigidbody);
             _shipView = GameObject.FindObjectOfType<ShipView>();
-            _displayEndGame = new DisplayEndGame();
+            _displayEndGame = new DisplayEndGame(createUpdatableObjectEvent, destroyUpdatableObjectEvent);
         }
 
         #endregion
@@ -89,6 +89,7 @@ namespace Asteroids
             }
 =======
             _displayEndGame.GameOver(_resourceManager);
+            _displayEndGame.GoToMainMenu();
             Dispose();
 >>>>>>> Created GameLose
         }
