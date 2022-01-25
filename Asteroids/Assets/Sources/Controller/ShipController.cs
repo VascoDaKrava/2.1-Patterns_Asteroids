@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 namespace Asteroids
@@ -43,7 +44,7 @@ namespace Asteroids
             _takeDamageEvent.TakeDamage += TakeDamageEventHandler;
             _shipModel = new ShipModel(rigidbody);
             _shipView = GameObject.FindObjectOfType<ShipView>();
-            _displayEndGame = new DisplayEndGame(createUpdatableObjectEvent, destroyUpdatableObjectEvent);
+            _displayEndGame = new DisplayEndGame();
         }
 
         #endregion
@@ -89,7 +90,9 @@ namespace Asteroids
             }
 =======
             _displayEndGame.GameOver(_resourceManager);
-            _displayEndGame.GoToMainMenu();
+            Time.timeScale = 3.0f;
+            SceneManager.LoadScene(1);
+            
             Dispose();
 >>>>>>> Created GameLose
         }
