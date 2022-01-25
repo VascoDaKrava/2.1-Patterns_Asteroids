@@ -10,7 +10,7 @@ namespace Asteroids
 
         public const string MISSILE_AIM9 = "MissileAIM9";
         public const string ASTEROID = "Asteroid";
-        public const string END_GAME = "EndGame";
+        public const string END_GAME = "UI/EndGame";
 
         #endregion
 
