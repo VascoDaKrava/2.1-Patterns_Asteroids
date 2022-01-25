@@ -17,19 +17,6 @@ namespace Asteroids
         #endregion
 
 
-        #region Properties
-
-        /// <summary>
-        /// Get value of ship strength
-        /// </summary>
-        public int ShipStrengthValue
-        {
-            get => _shipModel.StrengthShip;
-        }
-
-        #endregion
-
-
         #region ClassLifeCycles
 
         /// <summary>
@@ -91,7 +78,7 @@ namespace Asteroids
             {
                 Dispose();
             }
-            Debug.Log($"Ship strange = {_shipModel.StrengthShip}");
+            Debug.Log($"Ship strength = {_shipModel.StrengthShip}");
         }
 
         #endregion

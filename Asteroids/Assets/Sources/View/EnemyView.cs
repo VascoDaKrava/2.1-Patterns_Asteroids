@@ -3,7 +3,7 @@
 
 namespace Asteroids
 {
-    public sealed class AsteroidView : MonoBehaviour
+    public sealed class EnemyView : MonoBehaviour
     {
 
         #region Fields
@@ -30,28 +30,6 @@ namespace Asteroids
             // If enter to the FLYING_AREA do nothing
             if (!other.CompareTag(TagsAndLayers.FLYING_AREA_TAG))
                 _collisionDetectorEvent.Invoke(gameObject.transform, other.transform);
-        }
-
-        #endregion
-
-
-        #region Methods
-
-        /// <summary>
-        /// Destroy asteroid
-        /// </summary>
-        public void DestroyAsteroid()
-        {
-            Destroy(gameObject);
-        }
-
-        /// <summary>
-        /// Destroy asteroid after a certain time
-        /// </summary>
-        /// <param name="deathTime"></param>
-        public void DestroyAsteroidTime(float deathTime)
-        {
-            Destroy(gameObject, deathTime);
         }
 
         #endregion

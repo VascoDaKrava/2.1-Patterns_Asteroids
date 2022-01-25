@@ -1,16 +1,12 @@
-﻿using UnityEngine;
-
-
-namespace Asteroids
+﻿namespace Asteroids
 {
-    public sealed class AsteroidModel
+    public sealed class AsteroidSmallModel : EnemyModel
     {
 
         #region Fields
 
         private int _strengthAsteroid = 20;
         private float _speedAsteroid = 10.0f;
-        private Vector3 _direction;
         private int _damageAsteroid = 20;
         private float _deathTime = 15.0f;
 
@@ -22,7 +18,7 @@ namespace Asteroids
         /// <summary>
         /// Strength of Asteroid
         /// </summary>
-        public int Strength
+        public override int Strength
         {
             get => _strengthAsteroid;
 
@@ -33,26 +29,13 @@ namespace Asteroids
         }
 
         /// <summary>
-        /// Direction moving of Asteroid
-        /// </summary>
-        public Vector3 Direction
-        {
-            get => _direction;
-
-            set
-            {
-                _direction = value;
-            }
-        }
-
-        /// <summary>
         /// Time for destroy asteroid
         /// </summary>
-        public float DeathTime { get => _deathTime; }
+        public override float DeathTime { get => _deathTime; }
 
-        public float Speed { get => _speedAsteroid; }
+        public override float Speed { get => _speedAsteroid; }
 
-        public int Damage { get => _damageAsteroid; }
+        public override int Damage { get => _damageAsteroid; }
 
         #endregion
 

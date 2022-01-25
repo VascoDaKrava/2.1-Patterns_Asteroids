@@ -10,6 +10,8 @@ namespace Asteroids
 
         public const string MISSILE_AIM9 = "MissileAIM9";
         public const string ASTEROID = "Asteroid";
+        public const string LARGE_ASTEROID = "LargeAsteroid";
+        public const string ENEMY_SHIP = "EnemyShip";
 
         #endregion
 
