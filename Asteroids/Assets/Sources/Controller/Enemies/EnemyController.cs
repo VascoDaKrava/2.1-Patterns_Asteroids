@@ -145,7 +145,7 @@ namespace Asteroids
             {
                 _timers.StartTimer(_enemyModel.DeathTime);
                 PrepareBeforePush();
-                _enemyPool.Push(this);
+                //_enemyPool.Push(this);
             }
         }
 
