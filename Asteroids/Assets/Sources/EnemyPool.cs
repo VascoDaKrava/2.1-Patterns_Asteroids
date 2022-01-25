@@ -32,19 +32,25 @@ namespace Asteroids
                 
                 if (randomValue < _minValueForCreating)
                 {
-                    Push(controllersFactory.CreateSmallAsteroidController(resourceManager, spawnPosition));
+                    var enemy = controllersFactory.CreateSmallAsteroidController(resourceManager, spawnPosition);
+                    enemy.SetEnemyPool = this;
+                    enemy.ReturnToPoolInTime();
                 }
                 else if (randomValue >= _minValueForCreating && randomValue <= _maxValueForCreating)
                 {
-                    Push(controllersFactory.CreateLargeAsteroidController(resourceManager, spawnPosition));
+                    var enemy = controllersFactory.CreateLargeAsteroidController(resourceManager, spawnPosition);
+                    enemy.SetEnemyPool = this;
+                    enemy.ReturnToPoolInTime();
                 }
                 else if (randomValue > _maxValueForCreating)
                 {
-                    Push(controllersFactory.CreateEnemyShipController(resourceManager, spawnPosition));
+                    var enemy = controllersFactory.CreateEnemyShipController(resourceManager, spawnPosition);
+                    enemy.SetEnemyPool = this;
+                    enemy.ReturnToPoolInTime();
                 }
                 
-                _enemies.Peek().SetEnemyPool = this;
-                _enemies.Peek().ReturnToPoolInTime();
+                //_enemies.Peek().SetEnemyPool = this;
+                //_enemies.Peek().ReturnToPoolInTime();
             }
         }
 
