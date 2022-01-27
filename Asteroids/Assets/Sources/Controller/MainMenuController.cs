@@ -1,4 +1,6 @@
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -81,10 +83,11 @@ namespace Asteroids
 
         private void ButtonExitOnClickHandler()
         {
-            if (EditorApplication.isPlaying) 
-                EditorApplication.isPlaying = false;
-            
+#if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
+#else
             Application.Quit();
+#endif
         }
 
         private void ButtonBackOnClickHandler()
