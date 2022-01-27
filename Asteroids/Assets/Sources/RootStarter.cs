@@ -10,6 +10,7 @@ namespace Asteroids
 
         private InputManager _inputManager;
         private ResourceManager _resourceManager;
+        private ResourceManagerAudioClips _resourceManagerAudioClips;
         private Rigidbody _shipRigidbody;
         private Transform _bulletStartTransform;
         private Transform _spawnPosition;
@@ -27,6 +28,7 @@ namespace Asteroids
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent)
         {
             _resourceManager = new ResourceManager();
+            _resourceManagerAudioClips = new ResourceManagerAudioClips();
             _inputManager = new InputManager();
             _collisionDetectorEvent = new CollisionDetectorEvent();
             _takeDamageEvent = new TakeDamageEvent();
@@ -45,6 +47,8 @@ namespace Asteroids
             _controllersFactory.CreateShipController(_inputManager, _shipRigidbody);
             _controllersFactory.CreateFireController(_bulletStartTransform, _inputManager, _controllersFactory);
             _controllersFactory.CreateEnemySpawner(_spawnPosition, _resourceManager, _controllersFactory);
+
+            new SoundSystemController(_resourceManagerAudioClips);
         }
 
         #endregion

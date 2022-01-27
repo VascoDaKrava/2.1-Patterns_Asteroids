@@ -16,8 +16,7 @@ namespace Asteroids
         public GameObject LargeAsteroid { get; private set; }
 
         public GameObject EnemyShip { get; private set; }
-
-        public AudioMixer AudioMixerResource { get; private set; }
+        
 
         #endregion
 
@@ -30,7 +29,6 @@ namespace Asteroids
             Asteroid = Resources.Load(ResourcesPath.ASTEROID) as GameObject;
             LargeAsteroid = Resources.Load(ResourcesPath.LARGE_ASTEROID) as GameObject;
             EnemyShip = Resources.Load(ResourcesPath.ENEMY_SHIP) as GameObject;
-            AudioMixerResource = Resources.Load(ResourcesPath.AUDIO_MIXER) as AudioMixer;
         }
 
         #endregion

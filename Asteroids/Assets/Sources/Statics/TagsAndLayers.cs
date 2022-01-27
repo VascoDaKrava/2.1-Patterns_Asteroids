@@ -12,6 +12,7 @@ namespace Asteroids
         public const string SPAWN_POSITION_TAG = "Spawner";
         public const string BULLET_START_POSITION_TAG = "BulletStartPosition";
         public const string FLYING_AREA_TAG = "FlyingArea";
+        public const string MAIN_CAMERA_TAG = "MainCamera";
 
         public const int ENEMY_LAYER = 1 << 6;
 
