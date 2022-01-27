@@ -16,6 +16,8 @@ namespace Asteroids
 
         public GameObject EnemyShip => Resources.Load<GameObject>(ResourcesPath.ENEMY_SHIP);
       
+        public GameObject MainMenu => Resources.Load(ResourcesPath.MAIN_MENU) as GameObject;
+
         #endregion
     }
 }
