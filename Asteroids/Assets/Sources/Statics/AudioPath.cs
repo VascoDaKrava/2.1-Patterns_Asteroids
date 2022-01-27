@@ -22,9 +22,11 @@ namespace Asteroids
 
         #region Properties
 
-        public static string FOLDER_MUSIC { get; } = Path.Combine(Application.dataPath, "Audio", "Music");
+        public static string FOLDER_AUDIO => Path.Combine(Application.dataPath, "Audio");
 
-        public static string FOLDER_SFX { get; } = Path.Combine(Application.dataPath, "Audio", "Effects");
+        public static string FOLDER_MUSIC => Path.Combine(Application.dataPath, "Audio", "Music");
+
+        public static string FOLDER_SFX => Path.Combine(Application.dataPath, "Audio", "Effects");
 
         #endregion
 
