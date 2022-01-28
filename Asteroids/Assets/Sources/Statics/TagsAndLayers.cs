@@ -1,8 +1,5 @@
 namespace Asteroids
 {
-    /// <summary>
-    /// Contain Tags
-    /// </summary>
     public static class TagsAndLayers
     {
 

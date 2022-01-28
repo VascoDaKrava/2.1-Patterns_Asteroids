@@ -22,14 +22,8 @@
             }
         }
 
-        /// <summary>
-        /// Strength of Asteroid
-        /// </summary>
         public abstract int Strength { get; set; }
 
-        /// <summary>
-        /// Time for destroy asteroid
-        /// </summary>
         public abstract float DeathTime { get; }
 
         public abstract float Speed { get; }

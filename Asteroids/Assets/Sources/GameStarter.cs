@@ -67,19 +67,11 @@ namespace Asteroids
 
         #region Methods
 
-        /// <summary>
-        /// Add item to list for Update (in the current LateUpdate)
-        /// </summary>
-        /// <param name="updatableObject"></param>
         private void AddToUpdateList(IUpdatable updatableObject)
         {
             _candidatsForAddingToUpdatables.Add(updatableObject);
         }
 
-        /// <summary>
-        /// Remove item from list for Update
-        /// </summary>
-        /// <param name="updatableObject"></param>
         private void RemoveFromUpdateList(IUpdatable updatableObject)
         {
             _candidatsForRemovingFromUpdatables.Add(updatableObject);

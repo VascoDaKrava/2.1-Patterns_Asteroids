@@ -4,9 +4,6 @@ using UnityEngine;
 
 namespace Asteroids
 {
-    /// <summary>
-    /// Event, that is invoked after collision and if collision-detector can take damage
-    /// </summary>
     public sealed class TakeDamageEvent
     {
 
@@ -30,11 +27,6 @@ namespace Asteroids
 
         #region Methods / Calling
 
-        /// <summary>
-        /// Invoke event, when damage can transmitted onto damageReciever
-        /// </summary>
-        /// <param name="damageReciever"></param>
-        /// <param name="damage"></param>
         public void Invoke(Transform damageReciever, int damage)
         {
             _takeDamageEvent?.Invoke(damageReciever, damage);

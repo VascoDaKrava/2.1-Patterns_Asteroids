@@ -1,8 +1,5 @@
 namespace Asteroids
 {
-    /// <summary>
-    /// Abstract class for objects, who must use Update
-    /// </summary>
     public abstract class UpdatableObject : IUpdatable
     {
         

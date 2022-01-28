@@ -3,9 +3,6 @@ using System;
 
 namespace Asteroids
 {
-    /// <summary>
-    /// Event, that is invoked when updatable object was created
-    /// </summary>
     public sealed class CreateUpdatableObjectEvent
     {
 

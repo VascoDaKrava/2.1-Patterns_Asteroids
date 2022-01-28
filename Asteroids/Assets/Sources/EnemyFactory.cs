@@ -3,9 +3,6 @@
 
 namespace Asteroids
 {
-    /// <summary>
-    /// Factory for creating enemy
-    /// </summary>
     public sealed class EnemyFactory
     {
 

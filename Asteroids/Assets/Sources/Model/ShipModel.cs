@@ -19,9 +19,6 @@ namespace Asteroids
 
         #region Properties
 
-        /// <summary>
-        /// Current strength of ship
-        /// </summary>
         public int StrengthShip
         {
             get => _strengthShip;
@@ -32,9 +29,6 @@ namespace Asteroids
             }
         }
 
-        /// <summary>
-        /// Current speed of ship
-        /// </summary>
         public float SpeedShip { get; set; }
 
         #endregion
@@ -42,10 +36,6 @@ namespace Asteroids
 
         #region ClassLifeCycles
 
-        /// <summary>
-        /// Get link a rigidbody of ship
-        /// </summary>
-        /// <param name="rigidbody"></param>
         public ShipModel(Rigidbody rigidbody)
         {
             _shipRigidbody = rigidbody;
@@ -56,10 +46,6 @@ namespace Asteroids
 
         #region Methods
 
-        /// <summary>
-        /// Move model by direction
-        /// </summary>
-        /// <param name="direction"></param>
         public void LetMoveShip(Vector3 direction)
         {
             if (_shipRigidbody != null)

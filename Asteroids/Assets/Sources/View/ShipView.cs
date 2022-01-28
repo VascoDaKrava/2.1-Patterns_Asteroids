@@ -8,10 +8,6 @@ namespace Asteroids
 
         #region Methods
 
-        /// <summary>
-        /// Destroy ship
-        /// </summary>
-        /// <param name="deathTime"></param>
         public void DestroyShip()
         {
             Destroy(gameObject);

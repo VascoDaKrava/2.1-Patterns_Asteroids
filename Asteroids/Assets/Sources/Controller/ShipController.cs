@@ -19,10 +19,6 @@ namespace Asteroids
 
         #region ClassLifeCycles
 
-        /// <summary>
-        /// Create ShipController
-        /// </summary>
-        /// <param name="inputManager"></param>
         public ShipController(
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
@@ -54,9 +50,6 @@ namespace Asteroids
             }
         }
 
-        /// <summary>
-        /// Move ship
-        /// </summary>
         private void LetMoveShip()
         {
             _moveDirection = _inputManager.GetDirection();
@@ -67,10 +60,6 @@ namespace Asteroids
             }
         }
 
-        /// <summary>
-        /// Changing ship strength from asteroid damage
-        /// </summary>
-        /// <param name="value"></param>
         public void ChangeStrength(int value)
         {
             _shipModel.StrengthShip -= value;
@@ -78,7 +67,6 @@ namespace Asteroids
             {
                 Dispose();
             }
-            Debug.Log($"Ship strength = {_shipModel.StrengthShip}");
         }
 
         #endregion
