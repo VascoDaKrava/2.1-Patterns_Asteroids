@@ -1,5 +1,8 @@
 namespace Asteroids
 {
+    /// <summary>
+    /// Contain path to resources
+    /// </summary>
     public static class ResourcesPath
     {
 

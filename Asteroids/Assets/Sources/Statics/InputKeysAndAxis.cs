@@ -1,5 +1,8 @@
 ﻿namespace Asteroids
 {
+    /// <summary>
+    /// Contains names of Axis and Keys
+    /// </summary>
     public static class InputKeysAndAxis
     {
 

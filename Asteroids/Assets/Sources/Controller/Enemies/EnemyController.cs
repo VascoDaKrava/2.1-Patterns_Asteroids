@@ -65,8 +65,15 @@ namespace Asteroids
 
         #region Methods
 
+        /// <summary>
+        /// Moving asteroid in given direction
+        /// </summary>
         protected abstract void EnemyFly();
 
+        /// <summary>
+        /// Changing asteroid strength from missile damage
+        /// </summary>
+        /// <param name="value"></param>
         protected abstract void ChangeStrength(int value);
 
         protected abstract void Hit();

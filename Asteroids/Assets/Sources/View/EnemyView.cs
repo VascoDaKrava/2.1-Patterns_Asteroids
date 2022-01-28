@@ -30,6 +30,7 @@ namespace Asteroids
 
         private void OnTriggerEnter(Collider other)
         {
+            // If enter to the FLYING_AREA do nothing
             if (!other.CompareTag(TagsAndLayers.FLYING_AREA_TAG))
             {
                 _collisionDetectorEvent.Invoke(gameObject.transform, other.transform);

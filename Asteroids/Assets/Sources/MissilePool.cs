@@ -43,11 +43,13 @@ namespace Asteroids
             } 
             _missiles.Peek().PrepareAfterPop(position, direction);
             _missiles.Pop();
+            Debug.Log($"Missiles in pool : {_missiles.Count} / {_poolCapacity}");
         }
 
         public void Push(LineMissileController missileController)
         {
             _missiles.Push(missileController);
+            Debug.Log($"Missiles in pool : {_missiles.Count} / {_poolCapacity}");
         }
 
         #endregion

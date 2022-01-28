@@ -8,7 +8,7 @@ namespace Asteroids
         #region Fields
 
         private int _enemyInPool = 20;
-        private float _rateOfSpawn = 4.0f;
+        private float _rateOfSpawn = 4.0f; // Time in seconds between spawns
         private float _minSpawnPositionX = -50.0f;
         private float _maxSpawnPositionX = 50.0f;
 
@@ -43,6 +43,9 @@ namespace Asteroids
 
         #region Methods
 
+        /// <summary>
+        /// Spawn asteroids after a certain time
+        /// </summary>
         private void EnemySpawn()
         {
             if (!_timers.isTimerOn)

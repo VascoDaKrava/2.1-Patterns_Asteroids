@@ -15,6 +15,9 @@ namespace Asteroids
 
         #region Properties
 
+        /// <summary>
+        /// Return true when timer is working
+        /// </summary>
         public bool isTimerOn { get; private set; } = false;
 
         #endregion

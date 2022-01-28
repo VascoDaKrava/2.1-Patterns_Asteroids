@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Asteroids
 {
+    /// <summary>
+    /// Event, that is invoked when somebody make collision (for example, OnTriggerEnter)
+    /// </summary>
     public sealed class CollisionDetectorEvent
     {
 
@@ -27,6 +30,11 @@ namespace Asteroids
 
         #region Methods / Calling
 
+        /// <summary>
+        /// Invoke CollisionDetector event
+        /// </summary>
+        /// <param name="caller">Transform of GameObject, who invoke event</param>
+        /// <param name="called">Transform of GameObject, who make collision with caller</param>
         public void Invoke(Transform caller, Transform called)
         {
             _collisionDetector?.Invoke(caller, called);
