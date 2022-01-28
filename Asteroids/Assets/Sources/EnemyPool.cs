@@ -61,7 +61,10 @@ namespace Asteroids
 
         public void Pop(Vector3 position, Quaternion rotation)
         {
-            if (_enemies.Count == 0) return;
+            if (_enemies.Count == 0) 
+            {
+                return;
+            }
             _enemies.Peek().PrepareAfterPop(position, rotation);
             _enemies.Pop();
             Debug.Log($"Enemies left : {_enemies.Count} / {_poolCapacity}");

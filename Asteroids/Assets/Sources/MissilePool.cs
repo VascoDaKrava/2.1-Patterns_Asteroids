@@ -37,7 +37,10 @@ namespace Asteroids
 
         public void Pop(Vector3 position, Quaternion direction)
         {
-            if (_missiles.Count == 0) return;
+            if (_missiles.Count == 0)
+            {
+                return;
+            } 
             _missiles.Peek().PrepareAfterPop(position, direction);
             _missiles.Pop();
             Debug.Log($"Missiles in pool : {_missiles.Count} / {_poolCapacity}");

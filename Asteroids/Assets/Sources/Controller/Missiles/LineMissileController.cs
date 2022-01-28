@@ -15,7 +15,12 @@ namespace Asteroids
 
         #region Properties
 
-        public MissilePool SetMissilePool { set => _missilePool = value; get => _missilePool; }
+        public MissilePool SetMissilePool 
+        {
+            get => _missilePool;
+
+            set => _missilePool = value; 
+        }
 
         #endregion
 

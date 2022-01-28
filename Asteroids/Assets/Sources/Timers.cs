@@ -47,7 +47,9 @@ namespace Asteroids
             else
             {
                 if (_secondsElapsed > 0)
+                {
                     _secondsElapsed -= Time.deltaTime;
+                } 
                 else
                 {
                     _secondsElapsed = 0;

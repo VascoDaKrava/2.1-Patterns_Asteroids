@@ -48,7 +48,6 @@ namespace Asteroids
         /// </summary>
         private void EnemySpawn()
         {
-
             if (!_timers.isTimerOn)
             {
                 _timers.StartTimer(_rateOfSpawn);

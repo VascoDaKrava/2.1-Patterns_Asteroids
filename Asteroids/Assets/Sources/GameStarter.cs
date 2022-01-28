@@ -55,7 +55,9 @@ namespace Asteroids
             if (_candidatsForRemovingFromUpdatables.Count > 0)
             {
                 foreach (IUpdatable item in _candidatsForRemovingFromUpdatables)
+                {
                     _updatables.Remove(item);
+                }   
                 _candidatsForRemovingFromUpdatables.Clear();
             }
         }

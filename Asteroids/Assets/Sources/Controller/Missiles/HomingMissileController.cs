@@ -37,7 +37,9 @@ namespace Asteroids
         {
             Debug.Log("Target " + _target);
             if (_target == null)
+            {
                 Destroy();
+            } 
             else
             {
                 if (_missileRigidbody)
@@ -58,7 +60,9 @@ namespace Asteroids
             RemoveFromUpdate();
             base.Destroy();
             if (_missileView)
+            {
                 _missileView.DestroyMissile();
+            }     
         }
 
         #endregion

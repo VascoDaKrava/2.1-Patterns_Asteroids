@@ -64,7 +64,9 @@ namespace Asteroids
         private void SecondaryFire()
         {
             if (_inputManager.isSecondaryFire)
+            {
                 _isAutoFireOn = !_isAutoFireOn;
+            }
 
             if (_isAutoFireOn)
             {
