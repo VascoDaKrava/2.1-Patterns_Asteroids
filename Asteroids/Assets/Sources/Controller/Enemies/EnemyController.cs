@@ -40,8 +40,8 @@ namespace Asteroids
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent, 
             CollisionDetectorEvent collisionDetectorEvent,
-            TakeDamageEvent takeDamageEvent) :
-            base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
+            TakeDamageEvent takeDamageEvent) : base
+            (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _timers = new Timers(createUpdatableObjectEvent, destroyUpdatableObjectEvent);
 

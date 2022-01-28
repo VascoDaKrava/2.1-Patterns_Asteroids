@@ -28,8 +28,8 @@ namespace Asteroids
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             ResourceManager resourceManager,
             Transform spawnPosition,
-            UpdatableControllersFactory controllersFactory) :
-            base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
+            UpdatableControllersFactory controllersFactory) : base
+            (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _spawnPosition = spawnPosition;
             _controllersFactory = controllersFactory;

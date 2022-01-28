@@ -22,8 +22,8 @@ namespace Asteroids
             Quaternion bulletStartDirection,
             CollisionDetectorEvent collisionDetectorEvent,
             TakeDamageEvent takeDamageEvent,
-            Transform target) :
-            base(createUpdatableObject, destroyUpdatableObject, resourceManager, bulletStartPosition, bulletStartDirection, collisionDetectorEvent, takeDamageEvent)
+            Transform target) : base
+            (createUpdatableObject, destroyUpdatableObject, resourceManager, bulletStartPosition, bulletStartDirection, collisionDetectorEvent, takeDamageEvent)
         {
             _target = target;
         }

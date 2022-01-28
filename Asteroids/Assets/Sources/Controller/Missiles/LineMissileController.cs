@@ -28,8 +28,8 @@ namespace Asteroids
            Vector3 bulletStartPosition,
            Quaternion bulletStartDirection,
            CollisionDetectorEvent collisionDetectorEvent,
-           TakeDamageEvent takeDamageEvent) :
-           base(createUpdatableObject, destroyUpdatableObject, resourceManager, bulletStartPosition, bulletStartDirection, collisionDetectorEvent, takeDamageEvent)
+           TakeDamageEvent takeDamageEvent) : base
+           (createUpdatableObject, destroyUpdatableObject, resourceManager, bulletStartPosition, bulletStartDirection, collisionDetectorEvent, takeDamageEvent)
         {
             PrepareBeforePush();
         }

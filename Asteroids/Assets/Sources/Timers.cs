@@ -27,8 +27,8 @@ namespace Asteroids
 
         public Timers(
             CreateUpdatableObjectEvent createUpdatableObject,
-            DestroyUpdatableObjectEvent destroyUpdatableObject) :
-            base(createUpdatableObject, destroyUpdatableObject)
+            DestroyUpdatableObjectEvent destroyUpdatableObject) : base
+            (createUpdatableObject, destroyUpdatableObject)
         {
         }
 
