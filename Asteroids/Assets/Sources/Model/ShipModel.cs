@@ -32,11 +32,6 @@ namespace Asteroids
             }
         }
 
-        /// <summary>
-        /// Current speed of ship
-        /// </summary>
-        public float SpeedShip { get; set; }
-
         #endregion
 
 

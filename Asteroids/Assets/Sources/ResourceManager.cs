@@ -8,13 +8,13 @@ namespace Asteroids
 
         #region Properties
 
-        public GameObject MissileAIM9 => Resources.Load(ResourcesPath.MISSILE_AIM9) as GameObject;
+        public GameObject MissileAIM9 => Resources.Load<GameObject>(ResourcesPath.MISSILE_AIM9);
 
-        public GameObject Asteroid => Resources.Load(ResourcesPath.ASTEROID) as GameObject;
+        public GameObject Asteroid => Resources.Load<GameObject>(ResourcesPath.ASTEROID);
 
-        public GameObject LargeAsteroid => Resources.Load(ResourcesPath.LARGE_ASTEROID) as GameObject;
+        public GameObject LargeAsteroid => Resources.Load<GameObject>(ResourcesPath.LARGE_ASTEROID);
 
-        public GameObject EnemyShip => Resources.Load(ResourcesPath.ENEMY_SHIP) as GameObject;
+        public GameObject EnemyShip => Resources.Load<GameObject>(ResourcesPath.ENEMY_SHIP);
 
         #endregion
 
