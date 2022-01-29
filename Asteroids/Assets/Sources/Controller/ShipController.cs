@@ -15,10 +15,8 @@ namespace Asteroids
         private ShipModel _shipModel;
         private ShipView _shipView;
         private TakeDamageEvent _takeDamageEvent;
-<<<<<<< main
-=======
         private DisplayEndGame _displayEndGame;
->>>>>>> Created GameLose
+
 
         #endregion
 
@@ -82,19 +80,11 @@ namespace Asteroids
         /// <param name="value"></param>
         public void ChangeStrength(int value)
         {
-<<<<<<< main
-            _shipModel.StrengthShip -= value;
-            if (_shipModel.StrengthShip <= 0)
-            {
-                Dispose();
-            }
-=======
             _displayEndGame.GameOver(_resourceManager);
-            Time.timeScale = 3.0f;
+            Time.timeScale = 6.0f;
             SceneManager.LoadScene(1);
             
             Dispose();
->>>>>>> Created GameLose
         }
 
         #endregion

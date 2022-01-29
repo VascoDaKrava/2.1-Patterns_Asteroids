@@ -13,15 +13,18 @@ namespace Asteroids
 
         #endregion
 
+
         #region Properties
 
         public GameObject MissileAIM9 => Resources.Load<GameObject>(ResourcesPath.MISSILE_AIM9);
 
         public GameObject Asteroid => Resources.Load<GameObject>(ResourcesPath.ASTEROID);
 
-<<<<<<< main
         public GameObject LargeAsteroid => Resources.Load<GameObject>(ResourcesPath.LARGE_ASTEROID);
-=======
+
+        public GameObject EnemyShip => Resources.Load<GameObject>(ResourcesPath.ENEMY_SHIP);
+
+
         public Canvas Canvas
         {
             get
@@ -34,14 +37,9 @@ namespace Asteroids
             }
         }
 
-        public GameObject EndGame => Resources.Load(ResourcesPath.END_GAME) as GameObject;
+        public GameObject EndGame => Resources.Load<GameObject>(ResourcesPath.END_GAME);
         
 
-        #endregion
->>>>>>> Created GameLose
-
-        public GameObject EnemyShip => Resources.Load<GameObject>(ResourcesPath.ENEMY_SHIP);
-      
         #endregion
     }
 }
