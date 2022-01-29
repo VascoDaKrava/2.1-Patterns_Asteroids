@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6f07631083ddd043903a67a9d1558af, type: 3}
   m_Name: SoundSettingsDataSO
   m_EditorClassIdentifier: 
-  _volumeMaster: -5
+  _volumeMaster: 0
   _volumeMenu: -10
-  _volumeMusic: -20
-  _volumeSFX: -30
+  _volumeMusic: -15
+  _volumeSFX: -15

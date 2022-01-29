@@ -24,6 +24,13 @@ namespace Asteroids
         #endregion
 
 
+        #region Properties
+
+        public SoundSystemVolumeController SoundSystemVolumeController => _soundSystemVolumeController;
+
+        #endregion
+
+
         #region ClassLifeCycles
 
         public RootStarter(

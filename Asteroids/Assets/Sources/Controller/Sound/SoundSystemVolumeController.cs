@@ -9,6 +9,7 @@ namespace Asteroids
         #region Fields
 
         private AudioMixer _audioMixer;
+        private ResourceManagerSettings _settings;
 
         #endregion
 
@@ -75,11 +76,20 @@ namespace Asteroids
         public SoundSystemVolumeController(ResourceManagerAudioClips resourceManagerAudioClips, ResourceManagerSettings resourceManagerSettings)
         {
             _audioMixer = resourceManagerAudioClips.AudioMixerResource;
+            _settings = resourceManagerSettings;
+        }
 
-            VolumeMaster = resourceManagerSettings.SoundSettings.VolumeMaster;
-            VolumeMenu = resourceManagerSettings.SoundSettings.VolumeMenu;
-            VolumeMusic = resourceManagerSettings.SoundSettings.VolumeMusic;
-            VolumeSFX = resourceManagerSettings.SoundSettings.VolumeSFX;
+        #endregion
+
+
+        #region Methods
+
+        public void LoadSettings()
+        {
+            VolumeMaster = _settings.SoundSettings.VolumeMaster;
+            VolumeMenu = _settings.SoundSettings.VolumeMenu;
+            VolumeMusic = _settings.SoundSettings.VolumeMusic;
+            VolumeSFX = _settings.SoundSettings.VolumeSFX;
         }
 
         #endregion
