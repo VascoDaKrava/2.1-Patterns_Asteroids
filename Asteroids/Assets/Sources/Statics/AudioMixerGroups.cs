@@ -5,10 +5,10 @@ namespace Asteroids
 
         #region Fields
 
-        public const string MASTER = "MasterVolume";
-        public const string MUSIC = "MusicVolume";
-        public const string MENU = "MenuVolume";
-        public const string SFX = "SFXVolume";
+        public const string MASTER = "VolumeMaster";
+        public const string MUSIC = "VolumeMusic";
+        public const string MENU = "VolumeMenu";
+        public const string SFX = "VolumeSFX";
 
         #endregion
 

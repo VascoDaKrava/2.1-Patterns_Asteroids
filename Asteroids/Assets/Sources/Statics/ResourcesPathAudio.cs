@@ -18,12 +18,16 @@ namespace Asteroids
 
         private const string FILE_AUDIO_MIXER = "AudioMixer";
 
+        private const string FILE_SOUND_SETTINGS = "SoundSettingsDataSO";
+
+        private const string FOLDER_AUDIO = "Audio";
+
+        private const string FOLDER_SETTINGS = "Settings";
+
         #endregion
 
 
         #region Properties
-
-        private static string FOLDER_AUDIO => Path.Combine("Audio");
 
         private static string FOLDER_MUSIC => Path.Combine(FOLDER_AUDIO, "Music");
 
@@ -38,6 +42,8 @@ namespace Asteroids
         public static string SFX_BUTTON_CLICK => Path.Combine(FOLDER_SFX, FILE_SFX_BUTTON_CLICK);
         
         public static string AUDIO_MIXER => Path.Combine(FOLDER_AUDIO, FILE_AUDIO_MIXER);
+
+        public static string SOUND_SETTINGS => Path.Combine(FOLDER_SETTINGS, FILE_SOUND_SETTINGS);
 
         #endregion
 

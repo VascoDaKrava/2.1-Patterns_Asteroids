@@ -1,4 +1,3 @@
-using UnityEngine;
 using UnityEngine.Audio;
 
 
@@ -73,9 +72,14 @@ namespace Asteroids
 
         #region ClassLifeCycles
 
-        public SoundSystemVolumeController(ResourceManagerAudioClips resourceManagerAudioClips)
+        public SoundSystemVolumeController(ResourceManagerAudioClips resourceManagerAudioClips, ResourceManagerSettings resourceManagerSettings)
         {
             _audioMixer = resourceManagerAudioClips.AudioMixerResource;
+
+            VolumeMaster = resourceManagerSettings.SoundSettings.VolumeMaster;
+            VolumeMenu = resourceManagerSettings.SoundSettings.VolumeMenu;
+            VolumeMusic = resourceManagerSettings.SoundSettings.VolumeMusic;
+            VolumeSFX = resourceManagerSettings.SoundSettings.VolumeSFX;
         }
 
         #endregion
