@@ -15,9 +15,6 @@
 
         #region Properties
 
-        /// <summary>
-        /// Strength of EnemyShip
-        /// </summary>
         public override int Strength
         {
             get => _strengthEnemyShip;
@@ -28,9 +25,6 @@
             }
         }
 
-        /// <summary>
-        /// Time for destroy EnemyShip
-        /// </summary>
         public override float DeathTime { get => _deathTime; }
 
         public override float Speed { get => _speedEnemyShip; }

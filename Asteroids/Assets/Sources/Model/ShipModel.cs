@@ -57,7 +57,7 @@ namespace Asteroids
         #region Methods
 
         /// <summary>
-        /// Move model by direction
+        /// Move ship by direction
         /// </summary>
         /// <param name="direction"></param>
         public void LetMoveShip(Vector3 direction)

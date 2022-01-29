@@ -48,9 +48,6 @@ namespace Asteroids
                     enemy.SetEnemyPool = this;
                     enemy.ReturnToPoolInTime();
                 }
-                
-                //_enemies.Peek().SetEnemyPool = this;
-                //_enemies.Peek().ReturnToPoolInTime();
             }
         }
 
@@ -67,13 +64,11 @@ namespace Asteroids
             }
             _enemies.Peek().PrepareAfterPop(position, rotation);
             _enemies.Pop();
-            Debug.Log($"Enemies left : {_enemies.Count} / {_poolCapacity}");
         }
 
         public void Push(EnemyController enemyController)
         {
             _enemies.Push(enemyController);
-            Debug.Log($"Enemies left : {_enemies.Count} / {_poolCapacity}");
         }
         #endregion
 

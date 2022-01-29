@@ -23,12 +23,12 @@
         }
 
         /// <summary>
-        /// Strength of Asteroid
+        /// Strength of Enemy
         /// </summary>
         public abstract int Strength { get; set; }
 
         /// <summary>
-        /// Time for destroy asteroid
+        /// Time for destroy Enemy
         /// </summary>
         public abstract float DeathTime { get; }
 

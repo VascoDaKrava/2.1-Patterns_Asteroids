@@ -78,7 +78,6 @@ namespace Asteroids
             {
                 Dispose();
             }
-            Debug.Log($"Ship strength = {_shipModel.StrengthShip}");
         }
 
         #endregion

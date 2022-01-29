@@ -70,23 +70,15 @@ namespace Asteroids
 
             if (_isAutoFireOn)
             {
-                Debug.Log("Autofire is ON");
                 if (!_sonarTimer.isTimerOn)
                 {
                     _sonarTimer.StartTimer(_sonarReloadTime);
                     if (StartSonar(_bulletStartTransform.position, _sonarRange, out _enemyTargetTransform))
                     {
                         StartHomingMissile(_enemyTargetTransform);
-                        Debug.Log("Target = " + _enemyTargetTransform.gameObject);
                     }
-                    else
-                        Debug.Log("No Target");
                 }
-                else
-                    Debug.Log("Wait for recharge");
             }
-            else
-                Debug.Log("Autofire is OFF");
         }
 
         private void StartHomingMissile(Transform target)

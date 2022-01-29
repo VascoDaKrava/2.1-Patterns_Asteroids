@@ -35,7 +35,6 @@ namespace Asteroids
 
         protected override void MissileFly()
         {
-            Debug.Log("Target " + _target);
             if (_target == null)
             {
                 Destroy();
