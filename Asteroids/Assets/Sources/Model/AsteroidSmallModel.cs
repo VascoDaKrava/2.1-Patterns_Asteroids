@@ -15,9 +15,6 @@
 
         #region Properties
 
-        /// <summary>
-        /// Strength of Asteroid
-        /// </summary>
         public override int Strength
         {
             get => _strengthAsteroid;
@@ -28,9 +25,6 @@
             }
         }
 
-        /// <summary>
-        /// Time for destroy asteroid
-        /// </summary>
         public override float DeathTime { get => _deathTime; }
 
         public override float Speed { get => _speedAsteroid; }

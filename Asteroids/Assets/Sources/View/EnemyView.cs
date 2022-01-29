@@ -17,7 +17,10 @@ namespace Asteroids
 
         public CollisionDetectorEvent CollisionDetectorEvent
         {
-            set { _collisionDetectorEvent = value; }
+            set 
+            { 
+                _collisionDetectorEvent = value; 
+            }
         }
 
         #endregion
@@ -29,7 +32,10 @@ namespace Asteroids
         {
             // If enter to the FLYING_AREA do nothing
             if (!other.CompareTag(TagsAndLayers.FLYING_AREA_TAG))
+            {
                 _collisionDetectorEvent.Invoke(gameObject.transform, other.transform);
+            }
+                
         }
 
         #endregion

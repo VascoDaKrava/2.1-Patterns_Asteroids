@@ -33,8 +33,8 @@ namespace Asteroids
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             Transform bulletStartTransform,
             InputManager inputManagerLink,
-            UpdatableControllersFactory controllersFactory) :
-            base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
+            UpdatableControllersFactory controllersFactory) : base
+            (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _bulletStartTransform = bulletStartTransform;
             _inputManager = inputManagerLink;
@@ -64,27 +64,21 @@ namespace Asteroids
         private void SecondaryFire()
         {
             if (_inputManager.isSecondaryFire)
+            {
                 _isAutoFireOn = !_isAutoFireOn;
+            }
 
             if (_isAutoFireOn)
             {
-                Debug.Log("Autofire is ON");
                 if (!_sonarTimer.isTimerOn)
                 {
                     _sonarTimer.StartTimer(_sonarReloadTime);
                     if (StartSonar(_bulletStartTransform.position, _sonarRange, out _enemyTargetTransform))
                     {
                         StartHomingMissile(_enemyTargetTransform);
-                        Debug.Log("Target = " + _enemyTargetTransform.gameObject);
                     }
-                    else
-                        Debug.Log("No Target");
                 }
-                else
-                    Debug.Log("Wait for recharge");
             }
-            else
-                Debug.Log("Autofire is OFF");
         }
 
         private void StartHomingMissile(Transform target)

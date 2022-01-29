@@ -37,8 +37,8 @@ namespace Asteroids
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             CollisionDetectorEvent collisionDetectorEvent,
-            TakeDamageEvent takeDamageEvent) :
-            base(createUpdatableObjectEvent, destroyUpdatableObjectEvent, collisionDetectorEvent, takeDamageEvent)
+            TakeDamageEvent takeDamageEvent) : base
+            (createUpdatableObjectEvent, destroyUpdatableObjectEvent, collisionDetectorEvent, takeDamageEvent)
         {
         }
 
@@ -47,9 +47,6 @@ namespace Asteroids
 
         #region Methods
 
-        /// <summary>
-        /// Moving asteroid in given direction
-        /// </summary>
         protected override void EnemyFly()
         {
             if (_enemyRigidbody != null)
@@ -58,10 +55,6 @@ namespace Asteroids
             }
         }
 
-        /// <summary>
-        /// Changing asteroid strength from missile damage
-        /// </summary>
-        /// <param name="value"></param>
         protected override void ChangeStrength(int value)
         {
             _enemyModel.Strength -= value;

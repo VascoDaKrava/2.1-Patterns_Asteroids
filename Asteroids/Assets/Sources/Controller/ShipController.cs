@@ -28,8 +28,8 @@ namespace Asteroids
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             InputManager inputManager,
             Rigidbody rigidbody,
-            TakeDamageEvent takeDamageEvent) :
-            base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
+            TakeDamageEvent takeDamageEvent) : base
+            (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _inputManager = inputManager;
             _takeDamageEvent = takeDamageEvent;
@@ -78,7 +78,6 @@ namespace Asteroids
             {
                 Dispose();
             }
-            Debug.Log($"Ship strength = {_shipModel.StrengthShip}");
         }
 
         #endregion

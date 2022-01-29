@@ -29,7 +29,12 @@ namespace Asteroids
 
         #region Proprties
 
-        public EnemyPool SetEnemyPool { get => _enemyPool; set => _enemyPool = value; }
+        public EnemyPool SetEnemyPool 
+        { 
+            get => _enemyPool; 
+
+            set => _enemyPool = value; 
+        }
 
         #endregion
 
@@ -40,8 +45,8 @@ namespace Asteroids
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent, 
             CollisionDetectorEvent collisionDetectorEvent,
-            TakeDamageEvent takeDamageEvent) :
-            base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
+            TakeDamageEvent takeDamageEvent) : base
+            (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _timers = new Timers(createUpdatableObjectEvent, destroyUpdatableObjectEvent);
 
@@ -82,7 +87,10 @@ namespace Asteroids
                     _takeDamageEvent.Invoke(called, _enemyModel.Damage);
 
                     if (called.CompareTag(TagsAndLayers.PLAYER_TAG))
+                    {
                         Hit();
+                    }
+                        
                 }
             }
         }

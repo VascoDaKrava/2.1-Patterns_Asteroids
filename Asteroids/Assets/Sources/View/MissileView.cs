@@ -17,7 +17,10 @@ namespace Asteroids
 
         public CollisionDetectorEvent CollisionDetectorEvent
         {
-            set { _collisionDetectorEvent = value; }
+            set 
+            { 
+                _collisionDetectorEvent = value; 
+            }
         }
 
         #endregion
