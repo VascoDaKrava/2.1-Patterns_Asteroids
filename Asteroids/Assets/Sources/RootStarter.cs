@@ -48,7 +48,7 @@ namespace Asteroids
             _controllersFactory.CreateFireController(_bulletStartTransform, _inputManager, _controllersFactory);
             _controllersFactory.CreateEnemySpawner(_spawnPosition, _resourceManager, _controllersFactory);
 
-            new SoundSystemController(_resourceManagerAudioClips);
+            new SoundSystemPlayController(_resourceManagerAudioClips);
         }
 
         #endregion

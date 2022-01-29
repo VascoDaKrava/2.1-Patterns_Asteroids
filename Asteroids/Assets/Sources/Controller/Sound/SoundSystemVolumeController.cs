@@ -1,17 +1,15 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Audio;
 
 
 namespace Asteroids
 {
-    public sealed class SoundSystemController
+    public sealed class SoundSystemVolumeController
     {
 
         #region Fields
 
         private AudioMixer _audioMixer;
-        private AudioSource _audioSourceMain;
 
         #endregion
 
@@ -25,7 +23,7 @@ namespace Asteroids
                 _audioMixer.GetFloat(AudioMixerGroups.MASTER, out float value);
                 return value;
             }
-            set 
+            set
             {
                 _audioMixer.SetFloat(AudioMixerGroups.MASTER, value);
             }
@@ -73,18 +71,11 @@ namespace Asteroids
         #endregion
 
 
-        #region ClassLifeCicles
+        #region ClassLifeCycles
 
-        public SoundSystemController(ResourceManagerAudioClips resourceManagerAudioClips)
+        public SoundSystemVolumeController(ResourceManagerAudioClips resourceManagerAudioClips)
         {
             _audioMixer = resourceManagerAudioClips.AudioMixerResource;
-            _audioSourceMain = GameObject.FindGameObjectWithTag(TagsAndLayers.MAIN_CAMERA_TAG).GetComponent<AudioSource>();
-
-            //_audioMixer.outputAudioMixerGroup.name = AudioMixerGroups.MASTER;
-            _audioSourceMain.outputAudioMixerGroup = _audioMixer.outputAudioMixerGroup;
-            //_audioSourceMain.outputAudioMixerGroup.name = AudioMixerGroups.MUSIC;
-            _audioSourceMain.clip = resourceManagerAudioClips.AudioClipGame;
-            _audioSourceMain.Play();
         }
 
         #endregion
