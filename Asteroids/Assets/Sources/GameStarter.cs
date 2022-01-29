@@ -15,6 +15,7 @@ namespace Asteroids
         private List<IUpdatable> _candidatsForRemovingFromUpdatables;
         private CreateUpdatableObjectEvent _createUpdatableObjectEvent;
         private DestroyUpdatableObjectEvent _destroyUpdatableObjectEvent;
+        private RootStarter _rootStarter;
 
         #endregion
 
@@ -33,7 +34,12 @@ namespace Asteroids
             _createUpdatableObjectEvent.CreateUpdatableObject += AddToUpdateList;
             _destroyUpdatableObjectEvent.DestroyUpdatableObject += RemoveFromUpdateList;
 
-            new RootStarter(_createUpdatableObjectEvent, _destroyUpdatableObjectEvent);
+            _rootStarter = new RootStarter(_createUpdatableObjectEvent, _destroyUpdatableObjectEvent);
+        }
+
+        private void Start()
+        {
+            _rootStarter.SoundSystemVolumeController.LoadSettings();
         }
 
         private void Update()
