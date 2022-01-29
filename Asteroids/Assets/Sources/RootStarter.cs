@@ -37,8 +37,9 @@ namespace Asteroids
             _collisionDetectorEvent = new CollisionDetectorEvent();
             _takeDamageEvent = new TakeDamageEvent();
 
-            _soundSystemPlayController = new SoundSystemPlayController(_resourceManagerAudioClips);
+            _soundSystemPlayController = new SoundSystemPlayController();
             _soundSystemVolumeController = new SoundSystemVolumeController(_resourceManagerAudioClips, _resourceManagerSettings);
+            _soundSystemPlayController.PlaybackMusic(_resourceManagerAudioClips.AudioClipGame);
 
             _controllersFactory = new UpdatableControllersFactory(
                 createUpdatableObjectEvent,
@@ -54,7 +55,6 @@ namespace Asteroids
             _controllersFactory.CreateShipController(_inputManager, _shipRigidbody);
             _controllersFactory.CreateFireController(_bulletStartTransform, _inputManager, _controllersFactory);
             _controllersFactory.CreateEnemySpawner(_spawnPosition, _resourceManager, _controllersFactory);
-
         }
 
         #endregion
