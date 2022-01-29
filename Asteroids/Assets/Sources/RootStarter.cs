@@ -8,14 +8,25 @@ namespace Asteroids
 
         #region Fields
 
+        private CollisionDetectorEvent _collisionDetectorEvent;
         private InputManager _inputManager;
         private ResourceManager _resourceManager;
+        private ResourceManagerAudioClips _resourceManagerAudioClips;
+        private ResourceManagerSettings _resourceManagerSettings;
         private Rigidbody _shipRigidbody;
+        private SoundSystemPlayController _soundSystemPlayController;
+        private SoundSystemVolumeController _soundSystemVolumeController;
+        private TakeDamageEvent _takeDamageEvent;
         private Transform _bulletStartTransform;
         private Transform _spawnPosition;
         private UpdatableControllersFactory _controllersFactory;
-        private CollisionDetectorEvent _collisionDetectorEvent;
-        private TakeDamageEvent _takeDamageEvent;
+
+        #endregion
+
+
+        #region Properties
+
+        public SoundSystemVolumeController SoundSystemVolumeController => _soundSystemVolumeController;
 
         #endregion
 
@@ -27,9 +38,15 @@ namespace Asteroids
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent)
         {
             _resourceManager = new ResourceManager();
+            _resourceManagerAudioClips = new ResourceManagerAudioClips();
+            _resourceManagerSettings = new ResourceManagerSettings();
             _inputManager = new InputManager();
             _collisionDetectorEvent = new CollisionDetectorEvent();
             _takeDamageEvent = new TakeDamageEvent();
+
+            _soundSystemPlayController = new SoundSystemPlayController();
+            _soundSystemVolumeController = new SoundSystemVolumeController(_resourceManagerAudioClips, _resourceManagerSettings);
+            _soundSystemPlayController.PlaybackMusic(_resourceManagerAudioClips.AudioClipGame);
 
             _controllersFactory = new UpdatableControllersFactory(
                 createUpdatableObjectEvent,

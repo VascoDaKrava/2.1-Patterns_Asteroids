@@ -15,8 +15,7 @@ namespace Asteroids
         public GameObject LargeAsteroid => Resources.Load<GameObject>(ResourcesPath.LARGE_ASTEROID);
 
         public GameObject EnemyShip => Resources.Load<GameObject>(ResourcesPath.ENEMY_SHIP);
-
+      
         #endregion
-
     }
 }
