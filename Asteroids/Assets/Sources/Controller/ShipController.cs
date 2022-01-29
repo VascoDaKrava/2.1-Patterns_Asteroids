@@ -16,7 +16,10 @@ namespace Asteroids
         private ShipView _shipView;
         private TakeDamageEvent _takeDamageEvent;
         private DisplayEndGame _displayEndGame;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3.6-GameLose
 
         #endregion
 
@@ -81,7 +84,11 @@ namespace Asteroids
         public void ChangeStrength(int value)
         {
             _displayEndGame.GameOver(_resourceManager);
+<<<<<<< HEAD
             Time.timeScale = 6.0f;
+=======
+            Time.timeScale = 3.0f;
+>>>>>>> 3.6-GameLose
             SceneManager.LoadScene(1);
             
             Dispose();
