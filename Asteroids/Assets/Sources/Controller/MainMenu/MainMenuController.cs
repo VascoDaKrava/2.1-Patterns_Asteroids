@@ -12,20 +12,21 @@ namespace Asteroids
 
         #region Fields
 
-        private const string MAIN_SCENE = "MainScene";
-
         private MainMenuElements _menuElements;
+        private MainMenuOptionsController _optionsController;
 
         #endregion
 
 
         #region ClassLifeCycles
 
-        public MainMenuController(MainMenuElements menuElements)
+        public MainMenuController(MainMenuElements menuElements, SoundSystemVolumeController volumeController)
         {
             _menuElements = menuElements;
 
-            SetMenuOptionsVisible(false);
+            _optionsController = new MainMenuOptionsController(menuElements, this, volumeController);
+
+            _optionsController.SetMenuOptionsVisible(false);
 
             SubscribeOnClick();
         }
@@ -40,12 +41,7 @@ namespace Asteroids
 
         #region Methods
 
-        private void SetMenuOptionsVisible(bool visible)
-        {
-            _menuElements.MenuOptions.gameObject.SetActive(visible);
-        }
-
-        private void SetMenuButtonsVisible(bool visible)
+        public void SetMenuButtonsVisible(bool visible)
         {
             _menuElements.ButtonStart.interactable = visible;
             _menuElements.ButtonOptions.interactable = visible;
@@ -57,8 +53,6 @@ namespace Asteroids
             _menuElements.ButtonStart.onClick.AddListener(ButtonStartOnClickHandler);
             _menuElements.ButtonOptions.onClick.AddListener(ButtonOptionsOnClickHandler);
             _menuElements.ButtonExit.onClick.AddListener(ButtonExitOnClickHandler);
-            _menuElements.ButtonBack.onClick.AddListener(ButtonBackOnClickHandler);
-
         }
 
         private void UnsubscribeOnClick()
@@ -66,19 +60,17 @@ namespace Asteroids
             _menuElements.ButtonStart.onClick.RemoveListener(ButtonStartOnClickHandler);
             _menuElements.ButtonOptions.onClick.RemoveListener(ButtonOptionsOnClickHandler);
             _menuElements.ButtonExit.onClick.RemoveListener(ButtonExitOnClickHandler);
-            _menuElements.ButtonBack.onClick.RemoveListener(ButtonBackOnClickHandler);
-
         }
 
         private void ButtonStartOnClickHandler()
         {
-            SceneManager.LoadScene(MAIN_SCENE);
+            SceneManager.LoadScene(Scenes.FIRST_LEVEL);
         }
 
         private void ButtonOptionsOnClickHandler()
         {
             SetMenuButtonsVisible(false);
-            SetMenuOptionsVisible(true);
+            _optionsController.SetMenuOptionsVisible(true);
         }
 
         private void ButtonExitOnClickHandler()
@@ -90,19 +82,12 @@ namespace Asteroids
 #endif
         }
 
-        private void ButtonBackOnClickHandler()
-        {
-            SetMenuOptionsVisible(false);
-            SetMenuButtonsVisible(true);
-        }
-
-        #endregion
-
-
         public void OnPointerEnter(PointerEventData eventData)
         {
             Debug.Log("Enter : " + eventData.pointerEnter);
         }
+
+        #endregion
 
     }
 }

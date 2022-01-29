@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _volumeMaster: 0
   _volumeMenu: -10
-  _volumeMusic: -15
-  _volumeSFX: -15
+  _volumeMusic: -10
+  _volumeSFX: -10

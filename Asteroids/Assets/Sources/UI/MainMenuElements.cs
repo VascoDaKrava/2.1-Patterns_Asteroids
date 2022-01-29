@@ -49,7 +49,7 @@ namespace Asteroids
 
         public Slider SliderVolumeMusic { get; private set; }
 
-        public Slider SliderVolumeEffects { get; private set; }
+        public Slider SliderVolumeSFX { get; private set; }
 
         public Slider SliderVolumeMenu { get; private set; }
 
@@ -70,7 +70,7 @@ namespace Asteroids
             MenuOptions = GameObject.Find(PANEL_MENU_OPTIONS).GetComponent<Transform>();
 
             SliderVolumeMusic = GameObject.Find(SLIDER_VOLUME_MUSIC).GetComponent<Slider>();
-            SliderVolumeEffects = GameObject.Find(SLIDER_VOLUME_EFFECTS).GetComponent<Slider>();
+            SliderVolumeSFX = GameObject.Find(SLIDER_VOLUME_EFFECTS).GetComponent<Slider>();
             SliderVolumeMenu = GameObject.Find(SLIDER_VOLUME_MENU).GetComponent<Slider>();
 
             DropdownGraphicsQuality = GameObject.Find(DROPDOWN_GRAPHICS_QUALITY).GetComponent<Dropdown>();

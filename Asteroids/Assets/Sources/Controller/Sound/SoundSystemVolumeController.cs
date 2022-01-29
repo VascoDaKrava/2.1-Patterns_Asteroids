@@ -16,7 +16,7 @@ namespace Asteroids
 
         #region Properties
 
-        private float VolumeMaster
+        public float VolumeMaster
         {
             get
             {
@@ -29,7 +29,7 @@ namespace Asteroids
             }
         }
 
-        private float VolumeMenu
+        public float VolumeMenu
         {
             get
             {
@@ -42,7 +42,7 @@ namespace Asteroids
             }
         }
 
-        private float VolumeMusic
+        public float VolumeMusic
         {
             get
             {
@@ -55,7 +55,7 @@ namespace Asteroids
             }
         }
 
-        private float VolumeSFX
+        public float VolumeSFX
         {
             get
             {
