@@ -10,7 +10,6 @@ namespace Asteroids
 
         private ResourceManager _resources;
         private ResourceManagerAudioClips _resourcesAudioClips;
-        private ResourceManagerSettings _resourcesSettings;
         private SoundSystemPlayController _soundSystemPlayController;
         private SoundSystemVolumeController _volumeController;
 
@@ -24,9 +23,8 @@ namespace Asteroids
             _resources = new ResourceManager();
             _resourcesAudioClips = new ResourceManagerAudioClips();
             _soundSystemPlayController = new SoundSystemPlayController();
-            _resourcesSettings = new ResourceManagerSettings();
 
-            _volumeController = new SoundSystemVolumeController(_resourcesAudioClips, _resourcesSettings);
+            _volumeController = new SoundSystemVolumeController();
 
             new MainMenuController(
                 Instantiate(_resources.MainMenu).GetComponent<MainMenuElements>(),
@@ -39,9 +37,10 @@ namespace Asteroids
 
         private void Start()
         {
-            _volumeController.LoadSettings();
+            _volumeController.ApplySettings();
         }
 
         #endregion
+
     }
 }

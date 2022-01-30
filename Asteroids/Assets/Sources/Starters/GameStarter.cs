@@ -39,7 +39,7 @@ namespace Asteroids
 
         private void Start()
         {
-            _rootStarter.SoundSystemVolumeController.LoadSettings();
+            _rootStarter.SoundSystemVolumeController.ApplySettings();
         }
 
         private void Update()

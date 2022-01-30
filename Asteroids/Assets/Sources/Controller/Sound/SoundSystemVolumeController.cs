@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.Audio;
 
 
@@ -73,10 +74,10 @@ namespace Asteroids
 
         #region ClassLifeCycles
 
-        public SoundSystemVolumeController(ResourceManagerAudioClips resourceManagerAudioClips, ResourceManagerSettings resourceManagerSettings)
+        public SoundSystemVolumeController()
         {
-            _audioMixer = resourceManagerAudioClips.AudioMixerResource;
-            _settings = resourceManagerSettings;
+            _audioMixer = Resources.Load<AudioMixer>(ResourcesPathAudio.AUDIO_MIXER);
+            _settings = new ResourceManagerSettings();
         }
 
         #endregion
@@ -84,7 +85,7 @@ namespace Asteroids
 
         #region Methods
 
-        public void LoadSettings()
+        public void ApplySettings()
         {
             VolumeMaster = _settings.SoundSettings.VolumeMaster;
             VolumeMenu = _settings.SoundSettings.VolumeMenu;

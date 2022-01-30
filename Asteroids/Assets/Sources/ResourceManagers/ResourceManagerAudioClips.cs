@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Audio;
 
 
 namespace Asteroids
@@ -8,8 +7,6 @@ namespace Asteroids
     {
 
         #region Properties
-
-        public AudioMixer AudioMixerResource { get; private set; }
 
         public AudioClip AudioClipMenu { get; private set; }
         
@@ -26,8 +23,6 @@ namespace Asteroids
 
         public ResourceManagerAudioClips()
         {
-            AudioMixerResource = Resources.Load<AudioMixer>(ResourcesPathAudio.AUDIO_MIXER);
-
             AudioClipMenu = Resources.Load<AudioClip>(ResourcesPathAudio.MUSIC_MENU);
             AudioClipGame = Resources.Load<AudioClip>(ResourcesPathAudio.MUSIC_GAME);
             AudioClipButtonEnter = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_BUTTON_ENTER);

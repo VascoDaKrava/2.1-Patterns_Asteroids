@@ -12,7 +12,6 @@ namespace Asteroids
         private InputManager _inputManager;
         private ResourceManager _resourceManager;
         private ResourceManagerAudioClips _resourceManagerAudioClips;
-        private ResourceManagerSettings _resourceManagerSettings;
         private Rigidbody _shipRigidbody;
         private SoundSystemPlayController _soundSystemPlayController;
         private SoundSystemVolumeController _soundSystemVolumeController;
@@ -39,13 +38,12 @@ namespace Asteroids
         {
             _resourceManager = new ResourceManager();
             _resourceManagerAudioClips = new ResourceManagerAudioClips();
-            _resourceManagerSettings = new ResourceManagerSettings();
             _inputManager = new InputManager();
             _collisionDetectorEvent = new CollisionDetectorEvent();
             _takeDamageEvent = new TakeDamageEvent();
 
             _soundSystemPlayController = new SoundSystemPlayController();
-            _soundSystemVolumeController = new SoundSystemVolumeController(_resourceManagerAudioClips, _resourceManagerSettings);
+            _soundSystemVolumeController = new SoundSystemVolumeController();
             _soundSystemPlayController.PlaybackMusic(_resourceManagerAudioClips.AudioClipGame);
 
             _controllersFactory = new UpdatableControllersFactory(

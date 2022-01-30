@@ -36,7 +36,7 @@ namespace Asteroids
 
             SetMenuOptionsVisible(false);
 
-            volumeController.LoadSettings();
+            volumeController.ApplySettings();
             SetSlidersValue();
 
             SubscribeOnEvent();

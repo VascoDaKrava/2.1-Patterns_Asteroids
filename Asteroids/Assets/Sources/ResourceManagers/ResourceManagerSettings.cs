@@ -1,6 +1,3 @@
-using UnityEngine;
-
-
 namespace Asteroids
 {
     public sealed class ResourceManagerSettings
@@ -8,7 +5,17 @@ namespace Asteroids
 
         #region Properties
 
-        public SoundSettingsData SoundSettings { get; private set; }
+        public SoundSettingsData SoundSettings
+        {
+            get
+            {
+                return DataSaveLoadRepo.LoadSoundSettings();
+            }
+            set
+            {
+                DataSaveLoadRepo.SaveSoundSettings(value);
+            }
+        }
 
         #endregion
 
@@ -17,7 +24,6 @@ namespace Asteroids
 
         public ResourceManagerSettings()
         {
-            SoundSettings = Resources.Load<SoundSettingsData>(ResourcesPathAudio.SOUND_SETTINGS);
         }
 
         #endregion

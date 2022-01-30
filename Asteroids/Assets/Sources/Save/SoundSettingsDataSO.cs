@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Asteroids
 {
     [CreateAssetMenu]
-    public sealed class SoundSettingsData : ScriptableObject
+    public sealed class SoundSettingsDataSO : ScriptableObject
     {
 
         #region Fields
