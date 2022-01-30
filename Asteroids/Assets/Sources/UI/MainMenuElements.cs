@@ -1,10 +1,12 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 
 namespace Asteroids
 {
-    public sealed class MainMenuElements : MonoBehaviour
+    public sealed class MainMenuElements : MonoBehaviour, IPointerEnterHandler
     {
 
         #region Fields
@@ -32,6 +34,8 @@ namespace Asteroids
 
         #endregion
 
+        private event Action _onEnter;
+
         #endregion
 
 
@@ -55,6 +59,12 @@ namespace Asteroids
 
         public Dropdown DropdownGraphicsQuality { get; private set; }
 
+        public event Action OnEnter
+        {
+            add { _onEnter += value; }
+            remove { _onEnter -= value; }
+        }
+
         #endregion
 
 
@@ -74,6 +84,16 @@ namespace Asteroids
             SliderVolumeMenu = GameObject.Find(SLIDER_VOLUME_MENU).GetComponent<Slider>();
 
             DropdownGraphicsQuality = GameObject.Find(DROPDOWN_GRAPHICS_QUALITY).GetComponent<Dropdown>();
+        }
+
+        #endregion
+
+
+        #region IPointerEnterHandler
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            _onEnter.Invoke();
         }
 
         #endregion

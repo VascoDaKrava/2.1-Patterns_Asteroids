@@ -1,8 +1,6 @@
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 namespace Asteroids
@@ -14,26 +12,34 @@ namespace Asteroids
 
         private MainMenuElements _menuElements;
         private MainMenuOptionsController _optionsController;
+        private ResourceManagerAudioClips _audioClips;
+        private SoundSystemPlayController _playAudio;
 
         #endregion
 
 
         #region ClassLifeCycles
 
-        public MainMenuController(MainMenuElements menuElements, SoundSystemVolumeController volumeController)
+        public MainMenuController(
+            MainMenuElements menuElements,
+            SoundSystemVolumeController volumeController,
+            SoundSystemPlayController soundSystemPlayController,
+            ResourceManagerAudioClips audioClips)
         {
             _menuElements = menuElements;
+            _playAudio = soundSystemPlayController;
+            _audioClips = audioClips;
 
-            _optionsController = new MainMenuOptionsController(menuElements, this, volumeController);
+            _optionsController = new MainMenuOptionsController(menuElements, this, volumeController, soundSystemPlayController, audioClips);
 
             _optionsController.SetMenuOptionsVisible(false);
 
-            SubscribeOnClick();
+            SubscribeOnEvent();
         }
 
         ~MainMenuController()
         {
-            UnsubscribeOnClick();
+            UnsubscribeOnEvent();
         }
 
         #endregion
@@ -48,33 +54,39 @@ namespace Asteroids
             _menuElements.ButtonExit.interactable = visible;
         }
 
-        private void SubscribeOnClick()
+        private void SubscribeOnEvent()
         {
             _menuElements.ButtonStart.onClick.AddListener(ButtonStartOnClickHandler);
             _menuElements.ButtonOptions.onClick.AddListener(ButtonOptionsOnClickHandler);
             _menuElements.ButtonExit.onClick.AddListener(ButtonExitOnClickHandler);
+            _menuElements.OnEnter += ButtonOnPointerEnterHandler;
         }
 
-        private void UnsubscribeOnClick()
+        private void UnsubscribeOnEvent()
         {
             _menuElements.ButtonStart.onClick.RemoveListener(ButtonStartOnClickHandler);
             _menuElements.ButtonOptions.onClick.RemoveListener(ButtonOptionsOnClickHandler);
             _menuElements.ButtonExit.onClick.RemoveListener(ButtonExitOnClickHandler);
+            _menuElements.OnEnter -= ButtonOnPointerEnterHandler;
         }
 
         private void ButtonStartOnClickHandler()
         {
+            _playAudio.PlaybackMenu(_audioClips.AudioClipButtonClick);
             SceneManager.LoadScene(Scenes.FIRST_LEVEL);
         }
 
         private void ButtonOptionsOnClickHandler()
         {
+            _playAudio.PlaybackMenu(_audioClips.AudioClipButtonClick);
             SetMenuButtonsVisible(false);
             _optionsController.SetMenuOptionsVisible(true);
         }
 
         private void ButtonExitOnClickHandler()
         {
+            _playAudio.PlaybackMenu(_audioClips.AudioClipButtonClick);
+
 #if UNITY_EDITOR
             EditorApplication.isPlaying = false;
 #else
@@ -82,9 +94,9 @@ namespace Asteroids
 #endif
         }
 
-        public void OnPointerEnter(PointerEventData eventData)
+        private void ButtonOnPointerEnterHandler()
         {
-            Debug.Log("Enter : " + eventData.pointerEnter);
+            _playAudio.PlaybackMenu(_audioClips.AudioClipButtonEnter);
         }
 
         #endregion

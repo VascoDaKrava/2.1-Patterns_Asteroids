@@ -1,6 +1,4 @@
 using System;
-using UnityEngine;
-using UnityEngine.EventSystems;
 
 
 namespace Asteroids
@@ -15,17 +13,26 @@ namespace Asteroids
         private MainMenuElements _menuElements;
         private MainMenuController _menuController;
         private SoundSystemVolumeController _volumeController;
+        private SoundSystemPlayController _playAudio;
+        private ResourceManagerAudioClips _audioClips;
 
         #endregion
 
 
         #region ClassLifeCycles
 
-        public MainMenuOptionsController(MainMenuElements menuElements, MainMenuController menuController, SoundSystemVolumeController volumeController)
+        public MainMenuOptionsController(
+            MainMenuElements menuElements,
+            MainMenuController menuController,
+            SoundSystemVolumeController volumeController,
+            SoundSystemPlayController soundSystemPlayController,
+            ResourceManagerAudioClips audioClips)
         {
             _menuElements = menuElements;
             _menuController = menuController;
             _volumeController = volumeController;
+            _playAudio = soundSystemPlayController;
+            _audioClips = audioClips;
 
             SetMenuOptionsVisible(false);
 
@@ -75,6 +82,7 @@ namespace Asteroids
 
         private void ButtonBackOnClickHandler()
         {
+            _playAudio.PlaybackMenu(_audioClips.AudioClipButtonClick);
             SetMenuOptionsVisible(false);
             _menuController.SetMenuButtonsVisible(true);
         }
@@ -92,11 +100,6 @@ namespace Asteroids
         private void SliderVolumeSFXOnValueChangedHandler(float value)
         {
             _volumeController.VolumeSFX = _sliderValueConverter[(int)value];
-        }
-
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            Debug.Log("Enter : " + eventData.pointerEnter);
         }
 
         #endregion
