@@ -17,6 +17,8 @@ namespace Asteroids
         private UpdatableControllersFactory _controllersFactory;
         private ResourceManager _resourceManager;
         private EnemyPool _enemyPool;
+        private SoundSystemPlayController _soundSystemPlayController;
+        private ResourceManagerAudioClips _resourceManagerAudioClips;
 
         #endregion
 
@@ -28,7 +30,9 @@ namespace Asteroids
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             ResourceManager resourceManager,
             Transform spawnPosition,
-            UpdatableControllersFactory controllersFactory) : base
+            UpdatableControllersFactory controllersFactory,
+            SoundSystemPlayController soundSystemPlayController,
+            ResourceManagerAudioClips resourceManagerAudioClips) : base
             (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _spawnPosition = spawnPosition;
@@ -36,6 +40,8 @@ namespace Asteroids
             _resourceManager = resourceManager;
             _timers = _controllersFactory.CreateTimers();
             _enemyPool = new EnemyPool(_controllersFactory, _resourceManager, _spawnPosition, _enemyInPool);
+            _soundSystemPlayController = soundSystemPlayController;
+            _resourceManagerAudioClips = resourceManagerAudioClips;
         }
 
         #endregion
@@ -55,6 +61,7 @@ namespace Asteroids
                     Random.Range(_minSpawnPositionX, _maxSpawnPositionX),
                 _spawnPosition.position.y, _spawnPosition.position.z),
                 _spawnPosition.rotation);
+                _soundSystemPlayController.PlaybackSFX(_resourceManagerAudioClips.AudioClipSpawnEnemy);
             }
         }
 

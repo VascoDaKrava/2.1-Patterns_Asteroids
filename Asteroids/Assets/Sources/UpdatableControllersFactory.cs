@@ -64,7 +64,9 @@ namespace Asteroids
                 _destroyUpdatable,
                 inputManager,
                 rigidbody,
-                _takeDamageEvent);
+                _takeDamageEvent,
+                 _soundSystemPlayController,
+                _resourceManagerAudioClips);
         }
 
         /// <summary>
@@ -159,7 +161,9 @@ namespace Asteroids
                 _destroyUpdatable,
                 resourceManager,
                 spawnPosition,
-                controllersFactory);
+                controllersFactory,
+                _soundSystemPlayController,
+                _resourceManagerAudioClips);
         }
 
         /// <summary>

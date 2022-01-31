@@ -31,7 +31,7 @@ namespace Asteroids
 
         private const string FILE_SFX_HIT_ENEMY_SHIP = "HitEnemyShip";
 
-        private const string FILE_SFX_MOVING_PLAYER_SHIP = "MovingPlaerShip";
+        private const string FILE_SFX_MOVING_PLAYER_SHIP = "MovingPlayerShip";
 
         private const string FILE_SFX_MOVING_ENEMY_SHIP = "MovingEnemyShip";
 

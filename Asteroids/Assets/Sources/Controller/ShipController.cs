@@ -13,6 +13,8 @@ namespace Asteroids
         private ShipModel _shipModel;
         private ShipView _shipView;
         private TakeDamageEvent _takeDamageEvent;
+        private SoundSystemPlayController _soundSystemPlayController;
+        private ResourceManagerAudioClips _resourceManagerAudioClips;
 
         #endregion
 
@@ -28,7 +30,9 @@ namespace Asteroids
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             InputManager inputManager,
             Rigidbody rigidbody,
-            TakeDamageEvent takeDamageEvent) : base
+            TakeDamageEvent takeDamageEvent,
+            SoundSystemPlayController soundSystemPlayController,
+            ResourceManagerAudioClips resourceManagerAudioClips) : base
             (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _inputManager = inputManager;
@@ -36,6 +40,8 @@ namespace Asteroids
             _takeDamageEvent.TakeDamage += TakeDamageEventHandler;
             _shipModel = new ShipModel(rigidbody);
             _shipView = GameObject.FindObjectOfType<ShipView>();
+            _soundSystemPlayController = soundSystemPlayController;
+            _resourceManagerAudioClips = resourceManagerAudioClips;
         }
 
         #endregion
@@ -64,6 +70,7 @@ namespace Asteroids
             if (_moveDirection != Vector3.zero)
             {
                 _shipModel.LetMoveShip(_moveDirection);
+                _soundSystemPlayController.PlaybackSFX(_resourceManagerAudioClips.AudioClipMovingPlayerShip);
             }
         }
 
