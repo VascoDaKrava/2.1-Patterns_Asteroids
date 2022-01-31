@@ -21,7 +21,10 @@ namespace Asteroids
         private InputManager _inputManager;
         private UpdatableControllersFactory _controllersFactory;
         private MissilePool _missilePool;
+        private SoundSystemPlayController _soundSystemPlayController;
+        private ResourceManagerAudioClips _resourceManagerAudioClips;
         private bool _isAutoFireOn;
+
 
         #endregion
 
@@ -33,7 +36,9 @@ namespace Asteroids
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             Transform bulletStartTransform,
             InputManager inputManagerLink,
-            UpdatableControllersFactory controllersFactory) : base
+            UpdatableControllersFactory controllersFactory,
+            SoundSystemPlayController soundSystemPlayController,
+            ResourceManagerAudioClips resourceManagerAudioClips) : base
             (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _bulletStartTransform = bulletStartTransform;
@@ -42,6 +47,8 @@ namespace Asteroids
             _primaryFireTimer = _controllersFactory.CreateTimers();
             _sonarTimer = _controllersFactory.CreateTimers();
             _missilePool = new MissilePool(controllersFactory, _misselesInPool);
+            _soundSystemPlayController = soundSystemPlayController;
+            _resourceManagerAudioClips = resourceManagerAudioClips;
         }
 
         #endregion
@@ -57,6 +64,7 @@ namespace Asteroids
                 {
                     _primaryFireTimer.StartTimer(_rateOfFire);
                     _missilePool.Pop(_bulletStartTransform.position, _bulletStartTransform.rotation);
+                    _soundSystemPlayController.PlaybackSFX(_resourceManagerAudioClips.AudioClipStartRocket);
                 }
             }
         }
@@ -76,6 +84,7 @@ namespace Asteroids
                     if (StartSonar(_bulletStartTransform.position, _sonarRange, out _enemyTargetTransform))
                     {
                         StartHomingMissile(_enemyTargetTransform);
+                        _soundSystemPlayController.PlaybackSFX(_resourceManagerAudioClips.AudioClipStartRocket);
                     }
                 }
             }

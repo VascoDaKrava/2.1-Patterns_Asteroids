@@ -17,6 +17,8 @@ namespace Asteroids
         private CollisionDetectorEvent _collisionDetectorEvent;
         private TakeDamageEvent _takeDamageEvent;
         private EnemyFactory _enemyFactory;
+        private SoundSystemPlayController _soundSystemPlayController;
+        private ResourceManagerAudioClips _resourceManagerAudioClips;
 
         #endregion
 
@@ -28,7 +30,9 @@ namespace Asteroids
             DestroyUpdatableObjectEvent destroyUpdatable,
             ResourceManager resourceManager,
             CollisionDetectorEvent collisionDetectorEvent,
-            TakeDamageEvent takeDamageEvent)
+            TakeDamageEvent takeDamageEvent,
+            SoundSystemPlayController soundSystemPlayController,
+            ResourceManagerAudioClips resourceManagerAudioClips)
         {
             _createUpdatable = createUpdatable;
             _destroyUpdatable = destroyUpdatable;
@@ -36,6 +40,8 @@ namespace Asteroids
             _collisionDetectorEvent = collisionDetectorEvent;
             _takeDamageEvent = takeDamageEvent;
             _enemyFactory = new EnemyFactory();
+            _soundSystemPlayController = soundSystemPlayController;
+            _resourceManagerAudioClips = resourceManagerAudioClips;
         }
 
         #endregion
@@ -78,7 +84,9 @@ namespace Asteroids
                 _destroyUpdatable,
                 bulletStartPosition,
                 inputManagerLink,
-                updatableControllersFactory);
+                updatableControllersFactory,
+                _soundSystemPlayController,
+                _resourceManagerAudioClips);
         }
 
         /// <summary>

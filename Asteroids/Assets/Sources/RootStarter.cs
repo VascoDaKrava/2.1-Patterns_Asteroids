@@ -53,7 +53,9 @@ namespace Asteroids
                 destroyUpdatableObjectEvent,
                 _resourceManager,
                 _collisionDetectorEvent,
-                _takeDamageEvent);
+                _takeDamageEvent,
+                _soundSystemPlayController,
+                _resourceManagerAudioClips);
 
             _shipRigidbody = GameObject.FindGameObjectWithTag(TagsAndLayers.PLAYER_TAG).GetComponent<Rigidbody>();
             _bulletStartTransform = GameObject.FindGameObjectWithTag(TagsAndLayers.BULLET_START_POSITION_TAG).transform;
