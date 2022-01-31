@@ -16,10 +16,10 @@ namespace Asteroids
         private ShipView _shipView;
         private TakeDamageEvent _takeDamageEvent;
         private DisplayEndGame _displayEndGame;
-<<<<<<< HEAD
+        private SoundSystemPlayController _soundSystemPlayController;
+        private ResourceManagerAudioClips _resourceManagerAudioClips;
 
-=======
->>>>>>> 3.6-GameLose
+        private float _switchSceneTime = 3.0f;
 
         #endregion
 
@@ -36,7 +36,9 @@ namespace Asteroids
             InputManager inputManager,
             ResourceManager resourceManager,
             Rigidbody rigidbody,
-            TakeDamageEvent takeDamageEvent) : base
+            TakeDamageEvent takeDamageEvent,
+            SoundSystemPlayController soundSystemPlayController,
+            ResourceManagerAudioClips resourceManagerAudioClips) : base
             (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _inputManager = inputManager;
@@ -45,7 +47,9 @@ namespace Asteroids
             _takeDamageEvent.TakeDamage += TakeDamageEventHandler;
             _shipModel = new ShipModel(rigidbody);
             _shipView = GameObject.FindObjectOfType<ShipView>();
-            _displayEndGame = new DisplayEndGame();
+            _displayEndGame = new DisplayEndGame(_resourceManager.EndGame);
+            _soundSystemPlayController = soundSystemPlayController;
+            _resourceManagerAudioClips = resourceManagerAudioClips;
         }
 
         #endregion
@@ -83,14 +87,12 @@ namespace Asteroids
         /// <param name="value"></param>
         public void ChangeStrength(int value)
         {
-            _displayEndGame.GameOver(_resourceManager);
-<<<<<<< HEAD
-            Time.timeScale = 6.0f;
-=======
-            Time.timeScale = 3.0f;
->>>>>>> 3.6-GameLose
+            _soundSystemPlayController.PlaybackSFX(_resourceManagerAudioClips.AudioClipGameOVer);
+
+            _displayEndGame.GameOver();
+
             SceneManager.LoadScene(1);
-            
+
             Dispose();
         }
 

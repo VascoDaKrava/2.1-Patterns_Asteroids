@@ -19,6 +19,8 @@ namespace Asteroids
         
         public AudioClip AudioClipButtonClick { get; private set; }
 
+        public AudioClip AudioClipGameOVer { get; private set; }
+
         #endregion
 
 
@@ -32,6 +34,7 @@ namespace Asteroids
             AudioClipGame = Resources.Load<AudioClip>(ResourcesPathAudio.MUSIC_GAME);
             AudioClipButtonEnter = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_BUTTON_ENTER);
             AudioClipButtonClick = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_BUTTON_CLICK);
+            AudioClipGameOVer = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_GAME_OVER);
         }
 
         #endregion

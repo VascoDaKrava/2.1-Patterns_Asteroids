@@ -24,6 +24,8 @@ namespace Asteroids
 
         private const string FOLDER_SETTINGS = "Settings";
 
+        private const string FILE_SFX_GAME_OVER = "GameOVer";
+
         #endregion
 
 
@@ -44,6 +46,8 @@ namespace Asteroids
         public static string AUDIO_MIXER => Path.Combine(FOLDER_AUDIO, FILE_AUDIO_MIXER);
 
         public static string SOUND_SETTINGS => Path.Combine(FOLDER_SETTINGS, FILE_SOUND_SETTINGS);
+
+        public static string SFX_GAME_OVER => Path.Combine(FOLDER_SFX, FILE_SFX_GAME_OVER);
 
         #endregion
 

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 
 namespace Asteroids
@@ -7,19 +8,31 @@ namespace Asteroids
     {
         #region Fields
 
-        private GameObject _gameOver;
+        private Text _finishGameLabel;
+        private Image _background;
+
+        #endregion
+
+
+        #region ClassLifeCycles
+
+        public DisplayEndGame (GameObject endGame)
+        {
+            _finishGameLabel = endGame.GetComponentInChildren<Text>();
+            _background = endGame.GetComponentInChildren<Image>();
+            _finishGameLabel.text = string.Empty;
+            _background.gameObject.SetActive(false);
+        }
 
         #endregion
 
 
         #region Methods
 
-        public GameObject GameOver(ResourceManager resourceManager)
+        public void GameOver()
         {
-            _gameOver = resourceManager.EndGame;
-            var endGame = GameObject.Instantiate(_gameOver, resourceManager.Canvas.transform);
-
-            return endGame;
+            _finishGameLabel.text = "GAME OVER!";
+            _background.gameObject.SetActive(true);
         }
 
         #endregion
