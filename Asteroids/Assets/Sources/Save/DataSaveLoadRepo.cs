@@ -12,11 +12,13 @@ namespace Asteroids
         {
             XmlSerializer serializer = new XmlSerializer(data.GetType());
 
-            if (!Directory.Exists(SaveLoadPath.FOLDER_SAVE))
-                Directory.CreateDirectory(SaveLoadPath.FOLDER_SAVE);
+            if (!Directory.Exists(Path.GetDirectoryName(SaveLoadPath.PATH_TO_SETTINGS_FILE)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(SaveLoadPath.PATH_TO_SETTINGS_FILE));
+            }
 
             FileStream fs = new FileStream(
-                SaveLoadPath.SETTINGS,
+                SaveLoadPath.PATH_TO_SETTINGS_FILE,
                 FileMode.Create);
 
             serializer.Serialize(fs, data);
@@ -28,12 +30,12 @@ namespace Asteroids
         {
             SoundSettingsData data = new SoundSettingsData();
 
-            if (File.Exists(SaveLoadPath.SETTINGS))
+            if (File.Exists(SaveLoadPath.PATH_TO_SETTINGS_FILE))
             {
                 XmlSerializer serializer = new XmlSerializer(data.GetType());
 
                 FileStream fs = new FileStream(
-                    SaveLoadPath.SETTINGS,
+                    SaveLoadPath.PATH_TO_SETTINGS_FILE,
                     FileMode.Open);
 
                 data = (SoundSettingsData)serializer.Deserialize(fs);

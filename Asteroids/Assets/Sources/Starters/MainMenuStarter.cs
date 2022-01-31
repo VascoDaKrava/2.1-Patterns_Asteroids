@@ -23,7 +23,6 @@ namespace Asteroids
             _resources = new ResourceManager();
             _resourcesAudioClips = new ResourceManagerAudioClips();
             _soundSystemPlayController = new SoundSystemPlayController();
-
             _volumeController = new SoundSystemVolumeController();
 
             new MainMenuController(

@@ -10,7 +10,7 @@ namespace Asteroids
         #region Fields
 
         private AudioMixer _audioMixer;
-        private ResourceManagerSettings _settings;
+        private SoundSettingsData _soundSettingsData;
 
         #endregion
 
@@ -77,7 +77,8 @@ namespace Asteroids
         public SoundSystemVolumeController()
         {
             _audioMixer = Resources.Load<AudioMixer>(ResourcesPathAudio.AUDIO_MIXER);
-            _settings = new ResourceManagerSettings();
+            _soundSettingsData = DataSaveLoadRepo.LoadSoundSettings();
+            ApplySettings();
         }
 
         #endregion
@@ -87,10 +88,20 @@ namespace Asteroids
 
         public void ApplySettings()
         {
-            VolumeMaster = _settings.SoundSettings.VolumeMaster;
-            VolumeMenu = _settings.SoundSettings.VolumeMenu;
-            VolumeMusic = _settings.SoundSettings.VolumeMusic;
-            VolumeSFX = _settings.SoundSettings.VolumeSFX;
+            VolumeMaster = _soundSettingsData.VolumeMaster;
+            VolumeMenu = _soundSettingsData.VolumeMenu;
+            VolumeMusic = _soundSettingsData.VolumeMusic;
+            VolumeSFX = _soundSettingsData.VolumeSFX;
+        }
+
+        public void SaveSettings()
+        {
+            _soundSettingsData.VolumeMaster = VolumeMaster;
+            _soundSettingsData.VolumeMenu = VolumeMenu;
+            _soundSettingsData.VolumeMusic = VolumeMusic;
+            _soundSettingsData.VolumeSFX = VolumeSFX;
+
+            DataSaveLoadRepo.SaveSoundSettings(_soundSettingsData);
         }
 
         #endregion

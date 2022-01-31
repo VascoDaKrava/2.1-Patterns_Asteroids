@@ -34,12 +34,11 @@ namespace Asteroids
             _playAudio = soundSystemPlayController;
             _audioClips = audioClips;
 
-            SetMenuOptionsVisible(false);
-
-            volumeController.ApplySettings();
             SetSlidersValue();
 
             SubscribeOnEvent();
+
+            SetMenuOptionsVisible(false);
         }
 
         ~MainMenuOptionsController()
@@ -76,15 +75,16 @@ namespace Asteroids
         private void SetSlidersValue()
         {
             _menuElements.SliderVolumeMenu.value = Array.IndexOf(_sliderValueConverter, _volumeController.VolumeMenu);
-            _menuElements.SliderVolumeMusic.value = Array.IndexOf(_sliderValueConverter, _volumeController.VolumeMenu);
-            _menuElements.SliderVolumeSFX.value = Array.IndexOf(_sliderValueConverter, _volumeController.VolumeMenu);
+            _menuElements.SliderVolumeMusic.value = Array.IndexOf(_sliderValueConverter, _volumeController.VolumeMusic);
+            _menuElements.SliderVolumeSFX.value = Array.IndexOf(_sliderValueConverter, _volumeController.VolumeSFX);
         }
 
         private void ButtonBackOnClickHandler()
         {
             _playAudio.PlaybackMenu(_audioClips.AudioClipButtonClick);
-            SetMenuOptionsVisible(false);
+            _volumeController.SaveSettings();
             _menuController.SetMenuButtonsVisible(true);
+            SetMenuOptionsVisible(false);
         }
 
         private void SliderVolumeMusicOnValueChangedHandler(float value)

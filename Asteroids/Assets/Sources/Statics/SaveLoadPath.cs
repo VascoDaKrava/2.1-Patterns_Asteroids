@@ -11,14 +11,14 @@ namespace Asteroids
 
         private const string FILE_SETTINGS_XML = "Settings.xml";
 
-        public const string FOLDER_SAVE = "Save";
+        private const string FOLDER_SAVE = "Save";
 
         #endregion
 
 
         #region Properties
 
-        public static string SETTINGS => Path.Combine(Application.dataPath, FOLDER_SAVE, FILE_SETTINGS_XML);
+        public static string PATH_TO_SETTINGS_FILE => Path.Combine(Application.dataPath, FOLDER_SAVE, FILE_SETTINGS_XML);
 
         #endregion
 

@@ -1,27 +1,21 @@
+using System;
+
+
 namespace Asteroids
 {
+    [Serializable]
     public sealed class SoundSettingsData
     {
 
         #region Fields
 
-        private float _volumeMaster = -20.0f;
+        public float VolumeMaster = 0.0f;
 
-        private float _volumeMenu = -20.0f;
+        public float VolumeMenu = -20.0f;
 
-        private float _volumeMusic = -20.0f;
+        public float VolumeMusic = -20.0f;
 
-        private float _volumeSFX = -20.0f;
-
-        #endregion
-
-
-        #region Properties
-
-        public float VolumeMaster => _volumeMaster;
-        public float VolumeMenu => _volumeMenu;
-        public float VolumeMusic => _volumeMusic;
-        public float VolumeSFX => _volumeSFX;
+        public float VolumeSFX = -20.0f;
 
         #endregion
 

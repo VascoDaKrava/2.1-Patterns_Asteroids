@@ -32,8 +32,6 @@ namespace Asteroids
 
             _optionsController = new MainMenuOptionsController(menuElements, this, volumeController, soundSystemPlayController, audioClips);
 
-            _optionsController.SetMenuOptionsVisible(false);
-
             SubscribeOnEvent();
         }
 
