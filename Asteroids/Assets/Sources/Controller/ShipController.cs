@@ -91,7 +91,10 @@ namespace Asteroids
 
             _displayEndGame.GameOver();
 
-            SceneManager.LoadScene(1);
+            if (_switchSceneTime <= 0)
+            {
+                SceneManager.LoadScene(1);
+            }
 
             Dispose();
         }
