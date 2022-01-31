@@ -8,7 +8,7 @@ namespace Asteroids
     {
         #region Methods
 
-        public static void SaveSoundSettings(SoundSettingsData data)
+        public static void SaveSoundSettings(SettingsData data)
         {
             XmlSerializer serializer = new XmlSerializer(data.GetType());
 
@@ -26,9 +26,9 @@ namespace Asteroids
             fs.Close();
         }
 
-        public static SoundSettingsData LoadSoundSettings()
+        public static SettingsData LoadSoundSettings()
         {
-            SoundSettingsData data = new SoundSettingsData();
+            SettingsData data = new SettingsData();
 
             if (File.Exists(SaveLoadPath.PATH_TO_SETTINGS_FILE))
             {
@@ -38,7 +38,7 @@ namespace Asteroids
                     SaveLoadPath.PATH_TO_SETTINGS_FILE,
                     FileMode.Open);
 
-                data = (SoundSettingsData)serializer.Deserialize(fs);
+                data = (SettingsData)serializer.Deserialize(fs);
 
                 fs.Close();
             }

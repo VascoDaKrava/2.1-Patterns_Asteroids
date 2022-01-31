@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<SoundSettingsData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<SettingsData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <VolumeMaster>0</VolumeMaster>
-  <VolumeMenu>-5</VolumeMenu>
-  <VolumeMusic>-15</VolumeMusic>
+  <VolumeMenu>0</VolumeMenu>
+  <VolumeMusic>-30</VolumeMusic>
   <VolumeSFX>-20</VolumeSFX>
-</SoundSettingsData>
+</SettingsData>

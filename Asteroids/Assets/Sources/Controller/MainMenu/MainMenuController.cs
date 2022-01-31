@@ -1,7 +1,9 @@
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+using UnityEngine;
 using UnityEngine.SceneManagement;
+
 
 namespace Asteroids
 {
@@ -11,7 +13,7 @@ namespace Asteroids
         #region Fields
 
         private MainMenuElements _menuElements;
-        private MainMenuOptionsController _optionsController;
+        private MainMenuControllerOptions _optionsController;
         private ResourceManagerAudioClips _audioClips;
         private SoundSystemPlayController _playAudio;
 
@@ -21,16 +23,16 @@ namespace Asteroids
         #region ClassLifeCycles
 
         public MainMenuController(
-            MainMenuElements menuElements,
+            GameObject mainMenu,
             SoundSystemVolumeController volumeController,
             SoundSystemPlayController soundSystemPlayController,
             ResourceManagerAudioClips audioClips)
         {
-            _menuElements = menuElements;
+            _menuElements = mainMenu.GetComponent<MainMenuElements>();
             _playAudio = soundSystemPlayController;
             _audioClips = audioClips;
 
-            _optionsController = new MainMenuOptionsController(menuElements, this, volumeController, soundSystemPlayController, audioClips);
+            _optionsController = new MainMenuControllerOptions(mainMenu, this, volumeController, soundSystemPlayController, audioClips);
 
             SubscribeOnEvent();
         }

@@ -26,7 +26,7 @@ namespace Asteroids
             _volumeController = new SoundSystemVolumeController();
 
             new MainMenuController(
-                Instantiate(_resources.MainMenu).GetComponent<MainMenuElements>(),
+                Instantiate(_resources.MainMenu),
                 _volumeController,
                 _soundSystemPlayController,
                 _resourcesAudioClips);

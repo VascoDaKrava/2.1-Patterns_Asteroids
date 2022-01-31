@@ -4,7 +4,7 @@ using System;
 namespace Asteroids
 {
     [Serializable]
-    public sealed class SoundSettingsData
+    public sealed class SettingsData
     {
 
         #region Fields

@@ -19,5 +19,6 @@ namespace Asteroids
         public GameObject MainMenu => Resources.Load(ResourcesPath.MAIN_MENU) as GameObject;
 
         #endregion
+
     }
 }

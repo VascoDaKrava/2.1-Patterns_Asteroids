@@ -10,7 +10,7 @@ namespace Asteroids
         #region Fields
 
         private AudioMixer _audioMixer;
-        private SoundSettingsData _soundSettingsData;
+        private SettingsData _soundSettingsData;
 
         #endregion
 
