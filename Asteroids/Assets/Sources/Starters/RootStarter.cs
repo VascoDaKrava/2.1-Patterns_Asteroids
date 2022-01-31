@@ -13,6 +13,7 @@ namespace Asteroids
         private ResourceManager _resourceManager;
         private ResourceManagerAudioClips _resourceManagerAudioClips;
         private Rigidbody _shipRigidbody;
+        private SettingsData _settingsData;
         private SoundSystemPlayController _soundSystemPlayController;
         private SoundSystemVolumeController _soundSystemVolumeController;
         private TakeDamageEvent _takeDamageEvent;
@@ -36,14 +37,16 @@ namespace Asteroids
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent)
         {
+            _collisionDetectorEvent = new CollisionDetectorEvent();
+            _inputManager = new InputManager();
             _resourceManager = new ResourceManager();
             _resourceManagerAudioClips = new ResourceManagerAudioClips();
-            _inputManager = new InputManager();
-            _collisionDetectorEvent = new CollisionDetectorEvent();
+            _settingsData = DataSaveLoadRepo.LoadSettings();
             _takeDamageEvent = new TakeDamageEvent();
 
             _soundSystemPlayController = new SoundSystemPlayController();
-            _soundSystemVolumeController = new SoundSystemVolumeController();
+            _soundSystemVolumeController = new SoundSystemVolumeController(_settingsData);
+            new GraphicsQualityController(_settingsData);
             _soundSystemPlayController.PlaybackMusic(_resourceManagerAudioClips.AudioClipGame);
 
             _controllersFactory = new UpdatableControllersFactory(

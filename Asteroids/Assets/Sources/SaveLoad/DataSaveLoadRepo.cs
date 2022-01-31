@@ -8,7 +8,7 @@ namespace Asteroids
     {
         #region Methods
 
-        public static void SaveSoundSettings(SettingsData data)
+        public static void SaveSettings(SettingsData data)
         {
             XmlSerializer serializer = new XmlSerializer(data.GetType());
 
@@ -26,7 +26,7 @@ namespace Asteroids
             fs.Close();
         }
 
-        public static SettingsData LoadSoundSettings()
+        public static SettingsData LoadSettings()
         {
             SettingsData data = new SettingsData();
 

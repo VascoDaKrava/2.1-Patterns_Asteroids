@@ -1,18 +1,24 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
 namespace Asteroids
 {
-    public sealed class MainMenuControllerOptions
+    /// <summary>
+    /// MainMenu / Options items handlers
+    /// </summary>
+    public sealed class MainMenuHandlersOptions
     {
 
         #region Fields
 
-        private readonly float[] _sliderValueConverter = new float[7] { -80.0f,  -30.0f, -20.0f, -15.0f, -10.0f, -5.0f, 0.0f};
+        private readonly float[] _sliderValueConverter = new float[7] { -80.0f, -30.0f, -20.0f, -15.0f, -10.0f, -5.0f, 0.0f };
 
+        private GraphicsQualityController _graphicsQuality;
         private MainMenuElementsOptions _optionsMenuElements;
-        private MainMenuController _menuController;
+        private MainMenuHandlers _menuController;
+        private SettingsData _settingsData;
         private SoundSystemVolumeController _volumeController;
         private SoundSystemPlayController _playAudio;
         private ResourceManagerAudioClips _audioClips;
@@ -22,27 +28,31 @@ namespace Asteroids
 
         #region ClassLifeCycles
 
-        public MainMenuControllerOptions(
+        public MainMenuHandlersOptions(
             GameObject mainMenu,
-            MainMenuController menuController,
+            MainMenuHandlers menuController,
             SoundSystemVolumeController volumeController,
+            GraphicsQualityController graphicsQualityController,
             SoundSystemPlayController soundSystemPlayController,
-            ResourceManagerAudioClips audioClips)
+            ResourceManagerAudioClips audioClips,
+            SettingsData settingsData)
         {
-            _optionsMenuElements = mainMenu.GetComponent<MainMenuElementsOptions>();
-            _menuController = menuController;
-            _volumeController = volumeController;
-            _playAudio = soundSystemPlayController;
             _audioClips = audioClips;
+            _graphicsQuality = graphicsQualityController;
+            _menuController = menuController;
+            _optionsMenuElements = mainMenu.GetComponent<MainMenuElementsOptions>();
+            _playAudio = soundSystemPlayController;
+            _settingsData = settingsData;
+            _volumeController = volumeController;
 
-            SetSlidersValue();
+            SetInteractableValues();
 
             SubscribeOnEvent();
 
             SetMenuOptionsVisible(false);
         }
 
-        ~MainMenuControllerOptions()
+        ~MainMenuHandlersOptions()
         {
             UnsubscribeOnEvent();
         }
@@ -63,6 +73,8 @@ namespace Asteroids
             _optionsMenuElements.SliderVolumeMusic.onValueChanged.AddListener(SliderVolumeMusicOnValueChangedHandler);
             _optionsMenuElements.SliderVolumeMenu.onValueChanged.AddListener(SliderVolumeMenuOnValueChangedHandler);
             _optionsMenuElements.SliderVolumeSFX.onValueChanged.AddListener(SliderVolumeSFXOnValueChangedHandler);
+
+            _optionsMenuElements.DropdownGraphicsQuality.onValueChanged.AddListener(DropdownGraphicsQualityOnValueChangesHandler);
         }
 
         private void UnsubscribeOnEvent()
@@ -71,21 +83,43 @@ namespace Asteroids
             _optionsMenuElements.SliderVolumeMusic.onValueChanged.RemoveListener(SliderVolumeMusicOnValueChangedHandler);
             _optionsMenuElements.SliderVolumeMenu.onValueChanged.RemoveListener(SliderVolumeMenuOnValueChangedHandler);
             _optionsMenuElements.SliderVolumeSFX.onValueChanged.RemoveListener(SliderVolumeSFXOnValueChangedHandler);
+
+            _optionsMenuElements.DropdownGraphicsQuality.onValueChanged.RemoveListener(DropdownGraphicsQualityOnValueChangesHandler);
         }
 
-        private void SetSlidersValue()
+        private void SetInteractableValues()
+        {
+            SetSoundValues();
+            SetGraphicsValues();
+        }
+
+        private void SetSoundValues()
         {
             _optionsMenuElements.SliderVolumeMenu.value = Array.IndexOf(_sliderValueConverter, _volumeController.VolumeMenu);
             _optionsMenuElements.SliderVolumeMusic.value = Array.IndexOf(_sliderValueConverter, _volumeController.VolumeMusic);
             _optionsMenuElements.SliderVolumeSFX.value = Array.IndexOf(_sliderValueConverter, _volumeController.VolumeSFX);
         }
 
+        private void SetGraphicsValues()
+        {
+            _optionsMenuElements.DropdownGraphicsQuality.ClearOptions();
+            _optionsMenuElements.DropdownGraphicsQuality.AddOptions(new List<string>(QualitySettings.names));
+            _optionsMenuElements.DropdownGraphicsQuality.value = _settingsData.GraphicsQuality;
+        }
+
         private void ButtonBackOnClickHandler()
         {
             _playAudio.PlaybackMenu(_audioClips.AudioClipButtonClick);
-            _volumeController.SaveSettings();
+            _volumeController.SaveSoundSettings();
+            _graphicsQuality.SaveGraphicsSettings();
+            DataSaveLoadRepo.SaveSettings(_settingsData);
             _menuController.SetMenuButtonsVisible(true);
             SetMenuOptionsVisible(false);
+        }
+
+        private void DropdownGraphicsQualityOnValueChangesHandler(int value)
+        {
+            _graphicsQuality.GraphicsQualityLevel = value;
         }
 
         private void SliderVolumeMusicOnValueChangedHandler(float value)

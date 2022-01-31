@@ -7,13 +7,16 @@ using UnityEngine.SceneManagement;
 
 namespace Asteroids
 {
-    public sealed class MainMenuController
+    /// <summary>
+    /// MainMenu items hanlers
+    /// </summary>
+    public sealed class MainMenuHandlers
     {
 
         #region Fields
 
         private MainMenuElements _menuElements;
-        private MainMenuControllerOptions _optionsController;
+        private MainMenuHandlersOptions _optionsController;
         private ResourceManagerAudioClips _audioClips;
         private SoundSystemPlayController _playAudio;
 
@@ -22,22 +25,24 @@ namespace Asteroids
 
         #region ClassLifeCycles
 
-        public MainMenuController(
+        public MainMenuHandlers(
             GameObject mainMenu,
             SoundSystemVolumeController volumeController,
+            GraphicsQualityController graphicsQualityController,
             SoundSystemPlayController soundSystemPlayController,
-            ResourceManagerAudioClips audioClips)
+            ResourceManagerAudioClips audioClips,
+            SettingsData settingsData)
         {
             _menuElements = mainMenu.GetComponent<MainMenuElements>();
             _playAudio = soundSystemPlayController;
             _audioClips = audioClips;
 
-            _optionsController = new MainMenuControllerOptions(mainMenu, this, volumeController, soundSystemPlayController, audioClips);
+            _optionsController = new MainMenuHandlersOptions(mainMenu, this, volumeController, graphicsQualityController, soundSystemPlayController, audioClips, settingsData);
 
             SubscribeOnEvent();
         }
 
-        ~MainMenuController()
+        ~MainMenuHandlers()
         {
             UnsubscribeOnEvent();
         }

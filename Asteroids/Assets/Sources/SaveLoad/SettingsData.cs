@@ -17,6 +17,8 @@ namespace Asteroids
 
         public float VolumeSFX = -20.0f;
 
+        public int GraphicsQuality = 0;
+
         #endregion
 
     }

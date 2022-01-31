@@ -4,13 +4,16 @@ using UnityEngine.Audio;
 
 namespace Asteroids
 {
+    /// <summary>
+    /// Coresponding AudioMixer values with data from SettingsData
+    /// </summary>
     public sealed class SoundSystemVolumeController
     {
 
         #region Fields
 
         private AudioMixer _audioMixer;
-        private SettingsData _soundSettingsData;
+        private SettingsData _settingsData;
 
         #endregion
 
@@ -74,10 +77,10 @@ namespace Asteroids
 
         #region ClassLifeCycles
 
-        public SoundSystemVolumeController()
+        public SoundSystemVolumeController(SettingsData settingsData)
         {
+            _settingsData = settingsData;
             _audioMixer = Resources.Load<AudioMixer>(ResourcesPathAudio.AUDIO_MIXER);
-            _soundSettingsData = DataSaveLoadRepo.LoadSoundSettings();
             ApplySettings();
         }
 
@@ -88,20 +91,18 @@ namespace Asteroids
 
         public void ApplySettings()
         {
-            VolumeMaster = _soundSettingsData.VolumeMaster;
-            VolumeMenu = _soundSettingsData.VolumeMenu;
-            VolumeMusic = _soundSettingsData.VolumeMusic;
-            VolumeSFX = _soundSettingsData.VolumeSFX;
+            VolumeMaster = _settingsData.VolumeMaster;
+            VolumeMenu = _settingsData.VolumeMenu;
+            VolumeMusic = _settingsData.VolumeMusic;
+            VolumeSFX = _settingsData.VolumeSFX;
         }
 
-        public void SaveSettings()
+        public void SaveSoundSettings()
         {
-            _soundSettingsData.VolumeMaster = VolumeMaster;
-            _soundSettingsData.VolumeMenu = VolumeMenu;
-            _soundSettingsData.VolumeMusic = VolumeMusic;
-            _soundSettingsData.VolumeSFX = VolumeSFX;
-
-            DataSaveLoadRepo.SaveSoundSettings(_soundSettingsData);
+            _settingsData.VolumeMaster = VolumeMaster;
+            _settingsData.VolumeMenu = VolumeMenu;
+            _settingsData.VolumeMusic = VolumeMusic;
+            _settingsData.VolumeSFX = VolumeSFX;
         }
 
         #endregion
