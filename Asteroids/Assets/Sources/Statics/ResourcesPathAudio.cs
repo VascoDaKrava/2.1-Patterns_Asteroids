@@ -24,6 +24,21 @@ namespace Asteroids
 
         private const string FOLDER_SETTINGS = "Settings";
 
+
+        private const string FILE_SFX_ENEMY_EXPLOSiON = "EnemyExplosion";
+
+        private const string FILE_SFX_HIT_ASTEROID = "HitAsteroid";
+
+        private const string FILE_SFX_HIT_ENEMY_SHIP = "HitEnemyShip";
+
+        private const string FILE_SFX_MOVING_PLAYER_SHIP = "MovingPlaerShip";
+
+        private const string FILE_SFX_MOVING_ENEMY_SHIP = "MovingEnemyShip";
+
+        private const string FILE_SFX_SPAWN_ENEMY = "SpawnEnemy";
+
+        private const string FILE_SFX_START_ROCKET = "StartRocket";
+
         #endregion
 
 
@@ -44,6 +59,21 @@ namespace Asteroids
         public static string AUDIO_MIXER => Path.Combine(FOLDER_AUDIO, FILE_AUDIO_MIXER);
 
         public static string SOUND_SETTINGS => Path.Combine(FOLDER_SETTINGS, FILE_SOUND_SETTINGS);
+
+
+        public static string SFX_ENEMY_EXPLOSION => Path.Combine(FOLDER_SFX, FILE_SFX_ENEMY_EXPLOSiON);
+
+        public static string SFX_HIT_ASTEROID => Path.Combine(FOLDER_SFX, FILE_SFX_HIT_ASTEROID);
+
+        public static string SFX_HIT_ENEMY_SHIP => Path.Combine(FOLDER_SFX, FILE_SFX_HIT_ENEMY_SHIP);
+
+        public static string SFX_MOVING_PLAYER_SHIP => Path.Combine(FOLDER_SFX, FILE_SFX_MOVING_PLAYER_SHIP);
+
+        public static string SFX_MOVING_ENEMY_SHIP => Path.Combine(FOLDER_SFX, FILE_SFX_MOVING_ENEMY_SHIP);
+
+        public static string SFX_SPAWN_ENEMY => Path.Combine(FOLDER_SFX, FILE_SFX_SPAWN_ENEMY);
+
+        public static string SFX_START_ROCKET => Path.Combine(FOLDER_SFX, FILE_SFX_START_ROCKET);
 
         #endregion
 
