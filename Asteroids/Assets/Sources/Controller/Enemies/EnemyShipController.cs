@@ -37,8 +37,11 @@ namespace Asteroids
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             CollisionDetectorEvent collisionDetectorEvent,
-            TakeDamageEvent takeDamageEvent) : base
-            (createUpdatableObjectEvent, destroyUpdatableObjectEvent, collisionDetectorEvent, takeDamageEvent)
+            TakeDamageEvent takeDamageEvent,
+            SoundSystemPlayController soundSystemPlayController,
+            ResourceManagerAudioClips resourceManagerAudioClips) : base
+            (createUpdatableObjectEvent, destroyUpdatableObjectEvent, collisionDetectorEvent, takeDamageEvent,
+                soundSystemPlayController, resourceManagerAudioClips)
         {
         }
 
@@ -52,17 +55,20 @@ namespace Asteroids
             if (_enemyRigidbody != null)
             {
                 _enemyRigidbody.velocity = _direction * _enemyModel.Speed;
+                _soundSystemPlayController.PlaybackSFX(_resourceManagerAudioClips.AudioClipMovingEnemyShip);
             }
         }
 
         protected override void ChangeStrength(int value)
         {
+            _soundSystemPlayController.PlaybackSFX(_resourceManagerAudioClips.AudioClipHitEnemyShip);
             _enemyModel.ArmorEnemyShip -= value;
             if (_enemyModel.Strength <= 0)
             {
                 _enemyModel.Strength -= value;
                 if (_enemyModel.Strength <= 0)
                 {
+                    _soundSystemPlayController.PlaybackSFX(_resourceManagerAudioClips.AudioClipEnemyExplosion);
                     Hit();
                 }
             }

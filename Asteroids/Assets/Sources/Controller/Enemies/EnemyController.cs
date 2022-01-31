@@ -15,6 +15,8 @@ namespace Asteroids
         protected Vector3 _direction;
         protected EnemyPool _enemyPool;
         protected Timers _timers;
+        protected SoundSystemPlayController _soundSystemPlayController;
+        protected ResourceManagerAudioClips _resourceManagerAudioClips;
 
         protected CollisionDetectorEvent _collisionDetectorEvent;
         private TakeDamageEvent _takeDamageEvent;
@@ -45,7 +47,9 @@ namespace Asteroids
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent, 
             CollisionDetectorEvent collisionDetectorEvent,
-            TakeDamageEvent takeDamageEvent) : base
+            TakeDamageEvent takeDamageEvent,
+            SoundSystemPlayController soundSystemPlayController,
+            ResourceManagerAudioClips resourceManagerAudioClips) : base
             (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _timers = new Timers(createUpdatableObjectEvent, destroyUpdatableObjectEvent);
@@ -58,6 +62,9 @@ namespace Asteroids
 
             _collisionDetectorEvent.CollisionDetector += CollisionEventHandler;
             _takeDamageEvent.TakeDamage += TakeDamageEventHandler;
+
+            _soundSystemPlayController = soundSystemPlayController;
+            _resourceManagerAudioClips = resourceManagerAudioClips;
         }
 
         #endregion
@@ -89,6 +96,7 @@ namespace Asteroids
                     if (called.CompareTag(TagsAndLayers.PLAYER_TAG))
                     {
                         Hit();
+                        _soundSystemPlayController.PlaybackSFX(_resourceManagerAudioClips.AudioClipEnemyExplosion);
                     }
                         
                 }

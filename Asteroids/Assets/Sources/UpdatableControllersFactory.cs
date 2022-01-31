@@ -178,7 +178,9 @@ namespace Asteroids
                 _createUpdatable,
                 _destroyUpdatable,
                 _collisionDetectorEvent,
-                _takeDamageEvent);
+                _takeDamageEvent,
+                 _soundSystemPlayController,
+                _resourceManagerAudioClips);
 
             controller.EnemyModel = new AsteroidSmallModel();
             controller.EnemyView = _enemyFactory.CreateSmallAsteroid(resourceManager, spawnPosition);
@@ -197,7 +199,9 @@ namespace Asteroids
                  _createUpdatable,
                  _destroyUpdatable,
                  _collisionDetectorEvent,
-                 _takeDamageEvent);
+                 _takeDamageEvent,
+                  _soundSystemPlayController,
+                _resourceManagerAudioClips);
 
             controller.EnemyModel = new AsteroidLargeModel();
             controller.EnemyView = _enemyFactory.CreateLargeAsteroid(resourceManager, spawnPosition);
@@ -215,7 +219,9 @@ namespace Asteroids
                  _createUpdatable,
                  _destroyUpdatable,
                  _collisionDetectorEvent,
-                 _takeDamageEvent);
+                 _takeDamageEvent,
+                  _soundSystemPlayController,
+                _resourceManagerAudioClips);
 
             controller.EnemyModel = new EnemyShipModel();
             controller.EnemyView = _enemyFactory.CreateEnemyShip(resourceManager, spawnPosition);
