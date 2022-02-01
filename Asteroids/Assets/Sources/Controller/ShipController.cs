@@ -19,7 +19,7 @@ namespace Asteroids
         private SoundSystemPlayController _soundSystemPlayController;
         private ResourceManagerAudioClips _resourceManagerAudioClips;
 
-        private float _switchSceneTime = 3.0f;
+        
 
         #endregion
 
@@ -91,11 +91,6 @@ namespace Asteroids
 
             _displayEndGame.GameOver();
 
-            if (_switchSceneTime <= 0)
-            {
-                SceneManager.LoadScene(1);
-            }
-
             Dispose();
         }
 
@@ -108,7 +103,7 @@ namespace Asteroids
         {
             _takeDamageEvent.TakeDamage -= TakeDamageEventHandler;
             RemoveFromUpdate();
-            _shipView.DestroyShip();
+            //_shipView.DestroyShip();
         }
 
         #endregion

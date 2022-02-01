@@ -545,6 +545,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4020021592716288972, guid: a6790f45db5aa98449d4d50b1c3a6a98, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4020021592716288972, guid: a6790f45db5aa98449d4d50b1c3a6a98, type: 3}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
+    - target: {fileID: 4020021592716288972, guid: a6790f45db5aa98449d4d50b1c3a6a98, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5235881824389508892, guid: a6790f45db5aa98449d4d50b1c3a6a98, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6422213065465330626, guid: a6790f45db5aa98449d4d50b1c3a6a98, type: 3}
       propertyPath: m_RootOrder
       value: 4
