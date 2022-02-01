@@ -1,22 +1,26 @@
+using UnityEngine;
 using UnityEngine.Audio;
 
 
 namespace Asteroids
 {
+    /// <summary>
+    /// Coresponding AudioMixer values with data from SettingsData
+    /// </summary>
     public sealed class SoundSystemVolumeController
     {
 
         #region Fields
 
         private AudioMixer _audioMixer;
-        private ResourceManagerSettings _settings;
+        private SettingsData _settingsData;
 
         #endregion
 
 
         #region Properties
 
-        private float VolumeMaster
+        public float VolumeMaster
         {
             get
             {
@@ -29,7 +33,7 @@ namespace Asteroids
             }
         }
 
-        private float VolumeMenu
+        public float VolumeMenu
         {
             get
             {
@@ -42,7 +46,7 @@ namespace Asteroids
             }
         }
 
-        private float VolumeMusic
+        public float VolumeMusic
         {
             get
             {
@@ -55,7 +59,7 @@ namespace Asteroids
             }
         }
 
-        private float VolumeSFX
+        public float VolumeSFX
         {
             get
             {
@@ -73,10 +77,11 @@ namespace Asteroids
 
         #region ClassLifeCycles
 
-        public SoundSystemVolumeController(ResourceManagerAudioClips resourceManagerAudioClips, ResourceManagerSettings resourceManagerSettings)
+        public SoundSystemVolumeController(SettingsData settingsData)
         {
-            _audioMixer = resourceManagerAudioClips.AudioMixerResource;
-            _settings = resourceManagerSettings;
+            _settingsData = settingsData;
+            _audioMixer = Resources.Load<AudioMixer>(ResourcesPathAudio.AUDIO_MIXER);
+            ApplySettings();
         }
 
         #endregion
@@ -84,12 +89,20 @@ namespace Asteroids
 
         #region Methods
 
-        public void LoadSettings()
+        public void ApplySettings()
         {
-            VolumeMaster = _settings.SoundSettings.VolumeMaster;
-            VolumeMenu = _settings.SoundSettings.VolumeMenu;
-            VolumeMusic = _settings.SoundSettings.VolumeMusic;
-            VolumeSFX = _settings.SoundSettings.VolumeSFX;
+            VolumeMaster = _settingsData.VolumeMaster;
+            VolumeMenu = _settingsData.VolumeMenu;
+            VolumeMusic = _settingsData.VolumeMusic;
+            VolumeSFX = _settingsData.VolumeSFX;
+        }
+
+        public void SaveSoundSettings()
+        {
+            _settingsData.VolumeMaster = VolumeMaster;
+            _settingsData.VolumeMenu = VolumeMenu;
+            _settingsData.VolumeMusic = VolumeMusic;
+            _settingsData.VolumeSFX = VolumeSFX;
         }
 
         #endregion
