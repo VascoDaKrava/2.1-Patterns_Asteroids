@@ -103,7 +103,7 @@ namespace Asteroids
         {
             _takeDamageEvent.TakeDamage -= TakeDamageEventHandler;
             RemoveFromUpdate();
-            //_shipView.DestroyShip();
+            _shipView.DestroyShip();
         }
 
         #endregion

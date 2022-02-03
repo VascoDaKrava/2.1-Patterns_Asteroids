@@ -10,6 +10,7 @@ namespace Asteroids
 
         private Text _finishGameLabel;
         private Image _background;
+        private GameObject _prefab;
 
         #endregion
 
@@ -18,10 +19,12 @@ namespace Asteroids
 
         public DisplayEndGame (GameObject endGame)
         {
+            _prefab = endGame;
             _finishGameLabel = endGame.GetComponentInChildren<Text>();
             _background = endGame.GetComponentInChildren<Image>();
             _finishGameLabel.text = string.Empty;
             _background.gameObject.SetActive(false);
+            _prefab.gameObject.SetActive(false);
         }
 
         #endregion
@@ -31,6 +34,7 @@ namespace Asteroids
 
         public void GameOver()
         {
+            _prefab.gameObject.SetActive(true);
             _finishGameLabel.text = "GAME OVER!";
             _background.gameObject.SetActive(true);
         }
