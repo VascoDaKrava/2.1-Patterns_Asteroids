@@ -3,21 +3,16 @@
 
 namespace Asteroids
 {
-    public sealed class InputManager
+    public static class InputManager
     {
-
-        #region Fields
-
-        private Vector3 _direction;
-
-        #endregion
-
 
         #region Properties
 
-        public bool isPrimaryFire => Input.GetButton(InputKeysAndAxis.KEY_PRIMARY_FIRE);
+        public static bool isPrimaryFire => Input.GetButton(InputKeysAndAxis.KEY_PRIMARY_FIRE);
 
-        public bool isSecondaryFire => Input.GetButtonDown(InputKeysAndAxis.KEY_AUTO_FIRE);
+        public static bool isSecondaryFire => Input.GetButtonDown(InputKeysAndAxis.KEY_AUTO_FIRE);
+
+        public static bool isPause => Input.GetButtonDown(InputKeysAndAxis.KEY_PAUSE);
 
         #endregion
 
@@ -28,13 +23,14 @@ namespace Asteroids
         /// Return normalized Vector 3 of direction if pressed move-keys
         /// </summary>
         /// <returns></returns>
-        public Vector3 GetDirection()
+        public static Vector3 GetDirection()
         {
-            _direction.x = Input.GetAxis(InputKeysAndAxis.AXIS_HORIZONTAL);
-            _direction.y = 0.0f;
-            _direction.z = Input.GetAxis(InputKeysAndAxis.AXIS_VERTICAL);
+            Vector3 direction = new Vector3();
+            direction.x = Input.GetAxis(InputKeysAndAxis.AXIS_HORIZONTAL);
+            direction.y = 0.0f;
+            direction.z = Input.GetAxis(InputKeysAndAxis.AXIS_VERTICAL);
 
-            return _direction.normalized;
+            return direction.normalized;
         }
 
         #endregion

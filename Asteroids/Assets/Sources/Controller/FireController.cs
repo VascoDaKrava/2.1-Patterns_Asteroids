@@ -18,7 +18,6 @@ namespace Asteroids
         private Transform _enemyTargetTransform;
         private Timers _primaryFireTimer;
         private Timers _sonarTimer;
-        private InputManager _inputManager;
         private UpdatableControllersFactory _controllersFactory;
         private MissilePool _missilePool;
         private bool _isAutoFireOn;
@@ -32,12 +31,9 @@ namespace Asteroids
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             Transform bulletStartTransform,
-            InputManager inputManagerLink,
-            UpdatableControllersFactory controllersFactory) : base
-            (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
+            UpdatableControllersFactory controllersFactory) : base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _bulletStartTransform = bulletStartTransform;
-            _inputManager = inputManagerLink;
             _controllersFactory = controllersFactory;
             _primaryFireTimer = _controllersFactory.CreateTimers();
             _sonarTimer = _controllersFactory.CreateTimers();
@@ -51,7 +47,7 @@ namespace Asteroids
 
         private void PrimaryFire()
         {
-            if (_inputManager.isPrimaryFire)
+            if (InputManager.isPrimaryFire)
             {
                 if (!_primaryFireTimer.isTimerOn)
                 {
@@ -63,7 +59,7 @@ namespace Asteroids
 
         private void SecondaryFire()
         {
-            if (_inputManager.isSecondaryFire)
+            if (InputManager.isSecondaryFire)
             {
                 _isAutoFireOn = !_isAutoFireOn;
             }

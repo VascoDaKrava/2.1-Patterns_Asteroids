@@ -26,7 +26,7 @@ namespace Asteroids
             _resourcesAudioClips = new ResourceManagerAudioClips();
             _soundSystemPlayController = new SoundSystemPlayController();
             _settingsData = DataSaveLoadRepo.LoadSettings();
-            _volumeController = new SoundSystemVolumeController(_settingsData);
+            _volumeController = new SoundSystemVolumeController(_settingsData, _resources.AudioMixer);
             _graphicsQualityController = new GraphicsQualityController(_settingsData);
 
             new MainMenuHandlers(

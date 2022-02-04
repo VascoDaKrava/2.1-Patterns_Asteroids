@@ -13,6 +13,7 @@ namespace Asteroids
         public const string LARGE_ASTEROID = "LargeAsteroid";
         public const string ENEMY_SHIP = "EnemyShip";
         public const string MAIN_MENU = "MainMenu";
+        public const string PAUSE_MENU = "PauseMenu";
 
         #endregion
 

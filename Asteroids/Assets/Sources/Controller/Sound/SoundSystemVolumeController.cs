@@ -24,12 +24,12 @@ namespace Asteroids
         {
             get
             {
-                _audioMixer.GetFloat(AudioMixerGroups.MASTER, out float value);
+                _audioMixer.GetFloat(AudioMixerParams.MASTER, out float value);
                 return value;
             }
             set
             {
-                _audioMixer.SetFloat(AudioMixerGroups.MASTER, value);
+                _audioMixer.SetFloat(AudioMixerParams.MASTER, value);
             }
         }
 
@@ -37,12 +37,12 @@ namespace Asteroids
         {
             get
             {
-                _audioMixer.GetFloat(AudioMixerGroups.MENU, out float value);
+                _audioMixer.GetFloat(AudioMixerParams.MENU, out float value);
                 return value;
             }
             set
             {
-                _audioMixer.SetFloat(AudioMixerGroups.MENU, value);
+                _audioMixer.SetFloat(AudioMixerParams.MENU, value);
             }
         }
 
@@ -50,12 +50,12 @@ namespace Asteroids
         {
             get
             {
-                _audioMixer.GetFloat(AudioMixerGroups.MUSIC, out float value);
+                _audioMixer.GetFloat(AudioMixerParams.MUSIC, out float value);
                 return value;
             }
             set
             {
-                _audioMixer.SetFloat(AudioMixerGroups.MUSIC, value);
+                _audioMixer.SetFloat(AudioMixerParams.MUSIC, value);
             }
         }
 
@@ -63,12 +63,12 @@ namespace Asteroids
         {
             get
             {
-                _audioMixer.GetFloat(AudioMixerGroups.SFX, out float value);
+                _audioMixer.GetFloat(AudioMixerParams.SFX, out float value);
                 return value;
             }
             set
             {
-                _audioMixer.SetFloat(AudioMixerGroups.SFX, value);
+                _audioMixer.SetFloat(AudioMixerParams.SFX, value);
             }
         }
 
@@ -77,10 +77,10 @@ namespace Asteroids
 
         #region ClassLifeCycles
 
-        public SoundSystemVolumeController(SettingsData settingsData)
+        public SoundSystemVolumeController(SettingsData settingsData, AudioMixer audioMixer)
         {
             _settingsData = settingsData;
-            _audioMixer = Resources.Load<AudioMixer>(ResourcesPathAudio.AUDIO_MIXER);
+            _audioMixer = audioMixer;
             ApplySettings();
         }
 

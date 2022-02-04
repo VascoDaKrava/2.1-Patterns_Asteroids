@@ -46,17 +46,14 @@ namespace Asteroids
         /// <summary>
         /// Create new ShipController
         /// </summary>
-        /// <param name="inputManager">Link to InputManager</param>
         /// <param name="rigidbody">Link to ship Rigidbody</param>
         /// <returns></returns>
         public ShipController CreateShipController(
-            InputManager inputManager,
             Rigidbody rigidbody)
         {
             return new ShipController(
                 _createUpdatable,
                 _destroyUpdatable,
-                inputManager,
                 rigidbody,
                 _takeDamageEvent);
         }
@@ -65,19 +62,16 @@ namespace Asteroids
         /// Create new FireController
         /// </summary>
         /// <param name="bulletStartPosition">Link to Transform, where bullet was instantiate</param>
-        /// <param name="inputManagerLink">Link to InputManager</param>
         /// <param name="updatableControllersFactory">Link to ControllersFactory</param>
         /// <returns></returns>
         public FireController CreateFireController(
             Transform bulletStartPosition,
-            InputManager inputManagerLink,
             UpdatableControllersFactory updatableControllersFactory)
         {
             return new FireController(
                 _createUpdatable,
                 _destroyUpdatable,
                 bulletStartPosition,
-                inputManagerLink,
                 updatableControllersFactory);
         }
 
