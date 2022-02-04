@@ -24,11 +24,6 @@ namespace Asteroids
         #endregion
 
 
-        #region Properties
-
-        #endregion
-
-
         #region ClassLifeCycles
 
         public PauseMenuHandlers(
