@@ -13,9 +13,13 @@ namespace Asteroids
 
         #region Fields
 
+        private AudioMixer _audioMixer;
+        private GameObject _pauseMenuGameObject;
         private PauseMenuElements _pauseMenuElements;
         private ResourceManagerAudioClips _audioClips;
         private SoundSystemPlayController _playAudio;
+
+        private bool _isMenuHide;
 
         #endregion
 
@@ -31,11 +35,21 @@ namespace Asteroids
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             GameObject pauseMenu,
-            AudioMixer audioMixer) : base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
+            AudioMixer audioMixer,
+            SoundSystemPlayController playAudio,
+            ResourceManagerAudioClips audioClips) : base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
+            _audioClips = audioClips;
+            _audioMixer = audioMixer;
+            _pauseMenuGameObject = pauseMenu;
+            _playAudio = playAudio;
             _pauseMenuElements = pauseMenu.GetComponent<PauseMenuElements>();
 
+            _isMenuHide = false;
+
             SubscribeOnEvent();
+
+            ChangeMenuState();
         }
 
         ~PauseMenuHandlers()
@@ -65,11 +79,13 @@ namespace Asteroids
         private void ButtonResumeOnClickHandler()
         {
             _playAudio.PlaybackMenu(_audioClips.AudioClipButtonClick);
+            ChangeMenuState();
         }
 
         private void ButtonBackToMenuOnClickHandler()
         {
             _playAudio.PlaybackMenu(_audioClips.AudioClipButtonClick);
+            ChangeMenuState();
             SceneManager.LoadScene(Scenes.MAIN_MENU);
         }
 
@@ -81,12 +97,27 @@ namespace Asteroids
         private void CheckPause()
         {
             if (InputManager.isPause)
-            { }
+            {
+                ChangeMenuState();
+            }
         }
 
-        public void HideMenu()
+        public void ChangeMenuState()
         {
+            _isMenuHide = !_isMenuHide;
 
+            _pauseMenuGameObject.SetActive(!_isMenuHide);
+
+            if (_isMenuHide)
+            {
+                Time.timeScale = 1;
+                _audioMixer.SetFloat(AudioMixerParams.LOWPASS, AudioMixerParams.LOWPASS_HIGH);
+            }
+            else
+            {
+                Time.timeScale = 0;
+                _audioMixer.SetFloat(AudioMixerParams.LOWPASS, AudioMixerParams.LOWPASS_LOW);
+            }
         }
 
         #endregion

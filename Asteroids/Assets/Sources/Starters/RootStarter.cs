@@ -51,8 +51,9 @@ namespace Asteroids
                 createUpdatableObjectEvent,
                 destroyUpdatableObjectEvent,
                 GameObject.Instantiate(_resourceManager.PauseMenu),
-                _resourceManager.AudioMixer
-                );
+                _resourceManager.AudioMixer,
+                _soundSystemPlayController,
+                _resourceManagerAudioClips);
 
             _controllersFactory = new UpdatableControllersFactory(
                 createUpdatableObjectEvent,

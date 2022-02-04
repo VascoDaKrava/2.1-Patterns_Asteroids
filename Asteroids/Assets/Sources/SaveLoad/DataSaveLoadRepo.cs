@@ -6,6 +6,7 @@ namespace Asteroids
 {
     public static class DataSaveLoadRepo
     {
+
         #region Methods
 
         public static void SaveSettings(SettingsData data)
