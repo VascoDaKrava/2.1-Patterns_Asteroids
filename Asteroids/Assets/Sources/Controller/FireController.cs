@@ -33,8 +33,7 @@ namespace Asteroids
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             Transform bulletStartTransform,
             InputManager inputManagerLink,
-            UpdatableControllersFactory controllersFactory) : base
-            (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
+            UpdatableControllersFactory controllersFactory) : base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _bulletStartTransform = bulletStartTransform;
             _inputManager = inputManagerLink;

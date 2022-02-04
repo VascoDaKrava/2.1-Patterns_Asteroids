@@ -19,6 +19,8 @@ namespace Asteroids
 
         public bool isSecondaryFire => Input.GetButtonDown(InputKeysAndAxis.KEY_AUTO_FIRE);
 
+        public bool isPause => Input.GetButtonDown(InputKeysAndAxis.KEY_PAUSE);
+
         #endregion
 
 

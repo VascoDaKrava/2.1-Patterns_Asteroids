@@ -45,9 +45,15 @@ namespace Asteroids
             _takeDamageEvent = new TakeDamageEvent();
 
             _soundSystemPlayController = new SoundSystemPlayController();
-            _soundSystemVolumeController = new SoundSystemVolumeController(_settingsData);
+            _soundSystemVolumeController = new SoundSystemVolumeController(_settingsData, _resourceManager.AudioMixer);
             new GraphicsQualityController(_settingsData);
             _soundSystemPlayController.PlaybackMusic(_resourceManagerAudioClips.AudioClipGame);
+
+            new PauseMenuHandlers(
+                createUpdatableObjectEvent,
+                destroyUpdatableObjectEvent,
+                _resourceManager.PauseMenu,
+                _resourceManager.AudioMixer);
 
             _controllersFactory = new UpdatableControllersFactory(
                 createUpdatableObjectEvent,

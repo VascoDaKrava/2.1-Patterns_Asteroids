@@ -77,10 +77,10 @@ namespace Asteroids
 
         #region ClassLifeCycles
 
-        public SoundSystemVolumeController(SettingsData settingsData)
+        public SoundSystemVolumeController(SettingsData settingsData, AudioMixer audioMixer)
         {
             _settingsData = settingsData;
-            _audioMixer = Resources.Load<AudioMixer>(ResourcesPathAudio.AUDIO_MIXER);
+            _audioMixer = audioMixer;
             ApplySettings();
         }
 
