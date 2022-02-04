@@ -9,7 +9,6 @@ namespace Asteroids
         #region Fields
 
         private CollisionDetectorEvent _collisionDetectorEvent;
-        private InputManager _inputManager;
         private ResourceManager _resourceManager;
         private ResourceManagerAudioClips _resourceManagerAudioClips;
         private Rigidbody _shipRigidbody;
@@ -38,7 +37,6 @@ namespace Asteroids
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent)
         {
             _collisionDetectorEvent = new CollisionDetectorEvent();
-            _inputManager = new InputManager();
             _resourceManager = new ResourceManager();
             _resourceManagerAudioClips = new ResourceManagerAudioClips();
             _settingsData = DataSaveLoadRepo.LoadSettings();
@@ -52,8 +50,9 @@ namespace Asteroids
             new PauseMenuHandlers(
                 createUpdatableObjectEvent,
                 destroyUpdatableObjectEvent,
-                _resourceManager.PauseMenu,
-                _resourceManager.AudioMixer);
+                GameObject.Instantiate(_resourceManager.PauseMenu),
+                _resourceManager.AudioMixer
+                );
 
             _controllersFactory = new UpdatableControllersFactory(
                 createUpdatableObjectEvent,
@@ -66,8 +65,8 @@ namespace Asteroids
             _bulletStartTransform = GameObject.FindGameObjectWithTag(TagsAndLayers.BULLET_START_POSITION_TAG).transform;
             _spawnPosition = GameObject.FindGameObjectWithTag(TagsAndLayers.SPAWN_POSITION_TAG).transform;
 
-            _controllersFactory.CreateShipController(_inputManager, _shipRigidbody);
-            _controllersFactory.CreateFireController(_bulletStartTransform, _inputManager, _controllersFactory);
+            _controllersFactory.CreateShipController(_shipRigidbody);
+            _controllersFactory.CreateFireController(_bulletStartTransform, _controllersFactory);
             _controllersFactory.CreateEnemySpawner(_spawnPosition, _resourceManager, _controllersFactory);
         }
 

@@ -9,7 +9,6 @@ namespace Asteroids
         #region Fields
 
         private Vector3 _moveDirection;
-        private InputManager _inputManager;
         private ShipModel _shipModel;
         private ShipView _shipView;
         private TakeDamageEvent _takeDamageEvent;
@@ -26,12 +25,10 @@ namespace Asteroids
         public ShipController(
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
-            InputManager inputManager,
             Rigidbody rigidbody,
             TakeDamageEvent takeDamageEvent) : base
             (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
-            _inputManager = inputManager;
             _takeDamageEvent = takeDamageEvent;
             _takeDamageEvent.TakeDamage += TakeDamageEventHandler;
             _shipModel = new ShipModel(rigidbody);
@@ -59,7 +56,7 @@ namespace Asteroids
         /// </summary>
         private void LetMoveShip()
         {
-            _moveDirection = _inputManager.GetDirection();
+            _moveDirection = InputManager.GetDirection();
 
             if (_moveDirection != Vector3.zero)
             {

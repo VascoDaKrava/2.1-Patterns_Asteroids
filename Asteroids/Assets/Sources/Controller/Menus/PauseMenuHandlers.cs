@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 namespace Asteroids
 {
+    /// <summary>
+    /// PauseMenu items handlers
+    /// </summary>
     public sealed class PauseMenuHandlers : UpdatableObject
     {
 
@@ -76,6 +79,12 @@ namespace Asteroids
         }
 
         private void CheckPause()
+        {
+            if (InputManager.isPause)
+            { }
+        }
+
+        public void HideMenu()
         {
 
         }

@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 namespace Asteroids
 {
     /// <summary>
-    /// MainMenu items hanlers
+    /// MainMenu items handlers
     /// </summary>
     public sealed class MainMenuHandlers
     {
