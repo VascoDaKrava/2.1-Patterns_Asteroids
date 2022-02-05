@@ -65,10 +65,12 @@ namespace Asteroids
             _missileRigidbody.transform.position = position;
             _missileRigidbody.transform.rotation = rotation;
             AddToUpdate();
+            _trailRenderer.enabled = true;
         }
 
         public void PrepareBeforePush()
         {
+            _trailRenderer.enabled = false;
             RemoveFromUpdate();
             _missileRigidbody.gameObject.SetActive(false);
         }
