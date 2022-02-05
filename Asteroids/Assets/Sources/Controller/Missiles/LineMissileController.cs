@@ -15,11 +15,11 @@ namespace Asteroids
 
         #region Properties
 
-        public MissilePool SetMissilePool 
+        public MissilePool SetMissilePool
         {
             get => _missilePool;
 
-            set => _missilePool = value; 
+            set => _missilePool = value;
         }
 
         #endregion
@@ -33,8 +33,7 @@ namespace Asteroids
            Vector3 bulletStartPosition,
            Quaternion bulletStartDirection,
            CollisionDetectorEvent collisionDetectorEvent,
-           TakeDamageEvent takeDamageEvent) : base
-           (createUpdatableObject, destroyUpdatableObject, resourceManager, bulletStartPosition, bulletStartDirection, collisionDetectorEvent, takeDamageEvent)
+           TakeDamageEvent takeDamageEvent) : base(createUpdatableObject, destroyUpdatableObject, resourceManager, bulletStartPosition, bulletStartDirection, collisionDetectorEvent, takeDamageEvent)
         {
             PrepareBeforePush();
         }

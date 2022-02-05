@@ -22,8 +22,7 @@ namespace Asteroids
             Quaternion bulletStartDirection,
             CollisionDetectorEvent collisionDetectorEvent,
             TakeDamageEvent takeDamageEvent,
-            Transform target) : base
-            (createUpdatableObject, destroyUpdatableObject, resourceManager, bulletStartPosition, bulletStartDirection, collisionDetectorEvent, takeDamageEvent)
+            Transform target) : base(createUpdatableObject, destroyUpdatableObject, resourceManager, bulletStartPosition, bulletStartDirection, collisionDetectorEvent, takeDamageEvent)
         {
             _target = target;
         }
@@ -38,7 +37,7 @@ namespace Asteroids
             if (_target == null)
             {
                 Destroy();
-            } 
+            }
             else
             {
                 if (_missileRigidbody)
@@ -61,7 +60,7 @@ namespace Asteroids
             if (_missileView)
             {
                 _missileView.DestroyMissile();
-            }     
+            }
         }
 
         #endregion
