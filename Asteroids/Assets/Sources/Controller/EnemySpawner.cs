@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+
 namespace Asteroids
 {
     public sealed class EnemySpawner : UpdatableObject
@@ -14,7 +15,6 @@ namespace Asteroids
         private Vector3 _spawnPosition = new Vector3(0.0f, 0.0f, 110.0f);
 
         private Timers _timers;
-        private UpdatableControllersFactory _controllersFactory;
         private EnemyPool _enemyPool;
 
         #endregion
@@ -25,11 +25,11 @@ namespace Asteroids
         public EnemySpawner(
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
-            UpdatableControllersFactory controllersFactory) : base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
+            EnemyControllerFactory controllersFactory,
+            UpdatableControllersFactory updatableControllersFactory) : base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
-            _controllersFactory = controllersFactory;
-            _timers = _controllersFactory.CreateTimers();
-            _enemyPool = new EnemyPool(_controllersFactory, _enemyInPool);
+            _timers = updatableControllersFactory.CreateTimers();
+            _enemyPool = new EnemyPool(controllersFactory, _enemyInPool);
         }
 
         #endregion

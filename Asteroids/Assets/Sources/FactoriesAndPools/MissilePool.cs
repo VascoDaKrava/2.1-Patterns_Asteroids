@@ -18,14 +18,14 @@ namespace Asteroids
         #region ClassLifeCicles
 
         public MissilePool(
-            UpdatableControllersFactory controllersFactory,
+            MissileControllerFactory missileControllersFactory,
             int poolCapacity)
         {
             _poolCapacity = poolCapacity;
             _missiles = new Stack<LineMissileController>(_poolCapacity);
             for (int i = 0; i < _poolCapacity; i++)
             {
-                Push(controllersFactory.CreateMissileController(Vector3.zero, Quaternion.identity));
+                Push(missileControllersFactory.CreateMissileController(Vector3.zero, Quaternion.identity));
                 _missiles.Peek().SetMissilePool = this;
             }
         }

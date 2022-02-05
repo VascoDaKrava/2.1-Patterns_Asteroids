@@ -19,7 +19,7 @@ namespace Asteroids
 
         #region ClassLifeCycles
 
-        public EnemyPool(UpdatableControllersFactory controllersFactory,
+        public EnemyPool(EnemyControllerFactory enemyControllersFactory,
             int poolCapacity)
         {
             _poolCapacity = poolCapacity;
@@ -30,19 +30,19 @@ namespace Asteroids
                 
                 if (randomValue < _minValueForCreating)
                 {
-                    var enemy = controllersFactory.CreateSmallAsteroidController();
+                    var enemy = enemyControllersFactory.CreateSmallAsteroidController();
                     enemy.SetEnemyPool = this;
                     enemy.ReturnToPoolInTime();
                 }
                 else if (randomValue >= _minValueForCreating && randomValue <= _maxValueForCreating)
                 {
-                    var enemy = controllersFactory.CreateLargeAsteroidController();
+                    var enemy = enemyControllersFactory.CreateLargeAsteroidController();
                     enemy.SetEnemyPool = this;
                     enemy.ReturnToPoolInTime();
                 }
                 else if (randomValue > _maxValueForCreating)
                 {
-                    var enemy = controllersFactory.CreateEnemyShipController();
+                    var enemy = enemyControllersFactory.CreateEnemyShipController();
                     enemy.SetEnemyPool = this;
                     enemy.ReturnToPoolInTime();
                 }

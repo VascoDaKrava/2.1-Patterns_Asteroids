@@ -11,12 +11,10 @@ namespace Asteroids
         private CollisionDetectorEvent _collisionDetectorEvent;
         private ResourceManager _resourceManager;
         private ResourceManagerAudioClips _resourceManagerAudioClips;
-        private Rigidbody _shipRigidbody;
         private SettingsData _settingsData;
         private SoundSystemPlayController _soundSystemPlayController;
         private SoundSystemVolumeController _soundSystemVolumeController;
         private TakeDamageEvent _takeDamageEvent;
-        private Transform _bulletStartTransform;
         private UpdatableControllersFactory _controllersFactory;
 
         #endregion
@@ -61,11 +59,8 @@ namespace Asteroids
                 _collisionDetectorEvent,
                 _takeDamageEvent);
 
-            _shipRigidbody = GameObject.FindGameObjectWithTag(TagsAndLayers.PLAYER_TAG).GetComponent<Rigidbody>();
-            _bulletStartTransform = GameObject.FindGameObjectWithTag(TagsAndLayers.BULLET_START_POSITION_TAG).transform;
-
-            _controllersFactory.CreateShipController(_shipRigidbody);
-            _controllersFactory.CreateFireController(_bulletStartTransform, _controllersFactory);
+            _controllersFactory.CreateShipController(GameObject.FindGameObjectWithTag(TagsAndLayers.PLAYER_TAG).GetComponent<Rigidbody>());
+            _controllersFactory.CreateFireController(GameObject.FindGameObjectWithTag(TagsAndLayers.BULLET_START_POSITION_TAG).transform);
             _controllersFactory.CreateEnemySpawner();
         }
 

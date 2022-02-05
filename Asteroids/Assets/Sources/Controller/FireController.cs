@@ -14,12 +14,13 @@ namespace Asteroids
         private float _sonarRange = 50.0f;
         private float _sonarReloadTime = 5.0f; // Time in seconds between using sonar/autofire
 
-        private Transform _bulletStartTransform;
-        private Transform _enemyTargetTransform;
+        private MissileControllerFactory _missileFactory;
+        private MissilePool _missilePool;
         private Timers _primaryFireTimer;
         private Timers _sonarTimer;
+        private Transform _bulletStartTransform;
+        private Transform _enemyTargetTransform;
         private UpdatableControllersFactory _controllersFactory;
-        private MissilePool _missilePool;
         private bool _isAutoFireOn;
 
         #endregion
@@ -31,13 +32,15 @@ namespace Asteroids
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             Transform bulletStartTransform,
-            UpdatableControllersFactory controllersFactory) : base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
+            UpdatableControllersFactory controllersFactory,
+            MissileControllerFactory missileFactory) : base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _bulletStartTransform = bulletStartTransform;
             _controllersFactory = controllersFactory;
             _primaryFireTimer = _controllersFactory.CreateTimers();
             _sonarTimer = _controllersFactory.CreateTimers();
-            _missilePool = new MissilePool(controllersFactory, _misselesInPool);
+            _missileFactory = missileFactory;
+            _missilePool = new MissilePool(missileFactory, _misselesInPool);
         }
 
         #endregion
@@ -79,7 +82,7 @@ namespace Asteroids
 
         private void StartHomingMissile(Transform target)
         {
-            _controllersFactory.CreateMissileController(_bulletStartTransform.position, _bulletStartTransform.rotation, target);
+            _missileFactory.CreateMissileController(_bulletStartTransform.position, _bulletStartTransform.rotation, target);
         }
 
         /// <summary>
