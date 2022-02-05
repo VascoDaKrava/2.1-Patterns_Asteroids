@@ -20,8 +20,6 @@ namespace Asteroids
         #region ClassLifeCycles
 
         public EnemyPool(UpdatableControllersFactory controllersFactory,
-            ResourceManager resourceManager,
-            Transform spawnPosition,
             int poolCapacity)
         {
             _poolCapacity = poolCapacity;
@@ -32,19 +30,19 @@ namespace Asteroids
                 
                 if (randomValue < _minValueForCreating)
                 {
-                    var enemy = controllersFactory.CreateSmallAsteroidController(resourceManager, spawnPosition);
+                    var enemy = controllersFactory.CreateSmallAsteroidController();
                     enemy.SetEnemyPool = this;
                     enemy.ReturnToPoolInTime();
                 }
                 else if (randomValue >= _minValueForCreating && randomValue <= _maxValueForCreating)
                 {
-                    var enemy = controllersFactory.CreateLargeAsteroidController(resourceManager, spawnPosition);
+                    var enemy = controllersFactory.CreateLargeAsteroidController();
                     enemy.SetEnemyPool = this;
                     enemy.ReturnToPoolInTime();
                 }
                 else if (randomValue > _maxValueForCreating)
                 {
-                    var enemy = controllersFactory.CreateEnemyShipController(resourceManager, spawnPosition);
+                    var enemy = controllersFactory.CreateEnemyShipController();
                     enemy.SetEnemyPool = this;
                     enemy.ReturnToPoolInTime();
                 }
