@@ -38,7 +38,7 @@ namespace Asteroids
             if (_target == null)
             {
                 Destroy();
-            } 
+            }
             else
             {
                 if (_missileRigidbody)
@@ -61,7 +61,7 @@ namespace Asteroids
             if (_missileView)
             {
                 _missileView.DestroyMissile();
-            }     
+            }
         }
 
         #endregion
