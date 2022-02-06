@@ -20,8 +20,7 @@ namespace Asteroids
         private MainMenuHandlers _menuController;
         private SettingsData _settingsData;
         private SoundSystemVolumeController _volumeController;
-        private SoundSystemPlayController _playAudio;
-        private ResourceManagerAudioClips _audioClips;
+        private SoundSystemPlayController _audioPlay;
 
         #endregion
 
@@ -34,14 +33,12 @@ namespace Asteroids
             SoundSystemVolumeController volumeController,
             GraphicsQualityController graphicsQualityController,
             SoundSystemPlayController soundSystemPlayController,
-            ResourceManagerAudioClips audioClips,
             SettingsData settingsData)
         {
-            _audioClips = audioClips;
             _graphicsQuality = graphicsQualityController;
             _menuController = menuController;
             _optionsMenuElements = mainMenu.GetComponent<MainMenuElementsOptions>();
-            _playAudio = soundSystemPlayController;
+            _audioPlay = soundSystemPlayController;
             _settingsData = settingsData;
             _volumeController = volumeController;
 
@@ -109,7 +106,7 @@ namespace Asteroids
 
         private void ButtonBackOnClickHandler()
         {
-            _playAudio.PlaybackMenu(_audioClips.ButtonClick);
+            _audioPlay.PlaybackMenu(_audioPlay.AudioClips.ButtonClick);
             _volumeController.SaveSoundSettings();
             _graphicsQuality.SaveGraphicsSettings();
             DataSaveLoadRepo.SaveSettings(_settingsData);

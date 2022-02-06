@@ -16,8 +16,7 @@ namespace Asteroids
         private AudioMixer _audioMixer;
         private GameObject _pauseMenuGameObject;
         private PauseMenuElements _pauseMenuElements;
-        private ResourceManagerAudioClips _audioClips;
-        private SoundSystemPlayController _playAudio;
+        private SoundSystemPlayController _audioPlay;
 
         private bool _isMenuHide;
 
@@ -31,13 +30,11 @@ namespace Asteroids
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             GameObject pauseMenu,
             AudioMixer audioMixer,
-            SoundSystemPlayController playAudio,
-            ResourceManagerAudioClips audioClips) : base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
+            SoundSystemPlayController audioPlay) : base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
-            _audioClips = audioClips;
             _audioMixer = audioMixer;
             _pauseMenuGameObject = pauseMenu;
-            _playAudio = playAudio;
+            _audioPlay = audioPlay;
             _pauseMenuElements = pauseMenu.GetComponent<PauseMenuElements>();
 
             _isMenuHide = false;
@@ -73,20 +70,20 @@ namespace Asteroids
 
         private void ButtonResumeOnClickHandler()
         {
-            _playAudio.PlaybackMenu(_audioClips.ButtonClick);
+            _audioPlay.PlaybackMenu(_audioPlay.AudioClips.ButtonClick);
             ChangeMenuState();
         }
 
         private void ButtonBackToMenuOnClickHandler()
         {
-            _playAudio.PlaybackMenu(_audioClips.ButtonClick);
+            _audioPlay.PlaybackMenu(_audioPlay.AudioClips.ButtonClick);
             ChangeMenuState();
             SceneManager.LoadScene(Scenes.MAIN_MENU);
         }
 
         private void ButtonOnPointerEnterHandler()
         {
-            _playAudio.PlaybackMenu(_audioClips.ButtonEnter);
+            _audioPlay.PlaybackMenu(_audioPlay.AudioClips.ButtonEnter);
         }
 
         private void CheckPause()

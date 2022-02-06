@@ -21,7 +21,8 @@ namespace Asteroids
             DestroyUpdatableObjectEvent destroyUpdatable,
             ResourceManager resourceManager,
             CollisionDetectorEvent collisionDetectorEvent,
-            TakeDamageEvent takeDamageEvent)
+            TakeDamageEvent takeDamageEvent,
+            SoundSystemPlayController soundPlayController)
         {
             _createUpdatable = createUpdatable;
             _collisionDetectorEvent = collisionDetectorEvent;

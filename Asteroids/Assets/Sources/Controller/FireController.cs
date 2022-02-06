@@ -16,6 +16,7 @@ namespace Asteroids
 
         private MissileControllerFactory _missileFactory;
         private MissilePool _missilePool;
+        private SoundSystemPlayController _audioPlay;
         private Timers _primaryFireTimer;
         private Timers _sonarTimer;
         private Transform _bulletStartTransform;
@@ -33,12 +34,14 @@ namespace Asteroids
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             Transform bulletStartTransform,
             UpdatableControllersFactory controllersFactory,
-            MissileControllerFactory missileFactory) : base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
+            MissileControllerFactory missileFactory,
+            SoundSystemPlayController soundPlayController) : base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _bulletStartTransform = bulletStartTransform;
             _controllersFactory = controllersFactory;
             _primaryFireTimer = _controllersFactory.CreateTimers();
             _sonarTimer = _controllersFactory.CreateTimers();
+            _audioPlay = soundPlayController;
             _missileFactory = missileFactory;
             _missilePool = new MissilePool(missileFactory, _misselesInPool);
         }
@@ -56,6 +59,7 @@ namespace Asteroids
                 {
                     _primaryFireTimer.StartTimer(_rateOfFire);
                     _missilePool.Pop(_bulletStartTransform.position, _bulletStartTransform.rotation);
+                    //_audioPlay.PlaybackSFX(_);
                 }
             }
         }

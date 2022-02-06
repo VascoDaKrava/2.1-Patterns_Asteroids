@@ -11,6 +11,14 @@ namespace Asteroids
         private AudioSource _audioSourceMenu;
         private AudioSource _audioSourceSFX;
         private AudioSource _audioSourceMusic;
+        private ResourceManagerAudioClips _audioClips;
+
+        #endregion
+
+
+        #region Properties
+
+        public ResourceManagerAudioClips AudioClips => _audioClips;
 
         #endregion
 
@@ -22,6 +30,8 @@ namespace Asteroids
             _audioSourceMenu = GameObject.FindGameObjectWithTag(TagsAndLayers.MENU_AUDIOSOURCE_TAG).GetComponent<AudioSource>();
             _audioSourceSFX = GameObject.FindGameObjectWithTag(TagsAndLayers.SFX_AUDIOSOURCE_TAG).GetComponent<AudioSource>();
             _audioSourceMusic = GameObject.FindGameObjectWithTag(TagsAndLayers.MUSIC_AUDIOSOURCE_TAG).GetComponent<AudioSource>();
+
+            _audioClips = new ResourceManagerAudioClips();
 
             _audioSourceMusic.loop = true;
         }

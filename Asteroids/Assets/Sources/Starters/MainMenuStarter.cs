@@ -10,7 +10,6 @@ namespace Asteroids
 
         private GraphicsQualityController _graphicsQualityController;
         private ResourceManager _resources;
-        private ResourceManagerAudioClips _resourcesAudioClips;
         private SettingsData _settingsData;
         private SoundSystemPlayController _soundSystemPlayController;
         private SoundSystemVolumeController _volumeController;
@@ -23,7 +22,6 @@ namespace Asteroids
         private void Awake()
         {
             _resources = new ResourceManager();
-            _resourcesAudioClips = new ResourceManagerAudioClips();
             _soundSystemPlayController = new SoundSystemPlayController();
             _settingsData = DataSaveLoadRepo.LoadSettings();
             _volumeController = new SoundSystemVolumeController(_settingsData, _resources.AudioMixer);
@@ -34,10 +32,9 @@ namespace Asteroids
                 _volumeController,
                 _graphicsQualityController,
                 _soundSystemPlayController,
-                _resourcesAudioClips,
                 _settingsData);
 
-            _soundSystemPlayController.PlaybackMusic(_resourcesAudioClips.Menu);
+            _soundSystemPlayController.PlaybackMusic(_soundSystemPlayController.AudioClips.Menu);
         }
 
         private void Start()

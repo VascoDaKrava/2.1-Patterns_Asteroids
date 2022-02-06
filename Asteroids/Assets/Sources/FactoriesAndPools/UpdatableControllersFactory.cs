@@ -15,6 +15,7 @@ namespace Asteroids
         private DestroyUpdatableObjectEvent _destroyUpdatable;
         private EnemyControllerFactory _enemyControllersFactory;
         private MissileControllerFactory _missileControllersFactory;
+        private SoundSystemPlayController _soundPlayController;
         private TakeDamageEvent _takeDamageEvent;
 
         #endregion
@@ -27,25 +28,29 @@ namespace Asteroids
             DestroyUpdatableObjectEvent destroyUpdatable,
             ResourceManager resourceManager,
             CollisionDetectorEvent collisionDetectorEvent,
-            TakeDamageEvent takeDamageEvent)
+            TakeDamageEvent takeDamageEvent,
+            SoundSystemPlayController soundPlayController)
         {
             _createUpdatable = createUpdatable;
             _destroyUpdatable = destroyUpdatable;
             _takeDamageEvent = takeDamageEvent;
+            _soundPlayController = soundPlayController;
 
             _enemyControllersFactory = new EnemyControllerFactory(
                 createUpdatable,
                 destroyUpdatable,
                 resourceManager,
                 collisionDetectorEvent,
-                takeDamageEvent);
+                takeDamageEvent,
+                soundPlayController);
 
             _missileControllersFactory = new MissileControllerFactory(
                 collisionDetectorEvent,
                 createUpdatable,
                 destroyUpdatable,
                 resourceManager,
-                takeDamageEvent);
+                takeDamageEvent,
+                soundPlayController);
         }
 
         #endregion
@@ -65,7 +70,8 @@ namespace Asteroids
                 _createUpdatable,
                 _destroyUpdatable,
                 rigidbody,
-                _takeDamageEvent);
+                _takeDamageEvent,
+                _soundPlayController);
         }
 
         /// <summary>
@@ -81,7 +87,8 @@ namespace Asteroids
                 _destroyUpdatable,
                 bulletStartPosition,
                 this,
-                _missileControllersFactory);
+                _missileControllersFactory,
+                _soundPlayController);
         }
 
         /// <summary>
@@ -105,7 +112,8 @@ namespace Asteroids
                 _createUpdatable,
                 _destroyUpdatable,
                 _enemyControllersFactory,
-                this);
+                this,
+                _soundPlayController);
         }
 
         #endregion

@@ -17,8 +17,7 @@ namespace Asteroids
 
         private MainMenuElements _menuElements;
         private MainMenuHandlersOptions _optionsController;
-        private ResourceManagerAudioClips _audioClips;
-        private SoundSystemPlayController _playAudio;
+        private SoundSystemPlayController _audioPlay;
 
         #endregion
 
@@ -30,14 +29,12 @@ namespace Asteroids
             SoundSystemVolumeController volumeController,
             GraphicsQualityController graphicsQualityController,
             SoundSystemPlayController soundSystemPlayController,
-            ResourceManagerAudioClips audioClips,
             SettingsData settingsData)
         {
             _menuElements = mainMenu.GetComponent<MainMenuElements>();
-            _playAudio = soundSystemPlayController;
-            _audioClips = audioClips;
+            _audioPlay = soundSystemPlayController;
 
-            _optionsController = new MainMenuHandlersOptions(mainMenu, this, volumeController, graphicsQualityController, soundSystemPlayController, audioClips, settingsData);
+            _optionsController = new MainMenuHandlersOptions(mainMenu, this, volumeController, graphicsQualityController, soundSystemPlayController, settingsData);
 
             SubscribeOnEvent();
         }
@@ -77,20 +74,20 @@ namespace Asteroids
 
         private void ButtonStartOnClickHandler()
         {
-            _playAudio.PlaybackMenu(_audioClips.ButtonClick);
+            _audioPlay.PlaybackMenu(_audioPlay.AudioClips.ButtonClick);
             SceneManager.LoadScene(Scenes.FIRST_LEVEL);
         }
 
         private void ButtonOptionsOnClickHandler()
         {
-            _playAudio.PlaybackMenu(_audioClips.ButtonClick);
+            _audioPlay.PlaybackMenu(_audioPlay.AudioClips.ButtonClick);
             SetMenuButtonsVisible(false);
             _optionsController.SetMenuOptionsVisible(true);
         }
 
         private void ButtonExitOnClickHandler()
         {
-            _playAudio.PlaybackMenu(_audioClips.ButtonClick);
+            _audioPlay.PlaybackMenu(_audioPlay.AudioClips.ButtonClick);
 
 #if UNITY_EDITOR
             EditorApplication.isPlaying = false;
@@ -101,7 +98,7 @@ namespace Asteroids
 
         private void ButtonOnPointerEnterHandler()
         {
-            _playAudio.PlaybackMenu(_audioClips.ButtonEnter);
+            _audioPlay.PlaybackMenu(_audioPlay.AudioClips.ButtonEnter);
         }
 
         #endregion

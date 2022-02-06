@@ -26,7 +26,8 @@ namespace Asteroids
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             Rigidbody rigidbody,
-            TakeDamageEvent takeDamageEvent) : base
+            TakeDamageEvent takeDamageEvent,
+            SoundSystemPlayController soundPlayController) : base
             (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _takeDamageEvent = takeDamageEvent;
