@@ -69,6 +69,8 @@ namespace Asteroids
             _controllersFactory.CreateShipController(_shipRigidbody);
             _controllersFactory.CreateFireController(_bulletStartTransform, _controllersFactory);
             _controllersFactory.CreateEnemySpawner(_spawnPosition, _resourceManager, _controllersFactory);
+
+            new ExplosionController(_collisionDetectorEvent, _resourceManager);
         }
 
         #endregion
