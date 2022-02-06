@@ -9,9 +9,9 @@ namespace Asteroids
         #region Fields
 
         private CollisionDetectorEvent _collisionDetectorEvent;
-        private ResourceManager _resourceManager;
         private GameObject _explosionGameObject;
         private ParticleSystem _explosion;
+        private ResourceManager _resourceManager;
 
         #endregion
 

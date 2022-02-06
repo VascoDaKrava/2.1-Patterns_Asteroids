@@ -101,8 +101,21 @@ namespace Asteroids
             {
                 if (damageRecieverView == _enemyView)
                 {
+                    PlayHitSound();
                     ChangeStrength(damage);
                 }
+            }
+        }
+
+        private void PlayHitSound()
+        {
+            if (this is AsteroidController)
+            {
+                AudioPlay.PlaybackSFX(AudioPlay.AudioClips.HitAsteroid);
+            }
+            else
+            {
+                AudioPlay.PlaybackSFX(AudioPlay.AudioClips.HitEnemyShip);
             }
         }
 
