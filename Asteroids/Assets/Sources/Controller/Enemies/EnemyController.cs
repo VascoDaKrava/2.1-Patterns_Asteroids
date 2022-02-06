@@ -133,10 +133,12 @@ namespace Asteroids
             _enemyRigidbody.transform.position = position;
             _enemyRigidbody.transform.rotation = rotation;
             AddToUpdate();
+            _enemyView.gameObject.GetComponentInChildren<TrailRenderer>().enabled = true;
         }
 
         public void PrepareBeforePush()
         {
+            _enemyView.gameObject.GetComponentInChildren<TrailRenderer>().enabled = false;
             RemoveFromUpdate();
             _enemyRigidbody.gameObject.SetActive(false);
         }

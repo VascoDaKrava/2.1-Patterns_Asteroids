@@ -11,6 +11,7 @@ namespace Asteroids
         protected MissileModel _missileModel;
         protected MissileView _missileView;
         protected Rigidbody _missileRigidbody;
+        protected TrailRenderer _trailRenderer;
         private CollisionDetectorEvent _collisionDetectorEvent;
         private TakeDamageEvent _takeDamageEvent;
 
@@ -37,6 +38,8 @@ namespace Asteroids
                 resourceManager.MissileAIM9,
                 bulletStartPosition,
                 bulletStartDirection).GetComponent<MissileView>();
+
+            _trailRenderer = _missileView.gameObject.GetComponentInChildren<TrailRenderer>();
 
             _missileView.CollisionDetectorEvent = _collisionDetectorEvent;
 
