@@ -62,6 +62,8 @@ namespace Asteroids
             _controllersFactory.CreateShipController(GameObject.FindGameObjectWithTag(TagsAndLayers.PLAYER_TAG).GetComponent<Rigidbody>());
             _controllersFactory.CreateFireController(GameObject.FindGameObjectWithTag(TagsAndLayers.BULLET_START_POSITION_TAG).transform);
             _controllersFactory.CreateEnemySpawner();
+
+            new ExplosionController(_collisionDetectorEvent, _resourceManager);
         }
 
         #endregion
