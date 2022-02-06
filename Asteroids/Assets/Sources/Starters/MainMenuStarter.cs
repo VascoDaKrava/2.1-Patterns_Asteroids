@@ -40,7 +40,6 @@ namespace Asteroids
         private void Start()
         {
             _volumeController.ApplySettings();
-            _resources.AudioMixer.SetFloat(AudioMixerParams.LOWPASS, AudioMixerParams.LOWPASS_HIGH);
         }
 
         #endregion

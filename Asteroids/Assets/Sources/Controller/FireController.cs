@@ -59,7 +59,7 @@ namespace Asteroids
                 {
                     _primaryFireTimer.StartTimer(_rateOfFire);
                     _missilePool.Pop(_bulletStartTransform.position, _bulletStartTransform.rotation);
-                    //_audioPlay.PlaybackSFX(_);
+                    _audioPlay.PlaybackSFX(_audioPlay.AudioClips.StartMissile);
                 }
             }
         }
@@ -79,6 +79,7 @@ namespace Asteroids
                     if (StartSonar(_bulletStartTransform.position, _sonarRange, out _enemyTargetTransform))
                     {
                         StartHomingMissile(_enemyTargetTransform);
+                        _audioPlay.PlaybackSFX(_audioPlay.AudioClips.StartMissile);
                     }
                 }
             }

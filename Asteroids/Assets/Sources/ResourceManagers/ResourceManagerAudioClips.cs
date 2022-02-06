@@ -40,6 +40,7 @@ namespace Asteroids
             HitEnemyShip = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_HIT_ENEMY_SHIP);
             MovingEnemyShip = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_MOVING_ENEMY_SHIP);
             MovingPlayerShip = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_MOVING_PLAYER_SHIP);
+
             StartMissile = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_START_MISSILE);
         }
 
