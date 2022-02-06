@@ -37,12 +37,13 @@ namespace Asteroids
                 _resourcesAudioClips,
                 _settingsData);
 
-            _soundSystemPlayController.PlaybackMusic(_resourcesAudioClips.AudioClipMenu);
+            _soundSystemPlayController.PlaybackMusic(_resourcesAudioClips.Menu);
         }
 
         private void Start()
         {
             _volumeController.ApplySettings();
+            _resources.AudioMixer.SetFloat(AudioMixerParams.LOWPASS, AudioMixerParams.LOWPASS_HIGH);
         }
 
         #endregion

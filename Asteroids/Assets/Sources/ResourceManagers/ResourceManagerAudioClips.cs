@@ -8,13 +8,11 @@ namespace Asteroids
 
         #region Properties
 
-        public AudioClip AudioClipMenu { get; private set; }
-        
-        public AudioClip AudioClipGame { get; private set; }
-        
-        public AudioClip AudioClipButtonEnter { get; private set; }
-        
-        public AudioClip AudioClipButtonClick { get; private set; }
+        public AudioClip Menu { get; private set; }
+        public AudioClip Game { get; private set; }
+        public AudioClip GameLose { get; private set; }
+        public AudioClip ButtonEnter { get; private set; }
+        public AudioClip ButtonClick { get; private set; }
 
         #endregion
 
@@ -23,10 +21,11 @@ namespace Asteroids
 
         public ResourceManagerAudioClips()
         {
-            AudioClipMenu = Resources.Load<AudioClip>(ResourcesPathAudio.MUSIC_MENU);
-            AudioClipGame = Resources.Load<AudioClip>(ResourcesPathAudio.MUSIC_GAME);
-            AudioClipButtonEnter = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_BUTTON_ENTER);
-            AudioClipButtonClick = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_BUTTON_CLICK);
+            Menu = Resources.Load<AudioClip>(ResourcesPathAudio.MUSIC_MENU);
+            Game = Resources.Load<AudioClip>(ResourcesPathAudio.MUSIC_GAME);
+            GameLose = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_GAME_OVER);
+            ButtonEnter = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_BUTTON_ENTER);
+            ButtonClick = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_BUTTON_CLICK);
         }
 
         #endregion

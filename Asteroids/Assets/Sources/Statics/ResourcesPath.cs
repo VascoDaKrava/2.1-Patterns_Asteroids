@@ -11,6 +11,7 @@ namespace Asteroids
         public const string ASTEROID = "Asteroid";
         public const string ENEMY_SHIP = "EnemyShip";
         public const string EXPLOSION = "Explosion";
+        public const string GAME_LOSE = "GameLoseMenu";
         public const string LARGE_ASTEROID = "LargeAsteroid";
         public const string MAIN_MENU = "MainMenu";
         public const string MISSILE_AIM9 = "MissileAIM9";

@@ -42,7 +42,7 @@ namespace Asteroids
             _soundSystemPlayController = new SoundSystemPlayController();
             _soundSystemVolumeController = new SoundSystemVolumeController(_settingsData, _resourceManager.AudioMixer);
             new GraphicsQualityController(_settingsData);
-            _soundSystemPlayController.PlaybackMusic(_resourceManagerAudioClips.AudioClipGame);
+            _soundSystemPlayController.PlaybackMusic(_resourceManagerAudioClips.Game);
 
             new PauseMenuHandlers(
                 createUpdatableObjectEvent,
@@ -64,6 +64,8 @@ namespace Asteroids
             _controllersFactory.CreateEnemySpawner();
 
             new ExplosionController(_collisionDetectorEvent, _resourceManager);
+
+            new GameLoseController(_collisionDetectorEvent, _resourceManager, _soundSystemPlayController, _resourceManagerAudioClips);
         }
 
         #endregion

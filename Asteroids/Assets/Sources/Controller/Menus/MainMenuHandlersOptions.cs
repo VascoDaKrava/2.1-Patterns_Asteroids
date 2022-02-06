@@ -109,7 +109,7 @@ namespace Asteroids
 
         private void ButtonBackOnClickHandler()
         {
-            _playAudio.PlaybackMenu(_audioClips.AudioClipButtonClick);
+            _playAudio.PlaybackMenu(_audioClips.ButtonClick);
             _volumeController.SaveSoundSettings();
             _graphicsQuality.SaveGraphicsSettings();
             DataSaveLoadRepo.SaveSettings(_settingsData);

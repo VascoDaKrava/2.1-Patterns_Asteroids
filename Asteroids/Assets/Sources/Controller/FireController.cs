@@ -98,7 +98,7 @@ namespace Asteroids
             float nearestDistance = float.PositiveInfinity;
             float currentDistanceToTarget;
 
-            foreach (Collider item in Physics.OverlapSphere(startPosition, radius, TagsAndLayers.ENEMY_LAYER, QueryTriggerInteraction.Collide))
+            foreach (Collider item in Physics.OverlapSphere(startPosition, radius, TagsAndLayers.ENEMY_LAYER_MASK, QueryTriggerInteraction.Collide))
             {
                 currentDistanceToTarget = Vector3.Distance(item.transform.position, _bulletStartTransform.position);
 
