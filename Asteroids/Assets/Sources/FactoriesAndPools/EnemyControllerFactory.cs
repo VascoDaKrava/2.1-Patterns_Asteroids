@@ -10,6 +10,7 @@ namespace Asteroids
         private DestroyUpdatableObjectEvent _destroyUpdatable;
         private EnemyViewFactory _enemyViewFactory;
         private ResourceManager _resourceManager;
+        private SoundSystemPlayController _audioPlay;
         private TakeDamageEvent _takeDamageEvent;
 
         #endregion
@@ -24,6 +25,7 @@ namespace Asteroids
             TakeDamageEvent takeDamageEvent,
             SoundSystemPlayController soundPlayController)
         {
+            _audioPlay = soundPlayController;
             _createUpdatable = createUpdatable;
             _collisionDetectorEvent = collisionDetectorEvent;
             _destroyUpdatable = destroyUpdatable;
@@ -52,6 +54,7 @@ namespace Asteroids
 
             controller.EnemyModel = new AsteroidSmallModel();
             controller.EnemyView = _enemyViewFactory.CreateSmallAsteroid();
+            controller.AudioPlay = _audioPlay;
             return controller;
         }
 
@@ -69,6 +72,7 @@ namespace Asteroids
 
             controller.EnemyModel = new AsteroidLargeModel();
             controller.EnemyView = _enemyViewFactory.CreateLargeAsteroid();
+            controller.AudioPlay = _audioPlay;
             return controller;
         }
 
@@ -86,6 +90,7 @@ namespace Asteroids
 
             controller.EnemyModel = new EnemyShipModel();
             controller.EnemyView = _enemyViewFactory.CreateEnemyShip();
+            controller.AudioPlay = _audioPlay;
             return controller;
         }
 
