@@ -13,10 +13,9 @@ namespace Asteroids
 
         private CreateUpdatableObjectEvent _createUpdatable;
         private DestroyUpdatableObjectEvent _destroyUpdatable;
-        private ResourceManager _resourceManager;
-        private CollisionDetectorEvent _collisionDetectorEvent;
+        private EnemyControllerFactory _enemyControllersFactory;
+        private MissileControllerFactory _missileControllersFactory;
         private TakeDamageEvent _takeDamageEvent;
-        private EnemyFactory _enemyFactory;
 
         #endregion
 
@@ -32,10 +31,21 @@ namespace Asteroids
         {
             _createUpdatable = createUpdatable;
             _destroyUpdatable = destroyUpdatable;
-            _resourceManager = resourceManager;
-            _collisionDetectorEvent = collisionDetectorEvent;
             _takeDamageEvent = takeDamageEvent;
-            _enemyFactory = new EnemyFactory();
+
+            _enemyControllersFactory = new EnemyControllerFactory(
+                createUpdatable,
+                destroyUpdatable,
+                resourceManager,
+                collisionDetectorEvent,
+                takeDamageEvent);
+
+            _missileControllersFactory = new MissileControllerFactory(
+                collisionDetectorEvent,
+                createUpdatable,
+                destroyUpdatable,
+                resourceManager,
+                takeDamageEvent);
         }
 
         #endregion
@@ -62,60 +72,16 @@ namespace Asteroids
         /// Create new FireController
         /// </summary>
         /// <param name="bulletStartPosition">Link to Transform, where bullet was instantiate</param>
-        /// <param name="updatableControllersFactory">Link to ControllersFactory</param>
         /// <returns></returns>
         public FireController CreateFireController(
-            Transform bulletStartPosition,
-            UpdatableControllersFactory updatableControllersFactory)
+            Transform bulletStartPosition)
         {
             return new FireController(
                 _createUpdatable,
                 _destroyUpdatable,
                 bulletStartPosition,
-                updatableControllersFactory);
-        }
-
-        /// <summary>
-        /// Create new LineMissileController
-        /// </summary>
-        /// <param name="bulletStartPosition">Position, where bullet was instantiate</param>
-        /// <param name="bulletStartDirection">Direction of bullet, when it was instantiate</param>
-        /// <returns></returns>
-        public LineMissileController CreateMissileController(
-            Vector3 bulletStartPosition,
-            Quaternion bulletStartDirection)
-        {
-            return new LineMissileController(
-                _createUpdatable,
-                _destroyUpdatable,
-                _resourceManager,
-                bulletStartPosition,
-                bulletStartDirection,
-                _collisionDetectorEvent,
-                _takeDamageEvent);
-        }
-
-        /// <summary>
-        /// Create new HomingMissileController
-        /// </summary>
-        /// <param name="bulletStartPosition">Position, where bullet was instantiate</param>
-        /// <param name="bulletStartDirection">Direction of bullet, when it was instantiate</param>
-        /// <param name="target">Transform of target of missile</param>
-        /// <returns></returns>
-        public HomingMissileController CreateMissileController(
-            Vector3 bulletStartPosition,
-            Quaternion bulletStartDirection,
-            Transform target)
-        {
-            return new HomingMissileController(
-                _createUpdatable,
-                _destroyUpdatable,
-                _resourceManager,
-                bulletStartPosition,
-                bulletStartDirection,
-                _collisionDetectorEvent,
-                _takeDamageEvent,
-                target);
+                this,
+                _missileControllersFactory);
         }
 
         /// <summary>
@@ -132,76 +98,14 @@ namespace Asteroids
         /// <summary>
         /// Create new EnemySpawner
         /// </summary>
-        /// <param name="spawnPosition">Link to Transform, where Enemy was instantiate</param>
-        /// <param name="controllersFactory">Link to ControllersFactory</param>
         /// <returns></returns>
-        public EnemySpawner CreateEnemySpawner(
-            Transform spawnPosition,
-            ResourceManager resourceManager,
-            UpdatableControllersFactory controllersFactory)
+        public EnemySpawner CreateEnemySpawner()
         {
             return new EnemySpawner(
                 _createUpdatable,
                 _destroyUpdatable,
-                resourceManager,
-                spawnPosition,
-                controllersFactory);
-        }
-
-        /// <summary>
-        /// Create new Small AsteroidController
-        /// </summary>
-        /// <param name="spawnPosition">Link to Transform, where Enemy was instantiate</param>
-        /// <returns></returns>
-        public AsteroidController CreateSmallAsteroidController(ResourceManager resourceManager,
-            Transform spawnPosition)
-        {
-           var controller = new AsteroidController(
-                _createUpdatable,
-                _destroyUpdatable,
-                _collisionDetectorEvent,
-                _takeDamageEvent);
-
-            controller.EnemyModel = new AsteroidSmallModel();
-            controller.EnemyView = _enemyFactory.CreateSmallAsteroid(resourceManager, spawnPosition);
-            return controller;
-        }
-
-        /// <summary>
-        /// Create new Large AsteroidController
-        /// </summary>
-        /// <param name="spawnPosition">Link to Transform, where Enemy was instantiate</param>
-        /// <returns></returns>
-        public AsteroidController CreateLargeAsteroidController(ResourceManager resourceManager,
-            Transform spawnPosition)
-        {
-            var controller = new AsteroidController(
-                 _createUpdatable,
-                 _destroyUpdatable,
-                 _collisionDetectorEvent,
-                 _takeDamageEvent);
-
-            controller.EnemyModel = new AsteroidLargeModel();
-            controller.EnemyView = _enemyFactory.CreateLargeAsteroid(resourceManager, spawnPosition);
-            return controller;
-        }
-
-        /// <summary>
-        /// Create new EnemyShipController
-        /// </summary>
-        /// <param name="spawnPosition">Link to Transform, where Enemy was instantiate</param>
-        /// <returns></returns>
-        public EnemyShipController CreateEnemyShipController(ResourceManager resourceManager, Transform spawnPosition)
-        {
-            var controller = new EnemyShipController(
-                 _createUpdatable,
-                 _destroyUpdatable,
-                 _collisionDetectorEvent,
-                 _takeDamageEvent);
-
-            controller.EnemyModel = new EnemyShipModel();
-            controller.EnemyView = _enemyFactory.CreateEnemyShip(resourceManager, spawnPosition);
-            return controller;
+                _enemyControllersFactory,
+                this);
         }
 
         #endregion
