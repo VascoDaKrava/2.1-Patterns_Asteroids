@@ -73,20 +73,20 @@ namespace Asteroids
 
         private void ButtonResumeOnClickHandler()
         {
-            _playAudio.PlaybackMenu(_audioClips.AudioClipButtonClick);
+            _playAudio.PlaybackMenu(_audioClips.ButtonClick);
             ChangeMenuState();
         }
 
         private void ButtonBackToMenuOnClickHandler()
         {
-            _playAudio.PlaybackMenu(_audioClips.AudioClipButtonClick);
+            _playAudio.PlaybackMenu(_audioClips.ButtonClick);
             ChangeMenuState();
             SceneManager.LoadScene(Scenes.MAIN_MENU);
         }
 
         private void ButtonOnPointerEnterHandler()
         {
-            _playAudio.PlaybackMenu(_audioClips.AudioClipButtonEnter);
+            _playAudio.PlaybackMenu(_audioClips.ButtonEnter);
         }
 
         private void CheckPause()
@@ -105,12 +105,12 @@ namespace Asteroids
 
             if (_isMenuHide)
             {
-                Time.timeScale = 1;
+                Time.timeScale = 1.0f;
                 _audioMixer.SetFloat(AudioMixerParams.LOWPASS, AudioMixerParams.LOWPASS_HIGH);
             }
             else
             {
-                Time.timeScale = 0;
+                Time.timeScale = 0.0f;
                 _audioMixer.SetFloat(AudioMixerParams.LOWPASS, AudioMixerParams.LOWPASS_LOW);
             }
         }

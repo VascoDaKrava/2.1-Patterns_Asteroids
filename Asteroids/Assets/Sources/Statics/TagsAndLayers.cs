@@ -16,7 +16,8 @@ namespace Asteroids
         public const string SFX_AUDIOSOURCE_TAG = "SFXSource";
         public const string MENU_AUDIOSOURCE_TAG = "MenuSource";
 
-        public const int ENEMY_LAYER = 1 << 6;
+        public const int ENEMY_LAYER = 6;
+        public const int ENEMY_LAYER_MASK = 1 << ENEMY_LAYER;
 
         #endregion
 

@@ -77,20 +77,20 @@ namespace Asteroids
 
         private void ButtonStartOnClickHandler()
         {
-            _playAudio.PlaybackMenu(_audioClips.AudioClipButtonClick);
+            _playAudio.PlaybackMenu(_audioClips.ButtonClick);
             SceneManager.LoadScene(Scenes.FIRST_LEVEL);
         }
 
         private void ButtonOptionsOnClickHandler()
         {
-            _playAudio.PlaybackMenu(_audioClips.AudioClipButtonClick);
+            _playAudio.PlaybackMenu(_audioClips.ButtonClick);
             SetMenuButtonsVisible(false);
             _optionsController.SetMenuOptionsVisible(true);
         }
 
         private void ButtonExitOnClickHandler()
         {
-            _playAudio.PlaybackMenu(_audioClips.AudioClipButtonClick);
+            _playAudio.PlaybackMenu(_audioClips.ButtonClick);
 
 #if UNITY_EDITOR
             EditorApplication.isPlaying = false;
@@ -101,7 +101,7 @@ namespace Asteroids
 
         private void ButtonOnPointerEnterHandler()
         {
-            _playAudio.PlaybackMenu(_audioClips.AudioClipButtonEnter);
+            _playAudio.PlaybackMenu(_audioClips.ButtonEnter);
         }
 
         #endregion
