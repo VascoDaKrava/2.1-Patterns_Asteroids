@@ -61,6 +61,8 @@ namespace Asteroids
             _controllersFactory.CreateFireController(GameObject.FindGameObjectWithTag(TagsAndLayers.BULLET_START_POSITION_TAG).transform);
             _controllersFactory.CreateEnemySpawner();
 
+            _controllersFactory.CreateCheatUsage();
+
             new ExplosionController(_collisionDetectorEvent, _resourceManager);
 
             new GameLoseController(_collisionDetectorEvent, _resourceManager, _soundSystemPlayController);

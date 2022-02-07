@@ -116,6 +116,14 @@ namespace Asteroids
                 _soundPlayController);
         }
 
+        public CheatUsageController CreateCheatUsage()
+        {
+            return new CheatUsageController(
+                _createUpdatable,
+                _destroyUpdatable
+                );
+        }
+
         #endregion
 
     }
