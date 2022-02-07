@@ -122,7 +122,8 @@ namespace Asteroids
                 _createUpdatable,
                 _destroyUpdatable,
                 pauseMenu,
-                playerShip
+                playerShip,
+                _takeDamageEvent
                 );
         }
 

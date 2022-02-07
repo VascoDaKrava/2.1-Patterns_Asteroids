@@ -9,6 +9,7 @@ namespace Asteroids
         #region Fields
 
         private PauseMenuHandlers _pauseMenu;
+        private TakeDamageEvent _takeDamageEvent;
         private Transform _playerShip;
 
         #endregion
@@ -20,9 +21,11 @@ namespace Asteroids
             CreateUpdatableObjectEvent createUpdatableObject,
             DestroyUpdatableObjectEvent destroyUpdatableObject,
             PauseMenuHandlers pauseMenu,
-            Transform playerShip) : base(createUpdatableObject, destroyUpdatableObject)
+            Transform playerShip,
+            TakeDamageEvent takeDamageEvent) : base(createUpdatableObject, destroyUpdatableObject)
         {
             _pauseMenu = pauseMenu;
+            _takeDamageEvent = takeDamageEvent;
             _playerShip = playerShip;
         }
 
@@ -37,7 +40,7 @@ namespace Asteroids
             {
                 if (Sonar.StartSonar(_playerShip.position, float.MaxValue, out Transform target))
                 {
-                    Debug.Log("CHEAT " + target.name);
+                    _takeDamageEvent.Invoke(target, int.MaxValue);
                 }
             }
         }
