@@ -116,11 +116,12 @@ namespace Asteroids
                 _soundPlayController);
         }
 
-        public CheatUsageController CreateCheatUsage()
+        public CheatUsageController CreateCheatUsage(PauseMenuHandlers pauseMenu)
         {
             return new CheatUsageController(
                 _createUpdatable,
-                _destroyUpdatable
+                _destroyUpdatable,
+                pauseMenu
                 );
         }
 
