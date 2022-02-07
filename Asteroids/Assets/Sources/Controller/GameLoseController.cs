@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 namespace Asteroids
@@ -10,9 +9,8 @@ namespace Asteroids
         #region Fields
 
         private CollisionDetectorEvent _collisionDetectorEvent;
-        private SoundSystemPlayController _soundPlay;
+        private SoundSystemPlayController _audioPlay;
         private ResourceManager _resource;
-        private ResourceManagerAudioClips _audioClips;
 
         #endregion
 
@@ -22,12 +20,10 @@ namespace Asteroids
         public GameLoseController(
             CollisionDetectorEvent collisionDetectorEvent,
             ResourceManager resourceManager,
-            SoundSystemPlayController soundSystemPlayController,
-            ResourceManagerAudioClips resourceManagerAudioClips)
+            SoundSystemPlayController soundSystemPlayController)
         {
-            _soundPlay = soundSystemPlayController;
+            _audioPlay = soundSystemPlayController;
             _resource = resourceManager;
-            _audioClips = resourceManagerAudioClips;
             _collisionDetectorEvent = collisionDetectorEvent;
             _collisionDetectorEvent.CollisionDetector += CollisionHandeler;
         }
@@ -55,8 +51,8 @@ namespace Asteroids
         {
             Time.timeScale = 0.0f;
             _resource.AudioMixer.SetFloat(AudioMixerParams.LOWPASS, AudioMixerParams.LOWPASS_LOW);
-            _soundPlay.PlaybackSFX(_audioClips.GameLose);
-            GameObject.Instantiate(_resource.GameLose).GetComponent<LoadSceneAfterTime>().StartLoadSceneAfterTime(_audioClips.GameLose.length, Scenes.MAIN_MENU);
+            _audioPlay.PlaybackSFX(_audioPlay.AudioClips.GameLose);
+            GameObject.Instantiate(_resource.GameLose).GetComponent<LoadSceneAfterTime>().StartLoadSceneAfterTime(_audioPlay.AudioClips.GameLose.length, Scenes.MAIN_MENU);
         }
 
         #endregion

@@ -9,8 +9,10 @@ namespace Asteroids
         #region Fields
 
         private Vector3 _moveDirection;
+        private Rigidbody _rigidbody;
         private ShipModel _shipModel;
         private ShipView _shipView;
+        private SoundSystemPlayController _soundPlay;
         private TakeDamageEvent _takeDamageEvent;
 
         #endregion
@@ -26,13 +28,16 @@ namespace Asteroids
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             Rigidbody rigidbody,
-            TakeDamageEvent takeDamageEvent) : base
+            TakeDamageEvent takeDamageEvent,
+            SoundSystemPlayController soundPlayController) : base
             (createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
-            _takeDamageEvent = takeDamageEvent;
-            _takeDamageEvent.TakeDamage += TakeDamageEventHandler;
+            _rigidbody = rigidbody;
             _shipModel = new ShipModel(rigidbody);
             _shipView = GameObject.FindObjectOfType<ShipView>();
+            _soundPlay = soundPlayController;
+            _takeDamageEvent = takeDamageEvent;
+            _takeDamageEvent.TakeDamage += TakeDamageEventHandler;
         }
 
         #endregion
@@ -77,6 +82,17 @@ namespace Asteroids
             }
         }
 
+        private void PlaySoundIfFly()
+        {
+            if (_rigidbody.velocity != Vector3.zero)
+            {
+                if (!_soundPlay.PlaybackSFX())
+                {
+                    _soundPlay.PlaybackSFX(_soundPlay.AudioClips.MovingPlayerShip);
+                }
+            }
+        }
+
         #endregion
 
 
@@ -97,6 +113,7 @@ namespace Asteroids
         public override void LetUpdate()
         {
             LetMoveShip();
+            PlaySoundIfFly();
         }
 
         #endregion

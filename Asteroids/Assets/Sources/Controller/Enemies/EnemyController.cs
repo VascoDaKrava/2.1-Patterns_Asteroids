@@ -36,6 +36,8 @@ namespace Asteroids
             set => _enemyPool = value;
         }
 
+        public SoundSystemPlayController AudioPlay { protected get; set; }
+
         #endregion
 
 
@@ -89,7 +91,6 @@ namespace Asteroids
                     {
                         Hit();
                     }
-
                 }
             }
         }
@@ -100,8 +101,21 @@ namespace Asteroids
             {
                 if (damageRecieverView == _enemyView)
                 {
+                    PlayHitSound();
                     ChangeStrength(damage);
                 }
+            }
+        }
+
+        private void PlayHitSound()
+        {
+            if (this is AsteroidController)
+            {
+                AudioPlay.PlaybackSFX(AudioPlay.AudioClips.HitAsteroid);
+            }
+            else
+            {
+                AudioPlay.PlaybackSFX(AudioPlay.AudioClips.HitEnemyShip);
             }
         }
 
@@ -134,6 +148,11 @@ namespace Asteroids
             _enemyRigidbody.transform.rotation = rotation;
             AddToUpdate();
             _enemyView.gameObject.GetComponentInChildren<TrailRenderer>().enabled = true;
+            AudioPlay.PlaybackSFX(AudioPlay.AudioClips.EnemySpawn);
+            if (this is EnemyShipController)
+            {
+                AudioPlay.PlaybackSFX(AudioPlay.AudioClips.MovingEnemyShip, true);
+            }
         }
 
         public void PrepareBeforePush()
@@ -141,6 +160,11 @@ namespace Asteroids
             _enemyView.gameObject.GetComponentInChildren<TrailRenderer>().enabled = false;
             RemoveFromUpdate();
             _enemyRigidbody.gameObject.SetActive(false);
+            AudioPlay.PlaybackSFX(AudioPlay.AudioClips.EnemyDie);
+            if (this is EnemyShipController)
+            {
+                AudioPlay.PlaybackSFX(AudioPlay.AudioClips.MovingEnemyShip, false);
+            }
         }
 
         public void ReturnToPool(EnemyPool enemyPool, EnemyController enemyController)

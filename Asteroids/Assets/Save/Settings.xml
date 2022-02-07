@@ -3,6 +3,6 @@
   <VolumeMaster>0</VolumeMaster>
   <VolumeMenu>0</VolumeMenu>
   <VolumeMusic>-10</VolumeMusic>
-  <VolumeSFX>0</VolumeSFX>
+  <VolumeSFX>-15</VolumeSFX>
   <GraphicsQuality>4</GraphicsQuality>
 </SettingsData>

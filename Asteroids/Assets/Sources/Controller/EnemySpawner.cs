@@ -26,7 +26,8 @@ namespace Asteroids
             CreateUpdatableObjectEvent createUpdatableObjectEvent,
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             EnemyControllerFactory controllersFactory,
-            UpdatableControllersFactory updatableControllersFactory) : base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
+            UpdatableControllersFactory updatableControllersFactory,
+            SoundSystemPlayController soundPlayController) : base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _timers = updatableControllersFactory.CreateTimers();
             _enemyPool = new EnemyPool(controllersFactory, _enemyInPool);
