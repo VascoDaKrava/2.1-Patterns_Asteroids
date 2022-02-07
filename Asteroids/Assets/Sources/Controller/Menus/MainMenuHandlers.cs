@@ -52,6 +52,7 @@ namespace Asteroids
         public void SetMenuButtonsVisible(bool visible)
         {
             _menuElements.ButtonStart.interactable = visible;
+            _menuElements.ButtonStartMulti.interactable = visible;
             _menuElements.ButtonOptions.interactable = visible;
             _menuElements.ButtonExit.interactable = visible;
         }
@@ -59,6 +60,7 @@ namespace Asteroids
         private void SubscribeOnEvent()
         {
             _menuElements.ButtonStart.onClick.AddListener(ButtonStartOnClickHandler);
+            _menuElements.ButtonStartMulti.onClick.AddListener(ButtonStartMultiOnClickHandler);
             _menuElements.ButtonOptions.onClick.AddListener(ButtonOptionsOnClickHandler);
             _menuElements.ButtonExit.onClick.AddListener(ButtonExitOnClickHandler);
             _menuElements.OnEnter += ButtonOnPointerEnterHandler;
@@ -67,6 +69,7 @@ namespace Asteroids
         private void UnsubscribeOnEvent()
         {
             _menuElements.ButtonStart.onClick.RemoveListener(ButtonStartOnClickHandler);
+            _menuElements.ButtonStartMulti.onClick.RemoveListener(ButtonStartMultiOnClickHandler);
             _menuElements.ButtonOptions.onClick.RemoveListener(ButtonOptionsOnClickHandler);
             _menuElements.ButtonExit.onClick.RemoveListener(ButtonExitOnClickHandler);
             _menuElements.OnEnter -= ButtonOnPointerEnterHandler;
@@ -76,6 +79,12 @@ namespace Asteroids
         {
             _audioPlay.PlaybackMenu(_audioPlay.AudioClips.ButtonClick);
             SceneManager.LoadScene(Scenes.FIRST_LEVEL);
+        }
+
+        private void ButtonStartMultiOnClickHandler()
+        {
+            _audioPlay.PlaybackMenu(_audioPlay.AudioClips.ButtonClick);
+            _menuElements.TMProMessage.alpha = 1.0f;
         }
 
         private void ButtonOptionsOnClickHandler()
