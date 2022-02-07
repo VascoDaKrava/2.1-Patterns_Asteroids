@@ -36,7 +36,7 @@ namespace Asteroids
             set => _enemyPool = value;
         }
 
-        public SoundSystemPlayController AudioPlay { private get; set; }
+        public SoundSystemPlayController AudioPlay { protected get; set; }
 
         #endregion
 
@@ -149,6 +149,10 @@ namespace Asteroids
             AddToUpdate();
             _enemyView.gameObject.GetComponentInChildren<TrailRenderer>().enabled = true;
             AudioPlay.PlaybackSFX(AudioPlay.AudioClips.EnemySpawn);
+            if (this is EnemyShipController)
+            {
+                AudioPlay.PlaybackSFX(AudioPlay.AudioClips.MovingEnemyShip, true);
+            }
         }
 
         public void PrepareBeforePush()
@@ -157,6 +161,10 @@ namespace Asteroids
             RemoveFromUpdate();
             _enemyRigidbody.gameObject.SetActive(false);
             AudioPlay.PlaybackSFX(AudioPlay.AudioClips.EnemyDie);
+            if (this is EnemyShipController)
+            {
+                AudioPlay.PlaybackSFX(AudioPlay.AudioClips.MovingEnemyShip, false);
+            }
         }
 
         public void ReturnToPool(EnemyPool enemyPool, EnemyController enemyController)

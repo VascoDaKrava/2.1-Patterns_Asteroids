@@ -64,6 +64,21 @@ namespace Asteroids
             _audioSourceSFX.PlayOneShot(audioClip);
         }
 
+        public void PlaybackSFX(AudioClip audioClip, bool isLoop)
+        {
+            _audioSourceSFX.clip = audioClip;
+            _audioSourceSFX.loop = isLoop;
+
+            if (isLoop)
+            {
+                _audioSourceSFX.Play();
+            }
+            else
+            {
+                _audioSourceSFX.Stop();
+            }
+        }
+
         public void PlaybackMenu(AudioClip audioClip)
         {
             _audioSourceMenu.PlayOneShot(audioClip);

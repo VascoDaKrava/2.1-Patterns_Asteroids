@@ -34,13 +34,13 @@ namespace Asteroids
             ButtonEnter = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_BUTTON_ENTER);
             ButtonClick = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_BUTTON_CLICK);
 
-            MovingEnemyShip = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_MOVING_ENEMY_SHIP);
             MovingPlayerShip = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_MOVING_PLAYER_SHIP);
 
             EnemyDie = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_ENEMY_EXPLOSION);
             EnemySpawn = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_SPAWN_ENEMY);
             HitAsteroid = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_HIT_ASTEROID);
             HitEnemyShip = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_HIT_ENEMY_SHIP);
+            MovingEnemyShip = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_MOVING_ENEMY_SHIP);
             StartMissile = Resources.Load<AudioClip>(ResourcesPathAudio.SFX_START_MISSILE);
         }
 
