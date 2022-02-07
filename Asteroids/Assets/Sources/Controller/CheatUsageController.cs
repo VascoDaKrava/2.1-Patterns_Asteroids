@@ -9,6 +9,7 @@ namespace Asteroids
         #region Fields
 
         private PauseMenuHandlers _pauseMenu;
+        private Transform _playerShip;
 
         #endregion
 
@@ -18,9 +19,11 @@ namespace Asteroids
         public CheatUsageController(
             CreateUpdatableObjectEvent createUpdatableObject,
             DestroyUpdatableObjectEvent destroyUpdatableObject,
-            PauseMenuHandlers pauseMenu) : base(createUpdatableObject, destroyUpdatableObject)
+            PauseMenuHandlers pauseMenu,
+            Transform playerShip) : base(createUpdatableObject, destroyUpdatableObject)
         {
             _pauseMenu = pauseMenu;
+            _playerShip = playerShip;
         }
 
         #endregion
@@ -28,11 +31,14 @@ namespace Asteroids
 
         #region Methods
 
-        private void CheckCheat()
+        private void UseKillEnemyCheat()
         {
             if (InputManager.isCheat && _pauseMenu.IsCheatsOn)
             {
-                Debug.Log("CHEAT");
+                if (Sonar.StartSonar(_playerShip.position, float.MaxValue, out Transform target))
+                {
+                    Debug.Log("CHEAT " + target.name);
+                }
             }
         }
 
@@ -43,7 +49,7 @@ namespace Asteroids
 
         public override void LetUpdate()
         {
-            CheckCheat();
+            UseKillEnemyCheat();
         }
 
         #endregion
