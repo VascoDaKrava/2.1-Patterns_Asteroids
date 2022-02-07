@@ -59,6 +59,11 @@ namespace Asteroids
             PlaybackMusic(true);
         }
 
+        public bool PlaybackSFX()
+        {
+            return _audioSourceSFX.isPlaying;
+        }
+
         public void PlaybackSFX(AudioClip audioClip)
         {
             _audioSourceSFX.PlayOneShot(audioClip);
