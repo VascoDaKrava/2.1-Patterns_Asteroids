@@ -76,7 +76,7 @@ namespace Asteroids
                 if (!_sonarTimer.isTimerOn)
                 {
                     _sonarTimer.StartTimer(_sonarReloadTime);
-                    if (StartSonar(_bulletStartTransform.position, _sonarRange, out _enemyTargetTransform))
+                    if (Sonar.StartSonar(_bulletStartTransform.position, _sonarRange, out _enemyTargetTransform))
                     {
                         StartHomingMissile(_enemyTargetTransform);
                         _audioPlay.PlaybackSFX(_audioPlay.AudioClips.StartMissile);
@@ -88,33 +88,6 @@ namespace Asteroids
         private void StartHomingMissile(Transform target)
         {
             _missileFactory.CreateMissileController(_bulletStartTransform.position, _bulletStartTransform.rotation, target);
-        }
-
-        /// <summary>
-        /// Search enemies in radius of startPosition and return nearest as target
-        /// </summary>
-        /// <param name="startPosition"></param>
-        /// <param name="radius"></param>
-        /// <param name="target"></param>
-        /// <returns></returns>
-        private bool StartSonar(Vector3 startPosition, float radius, out Transform target)
-        {
-            target = null;
-            float nearestDistance = float.PositiveInfinity;
-            float currentDistanceToTarget;
-
-            foreach (Collider item in Physics.OverlapSphere(startPosition, radius, TagsAndLayers.ENEMY_LAYER_MASK, QueryTriggerInteraction.Collide))
-            {
-                currentDistanceToTarget = Vector3.Distance(item.transform.position, _bulletStartTransform.position);
-
-                if (nearestDistance > currentDistanceToTarget)
-                {
-                    nearestDistance = currentDistanceToTarget;
-                    target = item.transform;
-                }
-            }
-
-            return target;
         }
 
         #endregion

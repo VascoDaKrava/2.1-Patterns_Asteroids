@@ -13,6 +13,7 @@ namespace Asteroids
 
         private const string BUTTON_RESUME = "ButtonResume";
         private const string BUTTON_BACK_TO_MENU = "ButtonBackToMenu";
+        private const string TOGGLE_CHEATS = "Cheats";
 
         private event Action _onEnter;
 
@@ -22,8 +23,8 @@ namespace Asteroids
         #region Properties
 
         public Button ButtonResume { get; private set; }
-
         public Button ButtonBackToMenu { get; private set; }
+        public Toggle ToggleCheats { get; private set; }
 
         public event Action OnEnter
         {
@@ -40,6 +41,7 @@ namespace Asteroids
         {
             ButtonResume = GameObject.Find(BUTTON_RESUME).GetComponent<Button>();
             ButtonBackToMenu = GameObject.Find(BUTTON_BACK_TO_MENU).GetComponent<Button>();
+            ToggleCheats = GameObject.Find(TOGGLE_CHEATS).GetComponent<Toggle>();
         }
 
         #endregion

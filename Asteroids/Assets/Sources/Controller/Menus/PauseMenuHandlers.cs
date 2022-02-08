@@ -23,6 +23,13 @@ namespace Asteroids
         #endregion
 
 
+        #region Properties
+
+        public bool IsCheatsOn { get; private set; } = false;
+
+        #endregion
+
+
         #region ClassLifeCycles
 
         public PauseMenuHandlers(
@@ -36,6 +43,8 @@ namespace Asteroids
             _pauseMenuGameObject = pauseMenu;
             _audioPlay = audioPlay;
             _pauseMenuElements = pauseMenu.GetComponent<PauseMenuElements>();
+
+            _pauseMenuElements.ToggleCheats.isOn = IsCheatsOn;
 
             _isMenuHide = false;
 
@@ -58,6 +67,7 @@ namespace Asteroids
         {
             _pauseMenuElements.ButtonBackToMenu.onClick.AddListener(ButtonBackToMenuOnClickHandler);
             _pauseMenuElements.ButtonResume.onClick.AddListener(ButtonResumeOnClickHandler);
+            _pauseMenuElements.ToggleCheats.onValueChanged.AddListener(ToggleCheatsOnValueChangedHandler);
             _pauseMenuElements.OnEnter += ButtonOnPointerEnterHandler;
         }
 
@@ -65,6 +75,7 @@ namespace Asteroids
         {
             _pauseMenuElements.ButtonBackToMenu.onClick.RemoveListener(ButtonBackToMenuOnClickHandler);
             _pauseMenuElements.ButtonResume.onClick.RemoveListener(ButtonResumeOnClickHandler);
+            _pauseMenuElements.ToggleCheats.onValueChanged.RemoveListener(ToggleCheatsOnValueChangedHandler);
             _pauseMenuElements.OnEnter -= ButtonOnPointerEnterHandler;
         }
 
@@ -84,6 +95,11 @@ namespace Asteroids
         private void ButtonOnPointerEnterHandler()
         {
             _audioPlay.PlaybackMenu(_audioPlay.AudioClips.ButtonEnter);
+        }
+
+        private void ToggleCheatsOnValueChangedHandler(bool state)
+        {
+            IsCheatsOn = state;
         }
 
         private void CheckPause()

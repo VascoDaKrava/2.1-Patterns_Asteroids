@@ -57,9 +57,10 @@ namespace Asteroids
         protected override void ChangeStrength(int value)
         {
             _enemyModel.ArmorEnemyShip -= value;
-            if (_enemyModel.Strength <= 0)
+            if (_enemyModel.ArmorEnemyShip <= 0)
             {
-                _enemyModel.Strength -= value;
+                _enemyModel.Strength += _enemyModel.ArmorEnemyShip;
+                _enemyModel.ArmorEnemyShip = 0;
                 if (_enemyModel.Strength <= 0)
                 {
                     Hit();

@@ -9,6 +9,7 @@ namespace Asteroids
         #region Fields
 
         private CollisionDetectorEvent _collisionDetectorEvent;
+        private PauseMenuHandlers _pauseMenu;
         private ResourceManager _resourceManager;
         private SettingsData _settingsData;
         private SoundSystemPlayController _soundSystemPlayController;
@@ -42,7 +43,7 @@ namespace Asteroids
             new GraphicsQualityController(_settingsData);
             _soundSystemPlayController.PlaybackMusic(_soundSystemPlayController.AudioClips.Game);
 
-            new PauseMenuHandlers(
+            _pauseMenu = new PauseMenuHandlers(
                 createUpdatableObjectEvent,
                 destroyUpdatableObjectEvent,
                 GameObject.Instantiate(_resourceManager.PauseMenu),
@@ -60,6 +61,8 @@ namespace Asteroids
             _controllersFactory.CreateShipController(GameObject.FindGameObjectWithTag(TagsAndLayers.PLAYER_TAG).GetComponent<Rigidbody>());
             _controllersFactory.CreateFireController(GameObject.FindGameObjectWithTag(TagsAndLayers.BULLET_START_POSITION_TAG).transform);
             _controllersFactory.CreateEnemySpawner();
+
+            _controllersFactory.CreateCheatUsage(_pauseMenu, GameObject.FindGameObjectWithTag(TagsAndLayers.PLAYER_TAG).transform);
 
             new ExplosionController(_collisionDetectorEvent, _resourceManager);
 

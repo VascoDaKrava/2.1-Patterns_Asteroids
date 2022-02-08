@@ -116,6 +116,17 @@ namespace Asteroids
                 _soundPlayController);
         }
 
+        public CheatUsageController CreateCheatUsage(PauseMenuHandlers pauseMenu, Transform playerShip)
+        {
+            return new CheatUsageController(
+                _createUpdatable,
+                _destroyUpdatable,
+                pauseMenu,
+                playerShip,
+                _takeDamageEvent
+                );
+        }
+
         #endregion
 
     }
