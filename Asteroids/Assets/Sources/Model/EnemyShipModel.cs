@@ -26,9 +26,7 @@
         }
 
         public override float DeathTime { get => _deathTime; }
-
         public override float Speed { get => _speedEnemyShip; }
-
         public override int Damage { get => _damageEnemyShip; }
 
         #endregion

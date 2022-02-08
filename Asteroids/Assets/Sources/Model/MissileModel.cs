@@ -1,9 +1,5 @@
-using System;
-
-
 namespace Asteroids
 {
-
     public sealed class MissileModel
     {
 

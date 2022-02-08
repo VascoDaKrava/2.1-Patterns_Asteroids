@@ -31,9 +31,7 @@
         /// Time for destroy Enemy
         /// </summary>
         public abstract float DeathTime { get; }
-
         public abstract float Speed { get; }
-
         public abstract int Damage { get; }
 
         #endregion

@@ -9,7 +9,6 @@ namespace Asteroids
         #region Fields
 
         private int _strengthShip = 200;
-
         private float _speedShip = 10.0f;
 
         private Rigidbody _shipRigidbody;

@@ -26,15 +26,10 @@ namespace Asteroids
         #region Properties
 
         public Button ButtonBack { get; private set; }
-
         public Transform MenuOptions { get; private set; }
-
         public Slider SliderVolumeMusic { get; private set; }
-
         public Slider SliderVolumeSFX { get; private set; }
-
         public Slider SliderVolumeMenu { get; private set; }
-
         public TMP_Dropdown DropdownGraphicsQuality { get; private set; }
 
         #endregion

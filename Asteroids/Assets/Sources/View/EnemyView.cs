@@ -35,7 +35,6 @@ namespace Asteroids
             {
                 _collisionDetectorEvent.Invoke(gameObject.transform, other.transform);
             }
-                
         }
 
         #endregion

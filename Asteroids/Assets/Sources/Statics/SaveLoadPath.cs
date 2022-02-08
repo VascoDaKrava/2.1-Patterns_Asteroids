@@ -10,7 +10,6 @@ namespace Asteroids
         #region Fields
 
         private const string FILE_SETTINGS_XML = "Settings.xml";
-
         private const string FOLDER_SAVE = "Save";
 
         #endregion
