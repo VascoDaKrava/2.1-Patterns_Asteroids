@@ -20,7 +20,7 @@ namespace Asteroids
         #region ClassLifeCycles
 
         public EnemyPool(EnemyControllerFactory enemyControllersFactory,
-            int poolCapacity)
+            byte poolCapacity)
         {
             _poolCapacity = poolCapacity;
             _enemies = new Stack<EnemyController>(_poolCapacity);
