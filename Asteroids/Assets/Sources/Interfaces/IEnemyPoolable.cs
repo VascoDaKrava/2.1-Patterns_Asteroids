@@ -33,15 +33,11 @@ namespace Asteroids
         /// <summary>
         /// Return enemy to pool
         /// </summary>
-        /// <param name="missilePool"></param>
-        /// <param name="lineMissile"></param>
-        public void ReturnToPool(EnemyPool enemyPool, EnemyController enemyController);
+        public void ReturnToPool();
 
         /// <summary>
         /// Return enemy to pool in some time
         /// </summary>
-        /// <param name="missilePool"></param>
-        /// <param name="lineMissile"></param>
         public void ReturnToPoolInTime();
 
         #endregion

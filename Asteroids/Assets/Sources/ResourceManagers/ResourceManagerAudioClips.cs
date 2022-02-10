@@ -9,16 +9,27 @@ namespace Asteroids
         #region Properties
 
         public AudioClip Menu { get; private set; }
+
         public AudioClip Game { get; private set; }
+
         public AudioClip GameLose { get; private set; }
+
         public AudioClip ButtonEnter { get; private set; }
+
         public AudioClip ButtonClick { get; private set; }
+
         public AudioClip EnemyDie { get; private set; }
+
         public AudioClip EnemySpawn { get; private set; }
+
         public AudioClip HitAsteroid { get; private set; }
+
         public AudioClip HitEnemyShip { get; private set; }
+
         public AudioClip MovingEnemyShip { get; private set; }
+
         public AudioClip MovingPlayerShip { get; private set; }
+
         public AudioClip StartMissile { get; private set; }
 
         #endregion

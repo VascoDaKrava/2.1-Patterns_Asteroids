@@ -18,6 +18,7 @@ namespace Asteroids
 
         protected CollisionDetectorEvent _collisionDetectorEvent;
         private TakeDamageEvent _takeDamageEvent;
+        private EnemyController _enemyController;
 
         private float _minDirectionX = -0.7f;
         private float _maxDirectionX = 0.7f;
@@ -34,6 +35,14 @@ namespace Asteroids
             get => _enemyPool;
 
             set => _enemyPool = value;
+        }
+
+        public EnemyController Controller
+        {
+            set
+            {
+                _enemyController = value;
+            }
         }
 
         public SoundSystemPlayController AudioPlay { protected get; set; }
@@ -109,7 +118,7 @@ namespace Asteroids
 
         private void PlayHitSound()
         {
-            if (this is AsteroidController)
+            if (_enemyController is AsteroidController)
             {
                 AudioPlay.PlaybackSFX(AudioPlay.AudioClips.HitAsteroid);
             }
@@ -149,7 +158,7 @@ namespace Asteroids
             AddToUpdate();
             _enemyView.gameObject.GetComponentInChildren<TrailRenderer>().enabled = true;
             AudioPlay.PlaybackSFX(AudioPlay.AudioClips.EnemySpawn);
-            if (this is EnemyShipController)
+            if (_enemyController is EnemyShipController)
             {
                 AudioPlay.PlaybackSFX(AudioPlay.AudioClips.MovingEnemyShip, true);
             }
@@ -161,16 +170,16 @@ namespace Asteroids
             RemoveFromUpdate();
             _enemyRigidbody.gameObject.SetActive(false);
             AudioPlay.PlaybackSFX(AudioPlay.AudioClips.EnemyDie);
-            if (this is EnemyShipController)
+            if (_enemyController is EnemyShipController)
             {
                 AudioPlay.PlaybackSFX(AudioPlay.AudioClips.MovingEnemyShip, false);
             }
         }
 
-        public void ReturnToPool(EnemyPool enemyPool, EnemyController enemyController)
+        public void ReturnToPool()
         {
             PrepareBeforePush();
-            enemyPool.Push(enemyController);
+            _enemyPool.Push(_enemyController);
         }
 
         public void ReturnToPoolInTime()
@@ -178,8 +187,7 @@ namespace Asteroids
             if (!_timers.isTimerOn)
             {
                 _timers.StartTimer(_enemyModel.DeathTime);
-                PrepareBeforePush();
-                _enemyPool.Push(this);
+                ReturnToPool();
             }
         }
 

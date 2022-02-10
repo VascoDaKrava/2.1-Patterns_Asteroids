@@ -26,9 +26,13 @@ namespace Asteroids
         #region Properties
 
         public Button ButtonStart { get; private set; }
+
         public Button ButtonStartMulti { get; private set; }
+
         public Button ButtonOptions { get; private set; }
+
         public Button ButtonExit { get; private set; }
+
         public TextMeshProUGUI TMProMessage { get; private set; }
 
         public event Action OnEnter

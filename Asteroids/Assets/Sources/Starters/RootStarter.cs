@@ -56,7 +56,8 @@ namespace Asteroids
                 _resourceManager,
                 _collisionDetectorEvent,
                 _takeDamageEvent,
-                _soundSystemPlayController);
+                _soundSystemPlayController,
+                _soundSystemVolumeController);
 
             _controllersFactory.CreateShipController(GameObject.FindGameObjectWithTag(TagsAndLayers.PLAYER_TAG).GetComponent<Rigidbody>());
             _controllersFactory.CreateFireController(GameObject.FindGameObjectWithTag(TagsAndLayers.BULLET_START_POSITION_TAG).transform);

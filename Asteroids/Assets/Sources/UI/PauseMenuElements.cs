@@ -23,7 +23,9 @@ namespace Asteroids
         #region Properties
 
         public Button ButtonResume { get; private set; }
+
         public Button ButtonBackToMenu { get; private set; }
+
         public Toggle ToggleCheats { get; private set; }
 
         public event Action OnEnter

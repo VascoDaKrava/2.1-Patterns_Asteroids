@@ -35,6 +35,8 @@ namespace Asteroids
                 _settingsData);
 
             _soundSystemPlayController.PlaybackMusic(_soundSystemPlayController.AudioClips.Menu);
+
+            _resources.AudioMixer.SetFloat(AudioMixerParams.LOWPASS, AudioMixerParams.LOWPASS_HIGH);
         }
 
         private void Start()

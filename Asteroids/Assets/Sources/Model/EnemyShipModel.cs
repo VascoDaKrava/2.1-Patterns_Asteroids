@@ -6,9 +6,9 @@
         #region Fields
 
         private int _strengthEnemyShip = 50;
-        private float _speedEnemyShip = 5.0f;
+        private float _speedEnemyShip = 8.0f;
         private int _damageEnemyShip = 50;
-        private float _deathTime = 30.0f;
+        private float _deathTime = 45.0f;
 
         #endregion
 
@@ -26,7 +26,9 @@
         }
 
         public override float DeathTime { get => _deathTime; }
+
         public override float Speed { get => _speedEnemyShip; }
+
         public override int Damage { get => _damageEnemyShip; }
 
         #endregion

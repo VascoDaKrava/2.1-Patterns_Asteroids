@@ -65,7 +65,7 @@ namespace Asteroids
 
         protected override void Hit()
         {
-            ReturnToPool(_enemyPool, this);
+            ReturnToPool();
         }
 
         #endregion

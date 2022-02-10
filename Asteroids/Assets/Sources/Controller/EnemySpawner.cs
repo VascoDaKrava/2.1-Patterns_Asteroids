@@ -9,9 +9,10 @@ namespace Asteroids
         #region Fields
 
         private int _enemyInPool = 20;
-        private float _rateOfSpawn = 4.0f; // Time in seconds between spawns
+        private float _rateOfSpawn = 1.5f; // Time in seconds between spawns
         private float _minSpawnPositionX = -50.0f;
         private float _maxSpawnPositionX = 50.0f;
+        private float _muteSoundLevel = -80.0f;
         private Vector3 _spawnPosition = new Vector3(0.0f, 0.0f, 110.0f);
 
         private Timers _timers;
@@ -27,10 +28,13 @@ namespace Asteroids
             DestroyUpdatableObjectEvent destroyUpdatableObjectEvent,
             EnemyControllerFactory controllersFactory,
             UpdatableControllersFactory updatableControllersFactory,
-            SoundSystemPlayController soundPlayController) : base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
+            SoundSystemVolumeController soundSystemVolumeController) : base(createUpdatableObjectEvent, destroyUpdatableObjectEvent)
         {
             _timers = updatableControllersFactory.CreateTimers();
+            float tempVolumeSFX = soundSystemVolumeController.VolumeSFX;
+            soundSystemVolumeController.VolumeSFX = _muteSoundLevel;
             _enemyPool = new EnemyPool(controllersFactory, _enemyInPool);
+            soundSystemVolumeController.VolumeSFX = tempVolumeSFX;
         }
 
         #endregion
