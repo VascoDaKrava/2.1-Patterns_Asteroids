@@ -20,6 +20,9 @@ namespace Asteroids
         private TakeDamageEvent _takeDamageEvent;
         private EnemyController _enemyController;
 
+        private int _modelStrength;
+        private int _modelArmor;
+
         private float _minDirectionX = -0.7f;
         private float _maxDirectionX = 0.7f;
         private float _minDirectionZ = 0.0f;
@@ -68,6 +71,12 @@ namespace Asteroids
 
             _collisionDetectorEvent.CollisionDetector += CollisionEventHandler;
             _takeDamageEvent.TakeDamage += TakeDamageEventHandler;
+        }
+
+        ~EnemyController()
+        {
+            _collisionDetectorEvent.CollisionDetector -= CollisionEventHandler;
+            _takeDamageEvent.TakeDamage -= TakeDamageEventHandler;
         }
 
         #endregion
@@ -128,11 +137,11 @@ namespace Asteroids
             }
         }
 
-        public virtual void Destroy()
-        {
-            _collisionDetectorEvent.CollisionDetector -= CollisionEventHandler;
-            _takeDamageEvent.TakeDamage -= TakeDamageEventHandler;
-        }
+        //public virtual void Destroy()
+        //{
+        //    _collisionDetectorEvent.CollisionDetector -= CollisionEventHandler;
+        //    _takeDamageEvent.TakeDamage -= TakeDamageEventHandler;
+        //}
 
         #endregion
 
@@ -169,6 +178,7 @@ namespace Asteroids
             _enemyView.gameObject.GetComponentInChildren<TrailRenderer>().enabled = false;
             RemoveFromUpdate();
             _enemyRigidbody.gameObject.SetActive(false);
+            ResetModel();
             AudioPlay.PlaybackSFX(AudioPlay.AudioClips.EnemyDie);
             if (_enemyController is EnemyShipController)
             {
@@ -189,6 +199,18 @@ namespace Asteroids
                 _timers.StartTimer(_enemyModel.DeathTime);
                 ReturnToPool();
             }
+        }
+
+        private void ResetModel()
+        {
+            _enemyModel.Strength = _modelStrength;
+            _enemyModel.ArmorEnemyShip = _modelArmor;
+        }
+
+        protected void SaveModelData()
+        {
+            _modelStrength = _enemyModel.Strength;
+            _modelArmor = _enemyModel.ArmorEnemyShip;
         }
 
         #endregion

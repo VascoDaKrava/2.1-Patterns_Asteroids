@@ -2,7 +2,7 @@
 <SettingsData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <VolumeMaster>0</VolumeMaster>
   <VolumeMenu>0</VolumeMenu>
-  <VolumeMusic>-20</VolumeMusic>
+  <VolumeMusic>-15</VolumeMusic>
   <VolumeSFX>-10</VolumeSFX>
   <GraphicsQuality>4</GraphicsQuality>
 </SettingsData>

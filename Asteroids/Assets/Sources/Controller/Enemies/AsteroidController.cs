@@ -15,6 +15,7 @@ namespace Asteroids
             set
             {
                 _enemyModel = value;
+                SaveModelData();
             }
         }
 
