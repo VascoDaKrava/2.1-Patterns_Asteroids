@@ -16,6 +16,7 @@ namespace Asteroids
         private EnemyControllerFactory _enemyControllersFactory;
         private MissileControllerFactory _missileControllersFactory;
         private SoundSystemPlayController _soundPlayController;
+        private SoundSystemVolumeController _soundSystemVolumeController;
         private TakeDamageEvent _takeDamageEvent;
 
         #endregion
@@ -29,12 +30,14 @@ namespace Asteroids
             ResourceManager resourceManager,
             CollisionDetectorEvent collisionDetectorEvent,
             TakeDamageEvent takeDamageEvent,
-            SoundSystemPlayController soundPlayController)
+            SoundSystemPlayController soundPlayController,
+            SoundSystemVolumeController soundSystemVolumeController)
         {
             _createUpdatable = createUpdatable;
             _destroyUpdatable = destroyUpdatable;
             _takeDamageEvent = takeDamageEvent;
             _soundPlayController = soundPlayController;
+            _soundSystemVolumeController = soundSystemVolumeController;
 
             _enemyControllersFactory = new EnemyControllerFactory(
                 createUpdatable,
@@ -113,7 +116,7 @@ namespace Asteroids
                 _destroyUpdatable,
                 _enemyControllersFactory,
                 this,
-                _soundPlayController);
+                _soundSystemVolumeController);
         }
 
         public CheatUsageController CreateCheatUsage(PauseMenuHandlers pauseMenu, Transform playerShip)
