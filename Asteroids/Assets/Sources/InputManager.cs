@@ -9,8 +9,11 @@ namespace Asteroids
         #region Properties
 
         public static bool isPrimaryFire => Input.GetButton(InputKeysAndAxis.KEY_PRIMARY_FIRE);
+
         public static bool isSecondaryFire => Input.GetButtonDown(InputKeysAndAxis.KEY_AUTO_FIRE);
+
         public static bool isPause => Input.GetButtonDown(InputKeysAndAxis.KEY_PAUSE);
+
         public static bool isCheat => Input.GetButtonDown(InputKeysAndAxis.KEY_CHEAT);
 
         #endregion

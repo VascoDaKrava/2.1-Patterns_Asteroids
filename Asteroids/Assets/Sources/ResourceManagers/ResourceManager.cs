@@ -28,12 +28,19 @@ namespace Asteroids
         public AudioMixer AudioMixer => _audioMixer;
 
         public GameObject Asteroid => _asteroid;
+
         public GameObject EnemyShip => _enemyShip;
+
         public GameObject Explosion => _explosion;
+
         public GameObject GameLose => _gameLose;
+
         public GameObject LargeAsteroid => _largeAsteroid;
+
         public GameObject MainMenu => _mainMenu;
+
         public GameObject MissileAIM9 => _missile;
+
         public GameObject PauseMenu => _pauseMenu;
 
         #endregion
